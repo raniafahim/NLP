@@ -10,7 +10,7 @@ format: html
 
 ### **Qu’est ce qu'un langage naturel ?**
 
-Il existe plusieurs définitions pour définir le concept de langage naturel (https://dictionnary.com/) . 
+Il existe plusieurs définitions pour définir le concept de langage naturel [Lien](https://dictionnary.com/) . 
 
 1. Un ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.
 
