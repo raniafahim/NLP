@@ -5,7 +5,7 @@ execute:
   freeze: auto
 
 website:
-  title: "Cours introduction au Webscraping"
+  title: "Cours introduction NLP"
 
   page-footer:
     right: "Ce site a été créé avec [Quarto](https://quarto.org/)"
@@ -17,6 +17,15 @@ website:
     contents:
       - href: 1_intro.qmd
         text: Introduction au NLP
+      - href: 2_tokenization.qmd
+        text: Qu'est ce que la tokenization ?
+      - href: 3_preprocessing.qmd
+        text: Prétraitement des données 
+      - href: 4_embedding.qmd
+        text: Word Embedding
+      - href: 5_ressources.qmd
+        text: Ressources  
+        
         
 format:
   html:
