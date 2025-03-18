@@ -1,8 +1,11 @@
 ---
-title: "Bases pour le Webscraping"
-author: "cthiounn"
-date: "2024-06-06"
+title: "Les étapes du pre-processing"
+author: "raniafhm"
+date: "2025-17-03"
 format: html
+execute:
+  enabled: false
+jupyter: python3
 ---
 
 ## Les étapes du pre-processing 
