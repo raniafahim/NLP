@@ -27,7 +27,7 @@ Il existe plusieurs définitions pour définir le concept de langage naturel (ht
 5. Tout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.
 
 Ainsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication.
-Le langage est un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies...)  et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur. 
+Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies...)  et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur. 
 Exemples : 
 J’ai lu un article sur le droit des femmes dans le journal. 
 J’ai lu un article sur le droit des femmes dans le métro. 
