@@ -1,8 +1,10 @@
 ---
-title: "Environnement juridique du Webscraping"
-author: "cthiounn"
-date: "2024-05-20"
+title: "Tokenization : première étape du NLP"
+author: "raniafhm"
+date: "2025-17-03"
 format: html
+execute:
+  enabled: false
+jupyter: python3
 ---
-
-## La tokenization
+## Qu'est ce que la tokenization ?  
