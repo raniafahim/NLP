@@ -1,8 +1,0 @@
----
-title: "Environnement juridique du Webscraping"
-author: "cthiounn"
-date: "2024-05-20"
-format: html
----
-
-## La tokenization
