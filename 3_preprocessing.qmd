@@ -1,0 +1,8 @@
+---
+title: "Bases pour le Webscraping"
+author: "cthiounn"
+date: "2024-06-06"
+format: html
+---
+
+## Les étapes du pre-processing 

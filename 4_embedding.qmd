@@ -1,0 +1,11 @@
+---
+title: "Mon premier Webscraping"
+author: "cthiounn"
+date: "2024-05-20"
+format: html
+execute:
+  enabled: false
+jupyter: python3
+---
+
+## Emedding : Passer du token au vecteur numérique
