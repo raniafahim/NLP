@@ -16,21 +16,7 @@ website:
     style: "docked"
     contents:
       - href: 1_intro.qmd
-        text: Introduction au Webscraping
-      - href: 2_juridique.qmd
-        text: Le Webscraping et le juridique
-      - href: 3_html.qmd
-        text: Internet et le web
-      - href: 4_premier_pas.qmd
-        text: Premiers pas avec BeautifulSoup
-      - href: 5_api.qmd
-        text: Requêter une api
-      - href: 6_site_dynamique.qmd
-        text: Webscraping avec simulation dynamique
-      - href: 7_bonnes_pratiques.qmd
-        text: Quelques bonnes pratiques pour le Webscraping
-      - href: 8_ressources.qmd
-        text: Pour aller plus loin
+        text: Introduction au NLP
         
 format:
   html:
