@@ -4,21 +4,27 @@
     "href": "5_ressources.html",
     "title": "Pour aller plus loin",
     "section": "",
-    "text": "Quelques ressources pour aller plus loin :"
+    "text": "Quelques ressources pour aller plus loin :",
+    "crumbs": [
+      "Ressources"
+    ]
   },
   {
     "objectID": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
     "href": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
     "title": "Pour aller plus loin",
     "section": "",
-    "text": "Quelques ressources pour aller plus loin :"
+    "text": "Quelques ressources pour aller plus loin :",
+    "crumbs": [
+      "Ressources"
+    ]
   },
   {
     "objectID": "1_intro.html",
     "href": "1_intro.html",
     "title": "Introduction au NLP",
     "section": "",
-    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
+    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
     "crumbs": [
       "Introduction au NLP"
     ]
@@ -28,7 +34,7 @@
     "href": "1_intro.html#quest-ce-que-le-traitement-du-langage-naturel",
     "title": "Introduction au NLP",
     "section": "",
-    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
+    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
     "crumbs": [
       "Introduction au NLP"
     ]
