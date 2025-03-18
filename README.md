@@ -4,7 +4,7 @@
 
 * Introduction au NLP
 * Qu'est ce que la tokenization ?
-* 
+  
 
 ## Prérequis
 
