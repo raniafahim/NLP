@@ -1,8 +1,8 @@
 ---
-title: "Mon premier Webscraping"
+title: "Du mot au vecteur"
 author: "raniafhm"
 date: "2025-17-03"
 format: html
 ---
 
-## Emedding : Passer du token au vecteur numérique
+## Embedding : Passer du token au vecteur numérique
