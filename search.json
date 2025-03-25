@@ -20,6 +20,56 @@
     ]
   },
   {
+    "objectID": "4_embedding.html",
+    "href": "4_embedding.html",
+    "title": "Du mot au vecteur",
+    "section": "",
+    "text": "Un embedding est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.\n\n\n\nAvec un vocabulaire de tokens de taille ( n ), on peut créer un espace vectoriel de dimension ( n ), où chaque token est représenté par un vecteur unitaire canonique (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :\n1. L’espace vectoriel devient très grand lorsque ( n ) est important.\n2. Les représentations sont orthogonales, ce qui signifie qu’elles ne capturent aucune relation sémantique entre les mots.\n\n\n\nEn s’appuyant sur l’hypothèse distributionnelle et les réseaux de neurones, les modèles neuronaux Bag of Words (CBOW et Skip-Gram) permettent d’apprendre des représentations vectorielles compressées tout en conservant les proximités et distances sémantiques entre les tokens.",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#embedding-passer-du-token-au-vecteur-numérique",
+    "href": "4_embedding.html#embedding-passer-du-token-au-vecteur-numérique",
+    "title": "Du mot au vecteur",
+    "section": "",
+    "text": "Un embedding est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.\n\n\n\nAvec un vocabulaire de tokens de taille ( n ), on peut créer un espace vectoriel de dimension ( n ), où chaque token est représenté par un vecteur unitaire canonique (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :\n1. L’espace vectoriel devient très grand lorsque ( n ) est important.\n2. Les représentations sont orthogonales, ce qui signifie qu’elles ne capturent aucune relation sémantique entre les mots.\n\n\n\nEn s’appuyant sur l’hypothèse distributionnelle et les réseaux de neurones, les modèles neuronaux Bag of Words (CBOW et Skip-Gram) permettent d’apprendre des représentations vectorielles compressées tout en conservant les proximités et distances sémantiques entre les tokens.",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#les-premiers-algorithmes-sémantiques",
+    "href": "4_embedding.html#les-premiers-algorithmes-sémantiques",
+    "title": "Du mot au vecteur",
+    "section": "Les premiers algorithmes sémantiques",
+    "text": "Les premiers algorithmes sémantiques\n\n🔹 L’algorithme CBOW\nL’algorithme Continuous Bag of Words (CBOW) repose sur un réseau de neurones composé de deux étapes :\n1. Encodage : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.\n2. Décodage : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.\nL’idée est d’entraîner le réseau à prédire un mot à partir de son contexte (les mots qui l’entourent).\nExemple avec un contexte de 4 mots (les deux mots avant et après) :\n- Phrase : “Le chat dort sur le canapé.”\n- Contexte : [\"Le\", \"dort\", \"sur\", \"le\"]\n- Mot à prédire : \"chat\"\n- Base d’entraînement : ((“Le”, “dort”, “sur”, “le”), “chat”)\nEn parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on récupère la représentation vectorielle intermédiaire pour associer chaque mot à son embedding.\n\n\n🔹 L’algorithme Skip-Gram\nL’architecture du réseau est similaire à CBOW, mais avec une approche inversée :\n- Plutôt que de prédire un mot à partir de son contexte, Skip-Gram prédit les mots du contexte à partir d’un mot donné.\n- On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.\nExemple :\n- Phrase : “Le chat dort sur le canapé.”\n- Mot donné : \"chat\"\n- Contexte à prédire : [\"Le\", \"dort\", \"sur\", \"le\"]\n- Base d’entraînement : (“Le”,“chat”) ; (“dort”,“chat”) ; (“sur”,“chat”) ; (“le”,“chat”)\nUne fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.\n\n\n🔹 L’algorithme GloVe\nL’algorithme GloVe (Global Vectors for Word Representation) adopte une approche différente :\n- Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe apprend des cooccurrences de mots à partir d’un large corpus.\n- Il construit une matrice de cooccurrence indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.\n- Ensuite, un facteur de décomposition est utilisé pour générer des représentations vectorielles capturant les relations sémantiques.\nGloVe est particulièrement efficace pour représenter des mots ayant des relations sémantiques globales, comme :\n- Roi – Reine,\n- France – Paris,\n- Banque – Argent.\n\n\n🔹 L’algorithme FastText\nFastText est une amélioration de CBOW et Skip-Gram :\n- Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).\n- Cela permet de mieux gérer les mots rares ou inconnus en générant des embeddings dynamiques.\nExemple :\n- Le mot “apprentissage” peut être décomposé en [\"app\", \"pren\", \"tiss\", \"age\"].\n- Si un mot jamais vu auparavant est rencontré, son embedding peut être inféré à partir de ses sous-mots.\nFastText est particulièrement utile pour les langues morphologiquement riches (comme l’allemand ou le turc) et pour gérer les fautes d’orthographe ou les variantes linguistiques.",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#les-embeddings-contextuels",
+    "href": "4_embedding.html#les-embeddings-contextuels",
+    "title": "Du mot au vecteur",
+    "section": "Les embeddings contextuels",
+    "text": "Les embeddings contextuels\nLe principal problème des embeddings classiques est que leur représentation est fixe : un même token possède toujours le même vecteur numérique, quel que soit le contexte. Or, dans de nombreuses langues, notamment en français, un même mot peut avoir plusieurs significations selon son usage. De plus, des notions différentes peuvent s’écrire de la même façon (homonymes).\nPour désambiguïser ces cas, il est essentiel de prendre en compte le contexte dans lequel un mot apparaît afin de déterminer son sens précis.\nLes embeddings contextuels permettent d’adapter la représentation numérique d’un mot en fonction de son contexte. Contrairement aux approches statiques, ils tiennent compte de la position et de l’interaction entre les mots dans une phrase.\nExemple :\n- “La baleine nage dans l’océan.” 🐋 → baleine (animal)\n- “J’ai un mal de baleine après ce repas.” 🤕 → baleine (expression signifiant une douleur intense)\nLes modèles basés sur les transformers (ex. BERT, GPT, T5) sont capables d’encoder ces différences en générant un vecteur unique pour chaque occurrence d’un mot selon son contexte. Ainsi, un mot aura un embedding spécifique qui varie en fonction des mots qui l’entourent, tout en conservant les relations sémantiques apprises (synonymie, antonymie, etc.).",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#travaux-pratiques",
+    "href": "4_embedding.html#travaux-pratiques",
+    "title": "Du mot au vecteur",
+    "section": "Travaux pratiques",
+    "text": "Travaux pratiques",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
     "objectID": "1_intro.html",
     "href": "1_intro.html",
     "title": "Introduction au NLP",
@@ -37,6 +87,56 @@
     "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
     "crumbs": [
       "Introduction au NLP"
+    ]
+  },
+  {
+    "objectID": "2_tokenization.html",
+    "href": "2_tokenization.html",
+    "title": "Tokenization : première étape du NLP",
+    "section": "",
+    "text": "La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.\nLa tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.\nExemples de tokenisation :\n\nDécoupage en tokens mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"tokenisation\", \"en\", \"NLP\", \"est\", \"primordiale\"\n\nDécoupage en tokens sous-mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"token\", \"isation\", \"en\", \"NLP\", \"est\", \"prim\", \"ordiale\"\n\n\n\n\n\n\nUne fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :\n- Les mots les plus fréquents (top mots).\n- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.\n- Les mots qui reviennent dans des contextes similaires.\nEn NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.\n\n\n\nLa machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille n (suffisamment grand, mais pas excessif).\nUne première approche, appelée one-hot encoding, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :\n- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.\n- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les word embeddings (ex. Word2Vec, GloVe, BERT).\n\n\n\n\nPlusieurs librairies, en général en python, permettent de tokenizer un texte :\n\nNLTK\nSpacy\nHuggingFace",
+    "crumbs": [
+      "Qu'est ce que la tokenization ?"
+    ]
+  },
+  {
+    "objectID": "2_tokenization.html#quest-ce-que-la-tokenization",
+    "href": "2_tokenization.html#quest-ce-que-la-tokenization",
+    "title": "Tokenization : première étape du NLP",
+    "section": "",
+    "text": "La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.\nLa tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.\nExemples de tokenisation :\n\nDécoupage en tokens mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"tokenisation\", \"en\", \"NLP\", \"est\", \"primordiale\"\n\nDécoupage en tokens sous-mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"token\", \"isation\", \"en\", \"NLP\", \"est\", \"prim\", \"ordiale\"\n\n\n\n\n\n\nUne fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :\n- Les mots les plus fréquents (top mots).\n- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.\n- Les mots qui reviennent dans des contextes similaires.\nEn NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.\n\n\n\nLa machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille n (suffisamment grand, mais pas excessif).\nUne première approche, appelée one-hot encoding, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :\n- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.\n- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les word embeddings (ex. Word2Vec, GloVe, BERT).\n\n\n\n\nPlusieurs librairies, en général en python, permettent de tokenizer un texte :\n\nNLTK\nSpacy\nHuggingFace",
+    "crumbs": [
+      "Qu'est ce que la tokenization ?"
+    ]
+  },
+  {
+    "objectID": "3_preprocessing.html",
+    "href": "3_preprocessing.html",
+    "title": "Les étapes du pre-processing",
+    "section": "",
+    "text": "Le préprocessing consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).\n\n\n\nLa tokenisation fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.\n\n\n\nLa normalisation consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :\n- La conversion en majuscules ou minuscules pour éviter de traiter “Paris” et “paris” comme deux mots distincts.\n- La suppression des accents (ex. é → e) pour uniformiser les termes.\n\n\n\nLes stopwords sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des articles (le, la, un, des), des prépositions (à, de, pour), ou encore des conjonctions (et, mais, donc). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.\n\n\n\n\nLa lemmatisation consiste à réduire un mot à sa forme canonique (ou lemme), c’est-à-dire sa version trouvée dans le dictionnaire.\n\nEx. “mangé”, “mangeons”, “mangeaient” → “manger”\n\n\nLa stemmatisation, plus rudimentaire, tronque les mots à leur racine commune sans tenir compte des règles linguistiques.\n\nEx. “manger”, “mangé”, “mangeons” → “mang”\n\n\nCes techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.\n\n\n\nToutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.",
+    "crumbs": [
+      "Prétraitement des données"
+    ]
+  },
+  {
+    "objectID": "3_preprocessing.html#les-étapes-du-pre-processing",
+    "href": "3_preprocessing.html#les-étapes-du-pre-processing",
+    "title": "Les étapes du pre-processing",
+    "section": "",
+    "text": "Le préprocessing consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).\n\n\n\nLa tokenisation fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.\n\n\n\nLa normalisation consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :\n- La conversion en majuscules ou minuscules pour éviter de traiter “Paris” et “paris” comme deux mots distincts.\n- La suppression des accents (ex. é → e) pour uniformiser les termes.\n\n\n\nLes stopwords sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des articles (le, la, un, des), des prépositions (à, de, pour), ou encore des conjonctions (et, mais, donc). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.\n\n\n\n\nLa lemmatisation consiste à réduire un mot à sa forme canonique (ou lemme), c’est-à-dire sa version trouvée dans le dictionnaire.\n\nEx. “mangé”, “mangeons”, “mangeaient” → “manger”\n\n\nLa stemmatisation, plus rudimentaire, tronque les mots à leur racine commune sans tenir compte des règles linguistiques.\n\nEx. “manger”, “mangé”, “mangeons” → “mang”\n\n\nCes techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.\n\n\n\nToutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.",
+    "crumbs": [
+      "Prétraitement des données"
+    ]
+  },
+  {
+    "objectID": "3_preprocessing.html#travaux-pratiques",
+    "href": "3_preprocessing.html#travaux-pratiques",
+    "title": "Les étapes du pre-processing",
+    "section": "Travaux pratiques",
+    "text": "Travaux pratiques",
+    "crumbs": [
+      "Prétraitement des données"
     ]
   }
 ]

@@ -150,7 +150,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#embedding-passer-du-token-au-vecteur-numérique" id="toc-embedding-passer-du-token-au-vecteur-numérique" class="nav-link active" data-scroll-target="#embedding-passer-du-token-au-vecteur-numérique">Embedding : Passer du token au vecteur numérique</a></li>
+  <li><a href="#embedding-passer-du-token-au-vecteur-numérique" id="toc-embedding-passer-du-token-au-vecteur-numérique" class="nav-link active" data-scroll-target="#embedding-passer-du-token-au-vecteur-numérique">Embedding : Passer du token au vecteur numérique</a>
+  <ul class="collapse">
+  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition">Définition</a></li>
+  <li><a href="#lembedding-naïf" id="toc-lembedding-naïf" class="nav-link" data-scroll-target="#lembedding-naïf">L’embedding naïf</a></li>
+  <li><a href="#apprentissage-des-relations-sémantiques" id="toc-apprentissage-des-relations-sémantiques" class="nav-link" data-scroll-target="#apprentissage-des-relations-sémantiques">Apprentissage des relations sémantiques</a></li>
+  </ul></li>
+  <li><a href="#les-premiers-algorithmes-sémantiques" id="toc-les-premiers-algorithmes-sémantiques" class="nav-link" data-scroll-target="#les-premiers-algorithmes-sémantiques">Les premiers algorithmes sémantiques</a>
+  <ul class="collapse">
+  <li><a href="#lalgorithme-cbow" id="toc-lalgorithme-cbow" class="nav-link" data-scroll-target="#lalgorithme-cbow">🔹 L’algorithme CBOW</a></li>
+  <li><a href="#lalgorithme-skip-gram" id="toc-lalgorithme-skip-gram" class="nav-link" data-scroll-target="#lalgorithme-skip-gram">🔹 L’algorithme Skip-Gram</a></li>
+  <li><a href="#lalgorithme-glove" id="toc-lalgorithme-glove" class="nav-link" data-scroll-target="#lalgorithme-glove">🔹 L’algorithme GloVe</a></li>
+  <li><a href="#lalgorithme-fasttext" id="toc-lalgorithme-fasttext" class="nav-link" data-scroll-target="#lalgorithme-fasttext">🔹 L’algorithme FastText</a></li>
+  </ul></li>
+  <li><a href="#les-embeddings-contextuels" id="toc-les-embeddings-contextuels" class="nav-link" data-scroll-target="#les-embeddings-contextuels">Les embeddings contextuels</a></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques">Travaux pratiques</a></li>
   </ul>
 </nav>
     </div>
@@ -190,6 +204,82 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="embedding-passer-du-token-au-vecteur-numérique" class="level2">
 <h2 class="anchored" data-anchor-id="embedding-passer-du-token-au-vecteur-numérique">Embedding : Passer du token au vecteur numérique</h2>
+<section id="définition" class="level3">
+<h3 class="anchored" data-anchor-id="définition">Définition</h3>
+<p>Un <strong>embedding</strong> est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.</p>
+</section>
+<section id="lembedding-naïf" class="level3">
+<h3 class="anchored" data-anchor-id="lembedding-naïf">L’embedding naïf</h3>
+<p>Avec un vocabulaire de tokens de taille ( n ), on peut créer un <strong>espace vectoriel de dimension ( n )</strong>, où chaque token est représenté par un <strong>vecteur unitaire canonique</strong> (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :<br>
+1. L’espace vectoriel devient <strong>très grand</strong> lorsque ( n ) est important.<br>
+2. Les représentations sont <strong>orthogonales</strong>, ce qui signifie qu’elles ne capturent <strong>aucune relation sémantique</strong> entre les mots.</p>
+</section>
+<section id="apprentissage-des-relations-sémantiques" class="level3">
+<h3 class="anchored" data-anchor-id="apprentissage-des-relations-sémantiques">Apprentissage des relations sémantiques</h3>
+<p>En s’appuyant sur <strong>l’hypothèse distributionnelle</strong> et les <strong>réseaux de neurones</strong>, les modèles neuronaux <strong>Bag of Words</strong> (CBOW et Skip-Gram) permettent d’apprendre des <strong>représentations vectorielles compressées</strong> tout en conservant les <strong>proximités et distances sémantiques</strong> entre les tokens.</p>
+</section>
+</section>
+<section id="les-premiers-algorithmes-sémantiques" class="level2">
+<h2 class="anchored" data-anchor-id="les-premiers-algorithmes-sémantiques">Les premiers algorithmes sémantiques</h2>
+<section id="lalgorithme-cbow" class="level3">
+<h3 class="anchored" data-anchor-id="lalgorithme-cbow">🔹 L’algorithme CBOW</h3>
+<p>L’algorithme <strong>Continuous Bag of Words (CBOW)</strong> repose sur un <strong>réseau de neurones</strong> composé de deux étapes :<br>
+1. <strong>Encodage</strong> : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.<br>
+2. <strong>Décodage</strong> : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.</p>
+<p>L’idée est d’entraîner le réseau à <strong>prédire un mot</strong> à partir de son <strong>contexte</strong> (les mots qui l’entourent).</p>
+<p><strong>Exemple avec un contexte de 4 mots</strong> (<em>les deux mots avant et après</em>) :<br>
+- Phrase : <em>“Le chat dort sur le canapé.”</em><br>
+- Contexte : <code>["Le", "dort", "sur", "le"]</code><br>
+- Mot à prédire : <code>"chat"</code><br>
+- Base d’entraînement : ((“Le”, “dort”, “sur”, “le”), “chat”)</p>
+<p>En parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on <strong>récupère la représentation vectorielle intermédiaire</strong> pour associer chaque mot à son embedding.</p>
+</section>
+<section id="lalgorithme-skip-gram" class="level3">
+<h3 class="anchored" data-anchor-id="lalgorithme-skip-gram">🔹 L’algorithme Skip-Gram</h3>
+<p>L’architecture du réseau est similaire à CBOW, mais avec une approche inversée :<br>
+- Plutôt que de <strong>prédire un mot à partir de son contexte</strong>, Skip-Gram <strong>prédit les mots du contexte à partir d’un mot donné</strong>.<br>
+- On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.</p>
+<p><strong>Exemple :</strong><br>
+- Phrase : <em>“Le chat dort sur le canapé.”</em><br>
+- Mot donné : <code>"chat"</code><br>
+- Contexte à prédire : <code>["Le", "dort", "sur", "le"]</code><br>
+- Base d’entraînement : (“Le”,“chat”) ; (“dort”,“chat”) ; (“sur”,“chat”) ; (“le”,“chat”)</p>
+<p>Une fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.</p>
+</section>
+<section id="lalgorithme-glove" class="level3">
+<h3 class="anchored" data-anchor-id="lalgorithme-glove">🔹 L’algorithme GloVe</h3>
+<p>L’algorithme <strong>GloVe (Global Vectors for Word Representation)</strong> adopte une approche différente :<br>
+- Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe <strong>apprend des cooccurrences de mots</strong> à partir d’un large corpus.<br>
+- Il construit une <strong>matrice de cooccurrence</strong> indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.<br>
+- Ensuite, un <strong>facteur de décomposition</strong> est utilisé pour générer des représentations vectorielles capturant les relations sémantiques.</p>
+<p>GloVe est particulièrement efficace pour représenter <strong>des mots ayant des relations sémantiques globales</strong>, comme :<br>
+- <em>Roi – Reine</em>,<br>
+- <em>France – Paris</em>,<br>
+- <em>Banque – Argent</em>.</p>
+</section>
+<section id="lalgorithme-fasttext" class="level3">
+<h3 class="anchored" data-anchor-id="lalgorithme-fasttext">🔹 L’algorithme FastText</h3>
+<p>FastText est une amélioration de CBOW et Skip-Gram :<br>
+- <strong>Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).</strong><br>
+- Cela permet de mieux gérer les <strong>mots rares ou inconnus</strong> en générant des embeddings dynamiques.</p>
+<p><strong>Exemple :</strong><br>
+- Le mot <em>“apprentissage”</em> peut être décomposé en <code>["app", "pren", "tiss", "age"]</code>.<br>
+- Si un mot jamais vu auparavant est rencontré, son embedding peut être inféré à partir de ses sous-mots.</p>
+<p>FastText est particulièrement utile pour <strong>les langues morphologiquement riches</strong> (comme l’allemand ou le turc) et pour gérer les <strong>fautes d’orthographe ou les variantes linguistiques</strong>.</p>
+</section>
+</section>
+<section id="les-embeddings-contextuels" class="level2">
+<h2 class="anchored" data-anchor-id="les-embeddings-contextuels">Les embeddings contextuels</h2>
+<p>Le principal problème des embeddings classiques est que leur <strong>représentation est fixe</strong> : un même token possède toujours le <strong>même vecteur numérique</strong>, quel que soit le contexte. Or, dans de nombreuses langues, notamment en français, <strong>un même mot peut avoir plusieurs significations</strong> selon son usage. De plus, <strong>des notions différentes peuvent s’écrire de la même façon</strong> (homonymes).</p>
+<p>Pour désambiguïser ces cas, il est essentiel de prendre en compte <strong>le contexte</strong> dans lequel un mot apparaît afin de déterminer son sens précis.</p>
+<p>Les <strong>embeddings contextuels</strong> permettent d’adapter la représentation numérique d’un mot <strong>en fonction de son contexte</strong>. Contrairement aux approches statiques, ils tiennent compte <strong>de la position et de l’interaction entre les mots</strong> dans une phrase.</p>
+<p><strong>Exemple :</strong><br>
+- <em>“La <strong>baleine</strong> nage dans l’océan.”</em> 🐋 → <strong>baleine (animal)</strong><br>
+- <em>“J’ai un mal de <strong>baleine</strong> après ce repas.”</em> 🤕 → <strong>baleine (expression signifiant une douleur intense)</strong></p>
+<p>Les modèles basés sur les <strong>transformers</strong> (ex. <strong>BERT, GPT, T5</strong>) sont capables d’encoder ces différences en générant un <strong>vecteur unique pour chaque occurrence d’un mot</strong> selon son contexte. Ainsi, un mot aura un embedding spécifique <strong>qui varie en fonction des mots qui l’entourent</strong>, tout en <strong>conservant les relations sémantiques</strong> apprises (synonymie, antonymie, etc.).</p>
+</section>
+<section id="travaux-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="travaux-pratiques">Travaux pratiques</h2>
 
 
 </section>

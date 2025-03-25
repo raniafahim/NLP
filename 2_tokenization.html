@@ -150,7 +150,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quest-ce-que-la-tokenization" id="toc-quest-ce-que-la-tokenization" class="nav-link active" data-scroll-target="#quest-ce-que-la-tokenization">Qu’est ce que la tokenization ?</a></li>
+  <li><a href="#quest-ce-que-la-tokenization" id="toc-quest-ce-que-la-tokenization" class="nav-link active" data-scroll-target="#quest-ce-que-la-tokenization">Qu’est ce que la tokenization ?</a>
+  <ul class="collapse">
+  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition">Définition</a></li>
+  <li><a href="#pourquoi-faire" id="toc-pourquoi-faire" class="nav-link" data-scroll-target="#pourquoi-faire">Pourquoi faire ?</a></li>
+  <li><a href="#limplémentation" id="toc-limplémentation" class="nav-link" data-scroll-target="#limplémentation">L’implémentation</a></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques">Travaux pratiques</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -190,8 +196,51 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="quest-ce-que-la-tokenization" class="level2">
 <h2 class="anchored" data-anchor-id="quest-ce-que-la-tokenization">Qu’est ce que la tokenization ?</h2>
+<section id="définition" class="level3">
+<h3 class="anchored" data-anchor-id="définition">Définition</h3>
+<p>La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.</p>
+<p>La tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.</p>
+<p>Exemples de tokenisation :</p>
+<ul>
+<li><strong>Découpage en tokens mots</strong> :<br>
+<em>“La tokenisation en NLP est primordiale.”</em> → <code>"La"</code>, <code>"tokenisation"</code>, <code>"en"</code>, <code>"NLP"</code>, <code>"est"</code>, <code>"primordiale"</code><br>
+</li>
+<li><strong>Découpage en tokens sous-mots</strong> :<br>
+<em>“La tokenisation en NLP est primordiale.”</em> → <code>"La"</code>, <code>"token"</code>, <code>"isation"</code>, <code>"en"</code>, <code>"NLP"</code>, <code>"est"</code>, <code>"prim"</code>, <code>"ordiale"</code></li>
+</ul>
+</section>
+<section id="pourquoi-faire" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-faire">Pourquoi faire ?</h3>
+<section id="pour-les-humains" class="level4">
+<h4 class="anchored" data-anchor-id="pour-les-humains">Pour les humains :</h4>
+<p>Une fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :<br>
+- Les mots les plus fréquents (top mots).<br>
+- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.<br>
+- Les mots qui reviennent dans des contextes similaires.</p>
+<p>En NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.</p>
+</section>
+<section id="pour-la-machine" class="level4">
+<h4 class="anchored" data-anchor-id="pour-la-machine">Pour la machine :</h4>
+<p>La machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille <em>n</em> (suffisamment grand, mais pas excessif).</p>
+<p>Une première approche, appelée <strong>one-hot encoding</strong>, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :<br>
+- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.<br>
+- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les <strong>word embeddings</strong> (ex. Word2Vec, GloVe, BERT).</p>
+</section>
+</section>
+<section id="limplémentation" class="level3">
+<h3 class="anchored" data-anchor-id="limplémentation">L’implémentation</h3>
+<p>Plusieurs librairies, en général en python, permettent de tokenizer un texte :</p>
+<ul>
+<li>NLTK</li>
+<li>Spacy</li>
+<li>HuggingFace</li>
+</ul>
+</section>
+<section id="travaux-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="travaux-pratiques">Travaux pratiques</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

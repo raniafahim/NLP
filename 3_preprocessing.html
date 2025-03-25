@@ -150,7 +150,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#les-étapes-du-pre-processing" id="toc-les-étapes-du-pre-processing" class="nav-link active" data-scroll-target="#les-étapes-du-pre-processing">Les étapes du pre-processing</a></li>
+  <li><a href="#les-étapes-du-pre-processing" id="toc-les-étapes-du-pre-processing" class="nav-link active" data-scroll-target="#les-étapes-du-pre-processing">Les étapes du pre-processing</a>
+  <ul class="collapse">
+  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition">Définition</a></li>
+  <li><a href="#tokenisation" id="toc-tokenisation" class="nav-link" data-scroll-target="#tokenisation">Tokenisation</a></li>
+  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation">Normalisation</a></li>
+  <li><a href="#suppression-des-stopwords" id="toc-suppression-des-stopwords" class="nav-link" data-scroll-target="#suppression-des-stopwords">Suppression des stopwords</a></li>
+  <li><a href="#lemmatisation-et-stemmatisation" id="toc-lemmatisation-et-stemmatisation" class="nav-link" data-scroll-target="#lemmatisation-et-stemmatisation">Lemmatisation et Stemmatisation</a></li>
+  <li><a href="#modélisation" id="toc-modélisation" class="nav-link" data-scroll-target="#modélisation">Modélisation</a></li>
+  </ul></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques">Travaux pratiques</a></li>
   </ul>
 </nav>
     </div>
@@ -190,6 +199,46 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="les-étapes-du-pre-processing" class="level2">
 <h2 class="anchored" data-anchor-id="les-étapes-du-pre-processing">Les étapes du pre-processing</h2>
+<section id="définition" class="level3">
+<h3 class="anchored" data-anchor-id="définition">Définition</h3>
+<p>Le <strong>préprocessing</strong> consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).</p>
+</section>
+<section id="tokenisation" class="level3">
+<h3 class="anchored" data-anchor-id="tokenisation">Tokenisation</h3>
+<p>La <strong>tokenisation</strong> fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.</p>
+</section>
+<section id="normalisation" class="level3">
+<h3 class="anchored" data-anchor-id="normalisation">Normalisation</h3>
+<p>La <strong>normalisation</strong> consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :<br>
+- La conversion en <strong>majuscules ou minuscules</strong> pour éviter de traiter <em>“Paris”</em> et <em>“paris”</em> comme deux mots distincts.<br>
+- La suppression des <strong>accents</strong> (ex. <em>é</em> → <em>e</em>) pour uniformiser les termes.</p>
+</section>
+<section id="suppression-des-stopwords" class="level3">
+<h3 class="anchored" data-anchor-id="suppression-des-stopwords">Suppression des stopwords</h3>
+<p>Les <strong>stopwords</strong> sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des <strong>articles</strong> (<em>le, la, un, des</em>), des <strong>prépositions</strong> (<em>à, de, pour</em>), ou encore des <strong>conjonctions</strong> (<em>et, mais, donc</em>). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.</p>
+</section>
+<section id="lemmatisation-et-stemmatisation" class="level3">
+<h3 class="anchored" data-anchor-id="lemmatisation-et-stemmatisation">Lemmatisation et Stemmatisation</h3>
+<ul>
+<li>La <strong>lemmatisation</strong> consiste à réduire un mot à sa <strong>forme canonique</strong> (ou <strong>lemme</strong>), c’est-à-dire sa version trouvée dans le dictionnaire.
+<ul>
+<li>Ex. <em>“mangé”</em>, <em>“mangeons”</em>, <em>“mangeaient”</em> → <strong>“manger”</strong><br>
+</li>
+</ul></li>
+<li>La <strong>stemmatisation</strong>, plus rudimentaire, tronque les mots à leur <strong>racine</strong> commune sans tenir compte des règles linguistiques.
+<ul>
+<li>Ex. <em>“manger”</em>, <em>“mangé”</em>, <em>“mangeons”</em> → <strong>“mang”</strong></li>
+</ul></li>
+</ul>
+<p>Ces techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.</p>
+</section>
+<section id="modélisation" class="level3">
+<h3 class="anchored" data-anchor-id="modélisation">Modélisation</h3>
+<p>Toutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.</p>
+</section>
+</section>
+<section id="travaux-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="travaux-pratiques">Travaux pratiques</h2>
 
 
 </section>
