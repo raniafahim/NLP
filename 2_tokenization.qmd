@@ -8,3 +8,45 @@ execute:
 jupyter: python3
 ---
 ## Qu'est ce que la tokenization ?  
+
+### Définition  
+La tokenisation est le processus de découpage d'un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d'information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l'algorithme.  
+
+La tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s'effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.  
+
+Exemples de tokenisation :  
+
+- **Découpage en tokens mots** :  
+  *"La tokenisation en NLP est primordiale."* → `"La"`, `"tokenisation"`, `"en"`, `"NLP"`, `"est"`, `"primordiale"`  
+- **Découpage en tokens sous-mots** :  
+  *"La tokenisation en NLP est primordiale."* → `"La"`, `"token"`, `"isation"`, `"en"`, `"NLP"`, `"est"`, `"prim"`, `"ordiale"`  
+
+### Pourquoi faire ?  
+
+#### Pour les humains :  
+Une fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :  
+- Les mots les plus fréquents (top mots).  
+- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.  
+- Les mots qui reviennent dans des contextes similaires.  
+
+En NLP, on formule l'hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d'avoir le même sens.
+
+
+#### Pour la machine :  
+La machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille *n* (suffisamment grand, mais pas excessif).  
+
+Une première approche, appelée **one-hot encoding**, consiste à associer à chaque token un vecteur canonique \( e_n \). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :  
+- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu'on souhaiterait au contraire modéliser leur proximité sémantique.  
+- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les **word embeddings** (ex. Word2Vec, GloVe, BERT).
+
+
+### L'implémentation
+
+Plusieurs librairies, en général en python, permettent de tokenizer un texte :
+
+* NLTK
+* Spacy
+* HuggingFace
+
+
+### Travaux pratiques

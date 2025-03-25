@@ -9,3 +9,37 @@ jupyter: python3
 ---
 
 ## Les étapes du pre-processing 
+
+### Définition  
+
+Le **préprocessing** consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d'améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).  
+
+### Tokenisation  
+
+La **tokenisation** fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.  
+
+### Normalisation  
+
+La **normalisation** consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :  
+- La conversion en **majuscules ou minuscules** pour éviter de traiter *"Paris"* et *"paris"* comme deux mots distincts.  
+- La suppression des **accents** (ex. *é* → *e*) pour uniformiser les termes.  
+
+### Suppression des stopwords  
+
+Les **stopwords** sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des **articles** (*le, la, un, des*), des **prépositions** (*à, de, pour*), ou encore des **conjonctions** (*et, mais, donc*). Leur suppression permet de réduire le bruit et d'améliorer l'efficacité du modèle.  
+
+### Lemmatisation et Stemmatisation  
+
+- La **lemmatisation** consiste à réduire un mot à sa **forme canonique** (ou **lemme**), c'est-à-dire sa version trouvée dans le dictionnaire.  
+  - Ex. *"mangé"*, *"mangeons"*, *"mangeaient"* → **"manger"**  
+- La **stemmatisation**, plus rudimentaire, tronque les mots à leur **racine** commune sans tenir compte des règles linguistiques.  
+  - Ex. *"manger"*, *"mangé"*, *"mangeons"* → **"mang"**  
+
+Ces techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.
+
+### Modélisation 
+
+Toutes ces étapes sont adaptées en fonction de la problématique. Il n'existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d'identifier la plus efficace.
+
+
+## Travaux pratiques

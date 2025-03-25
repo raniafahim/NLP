@@ -6,3 +6,90 @@ format: html
 ---
 
 ## Embedding : Passer du token au vecteur numérique
+
+### Définition  
+
+Un **embedding** est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.  
+
+### L'embedding naïf  
+
+Avec un vocabulaire de tokens de taille \( n \), on peut créer un **espace vectoriel de dimension \( n \)**, où chaque token est représenté par un **vecteur unitaire canonique** (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :  
+1. L’espace vectoriel devient **très grand** lorsque \( n \) est important.  
+2. Les représentations sont **orthogonales**, ce qui signifie qu'elles ne capturent **aucune relation sémantique** entre les mots.  
+
+### Apprentissage des relations sémantiques  
+
+En s’appuyant sur **l’hypothèse distributionnelle** et les **réseaux de neurones**, les modèles neuronaux **Bag of Words** (CBOW et Skip-Gram) permettent d’apprendre des **représentations vectorielles compressées** tout en conservant les **proximités et distances sémantiques** entre les tokens.  
+
+## Les premiers algorithmes sémantiques  
+
+### 🔹 L'algorithme CBOW  
+
+L'algorithme **Continuous Bag of Words (CBOW)** repose sur un **réseau de neurones** composé de deux étapes :  
+1. **Encodage** : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.  
+2. **Décodage** : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.  
+
+L’idée est d’entraîner le réseau à **prédire un mot** à partir de son **contexte** (les mots qui l’entourent).  
+
+**Exemple avec un contexte de 4 mots** (*les deux mots avant et après*) :  
+- Phrase : *"Le chat dort sur le canapé."*  
+- Contexte : `["Le", "dort", "sur", "le"]`  
+- Mot à prédire : `"chat"`  
+- Base d'entraînement : (("Le", "dort", "sur", "le"), "chat")
+
+En parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on **récupère la représentation vectorielle intermédiaire** pour associer chaque mot à son embedding.  
+
+### 🔹 L'algorithme Skip-Gram  
+
+L'architecture du réseau est similaire à CBOW, mais avec une approche inversée :  
+- Plutôt que de **prédire un mot à partir de son contexte**, Skip-Gram **prédit les mots du contexte à partir d’un mot donné**.  
+- On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.  
+
+**Exemple :**  
+- Phrase : *"Le chat dort sur le canapé."*  
+- Mot donné : `"chat"`  
+- Contexte à prédire : `["Le", "dort", "sur", "le"]`  
+- Base d'entraînement : ("Le","chat") ; ("dort","chat") ; ("sur","chat") ; ("le","chat")
+
+Une fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.
+
+### 🔹 L'algorithme GloVe  
+
+L'algorithme **GloVe (Global Vectors for Word Representation)** adopte une approche différente :  
+- Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe **apprend des cooccurrences de mots** à partir d’un large corpus.  
+- Il construit une **matrice de cooccurrence** indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.  
+- Ensuite, un **facteur de décomposition** est utilisé pour générer des représentations vectorielles capturant les relations sémantiques.  
+
+GloVe est particulièrement efficace pour représenter **des mots ayant des relations sémantiques globales**, comme :  
+- *Roi – Reine*,  
+- *France – Paris*,  
+- *Banque – Argent*.  
+
+### 🔹 L'algorithme FastText  
+
+FastText est une amélioration de CBOW et Skip-Gram :  
+- **Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).**  
+- Cela permet de mieux gérer les **mots rares ou inconnus** en générant des embeddings dynamiques.  
+
+**Exemple :**  
+- Le mot *"apprentissage"* peut être décomposé en `["app", "pren", "tiss", "age"]`.  
+- Si un mot jamais vu auparavant est rencontré, son embedding peut être inféré à partir de ses sous-mots.  
+
+FastText est particulièrement utile pour **les langues morphologiquement riches** (comme l’allemand ou le turc) et pour gérer les **fautes d’orthographe ou les variantes linguistiques**.  
+
+
+## Les embeddings contextuels
+
+Le principal problème des embeddings classiques est que leur **représentation est fixe** : un même token possède toujours le **même vecteur numérique**, quel que soit le contexte. Or, dans de nombreuses langues, notamment en français, **un même mot peut avoir plusieurs significations** selon son usage. De plus, **des notions différentes peuvent s’écrire de la même façon** (homonymes).  
+
+Pour désambiguïser ces cas, il est essentiel de prendre en compte **le contexte** dans lequel un mot apparaît afin de déterminer son sens précis.  
+
+Les **embeddings contextuels** permettent d’adapter la représentation numérique d’un mot **en fonction de son contexte**. Contrairement aux approches statiques, ils tiennent compte **de la position et de l'interaction entre les mots** dans une phrase.  
+
+**Exemple :**  
+- *"La **baleine** nage dans l’océan."* 🐋 → **baleine (animal)**  
+- *"J’ai un mal de **baleine** après ce repas."* 🤕 → **baleine (expression signifiant une douleur intense)**  
+
+Les modèles basés sur les **transformers** (ex. **BERT, GPT, T5**) sont capables d’encoder ces différences en générant un **vecteur unique pour chaque occurrence d’un mot** selon son contexte. Ainsi, un mot aura un embedding spécifique **qui varie en fonction des mots qui l'entourent**, tout en **conservant les relations sémantiques** apprises (synonymie, antonymie, etc.).
+
+## Travaux pratiques
