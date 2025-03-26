@@ -23,7 +23,7 @@ En s’appuyant sur **l’hypothèse distributionnelle** et les **réseaux de ne
 
 ## Les premiers algorithmes sémantiques  
 
-### 🔹 L'algorithme CBOW  
+### L'algorithme CBOW  
 
 L'algorithme **Continuous Bag of Words (CBOW)** repose sur un **réseau de neurones** composé de deux étapes :  
 1. **Encodage** : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.  
@@ -39,7 +39,7 @@ L’idée est d’entraîner le réseau à **prédire un mot** à partir de son 
 
 En parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on **récupère la représentation vectorielle intermédiaire** pour associer chaque mot à son embedding.  
 
-### 🔹 L'algorithme Skip-Gram  
+### L'algorithme Skip-Gram  
 
 L'architecture du réseau est similaire à CBOW, mais avec une approche inversée :  
 - Plutôt que de **prédire un mot à partir de son contexte**, Skip-Gram **prédit les mots du contexte à partir d’un mot donné**.  
@@ -53,7 +53,7 @@ L'architecture du réseau est similaire à CBOW, mais avec une approche inversé
 
 Une fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.
 
-### 🔹 L'algorithme GloVe  
+### L'algorithme GloVe  
 
 L'algorithme **GloVe (Global Vectors for Word Representation)** adopte une approche différente :  
 - Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe **apprend des cooccurrences de mots** à partir d’un large corpus.  
@@ -65,7 +65,7 @@ GloVe est particulièrement efficace pour représenter **des mots ayant des rela
 - *France – Paris*,  
 - *Banque – Argent*.  
 
-### 🔹 L'algorithme FastText  
+### L'algorithme FastText  
 
 FastText est une amélioration de CBOW et Skip-Gram :  
 - **Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).**  

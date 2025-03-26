@@ -11,4 +11,6 @@ execute:
 
 Quelques ressources pour aller plus loin :
 
-* 
+* [Cours de Lino Galiana](https://pythonds.linogaliana.fr/content/NLP/)
+* [Cours de Julien Romero](https://www-inf.telecom-sudparis.eu/COURS/CSC4538/Supports/cours/intro_nlp.pdf)
+* [Cours de Georges-André Silber](https://www.cri.minesparis.psl.eu/people/silber/nlp_archives/202406_intro_nlp.pdf)
