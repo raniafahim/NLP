@@ -36,12 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-88b9f24238093d7ede9e821d28d5c74f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-ab6b8b7d8618fd52021f453d175ef30d.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-04fd4fe834e05081167d21501a7e344c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body class="nav-sidebar docked">
@@ -98,9 +97,6 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Cours introduction NLP</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -150,21 +146,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#embedding-passer-du-token-au-vecteur-numérique" id="toc-embedding-passer-du-token-au-vecteur-numérique" class="nav-link active" data-scroll-target="#embedding-passer-du-token-au-vecteur-numérique">Embedding : Passer du token au vecteur numérique</a>
+  <li><a href="#embedding-passer-du-token-au-vecteur-numérique" id="toc-embedding-passer-du-token-au-vecteur-numérique" class="nav-link active" data-scroll-target="#embedding-passer-du-token-au-vecteur-numérique"><span class="header-section-number">1</span> Embedding : Passer du token au vecteur numérique</a>
   <ul class="collapse">
-  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition">Définition</a></li>
-  <li><a href="#lembedding-naïf" id="toc-lembedding-naïf" class="nav-link" data-scroll-target="#lembedding-naïf">L’embedding naïf</a></li>
-  <li><a href="#apprentissage-des-relations-sémantiques" id="toc-apprentissage-des-relations-sémantiques" class="nav-link" data-scroll-target="#apprentissage-des-relations-sémantiques">Apprentissage des relations sémantiques</a></li>
+  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition"><span class="header-section-number">1.1</span> Définition</a></li>
+  <li><a href="#lembedding-naïf" id="toc-lembedding-naïf" class="nav-link" data-scroll-target="#lembedding-naïf"><span class="header-section-number">1.2</span> L’embedding naïf</a></li>
+  <li><a href="#apprentissage-des-relations-sémantiques" id="toc-apprentissage-des-relations-sémantiques" class="nav-link" data-scroll-target="#apprentissage-des-relations-sémantiques"><span class="header-section-number">1.3</span> Apprentissage des relations sémantiques</a></li>
   </ul></li>
-  <li><a href="#les-premiers-algorithmes-sémantiques" id="toc-les-premiers-algorithmes-sémantiques" class="nav-link" data-scroll-target="#les-premiers-algorithmes-sémantiques">Les premiers algorithmes sémantiques</a>
+  <li><a href="#les-premiers-algorithmes-sémantiques" id="toc-les-premiers-algorithmes-sémantiques" class="nav-link" data-scroll-target="#les-premiers-algorithmes-sémantiques"><span class="header-section-number">2</span> Les premiers algorithmes sémantiques</a>
   <ul class="collapse">
-  <li><a href="#lalgorithme-cbow" id="toc-lalgorithme-cbow" class="nav-link" data-scroll-target="#lalgorithme-cbow">L’algorithme CBOW</a></li>
-  <li><a href="#lalgorithme-skip-gram" id="toc-lalgorithme-skip-gram" class="nav-link" data-scroll-target="#lalgorithme-skip-gram">L’algorithme Skip-Gram</a></li>
-  <li><a href="#lalgorithme-glove" id="toc-lalgorithme-glove" class="nav-link" data-scroll-target="#lalgorithme-glove">L’algorithme GloVe</a></li>
-  <li><a href="#lalgorithme-fasttext" id="toc-lalgorithme-fasttext" class="nav-link" data-scroll-target="#lalgorithme-fasttext">L’algorithme FastText</a></li>
+  <li><a href="#lalgorithme-cbow" id="toc-lalgorithme-cbow" class="nav-link" data-scroll-target="#lalgorithme-cbow"><span class="header-section-number">2.1</span> L’algorithme CBOW</a></li>
+  <li><a href="#lalgorithme-skip-gram" id="toc-lalgorithme-skip-gram" class="nav-link" data-scroll-target="#lalgorithme-skip-gram"><span class="header-section-number">2.2</span> L’algorithme Skip-Gram</a></li>
+  <li><a href="#lalgorithme-glove" id="toc-lalgorithme-glove" class="nav-link" data-scroll-target="#lalgorithme-glove"><span class="header-section-number">2.3</span> L’algorithme GloVe</a></li>
+  <li><a href="#lalgorithme-fasttext" id="toc-lalgorithme-fasttext" class="nav-link" data-scroll-target="#lalgorithme-fasttext"><span class="header-section-number">2.4</span> L’algorithme FastText</a></li>
   </ul></li>
-  <li><a href="#les-embeddings-contextuels" id="toc-les-embeddings-contextuels" class="nav-link" data-scroll-target="#les-embeddings-contextuels">Les embeddings contextuels</a></li>
-  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques">Travaux pratiques</a></li>
+  <li><a href="#les-embeddings-contextuels" id="toc-les-embeddings-contextuels" class="nav-link" data-scroll-target="#les-embeddings-contextuels"><span class="header-section-number">3</span> Les embeddings contextuels</a></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">4</span> Travaux pratiques</a></li>
   </ul>
 </nav>
     </div>
@@ -202,27 +198,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="embedding-passer-du-token-au-vecteur-numérique" class="level2">
-<h2 class="anchored" data-anchor-id="embedding-passer-du-token-au-vecteur-numérique">Embedding : Passer du token au vecteur numérique</h2>
-<section id="définition" class="level3">
-<h3 class="anchored" data-anchor-id="définition">Définition</h3>
+<section id="embedding-passer-du-token-au-vecteur-numérique" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="embedding-passer-du-token-au-vecteur-numérique"><span class="header-section-number">1</span> Embedding : Passer du token au vecteur numérique</h2>
+<section id="définition" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="définition"><span class="header-section-number">1.1</span> Définition</h3>
 <p>Un <strong>embedding</strong> est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.</p>
 </section>
-<section id="lembedding-naïf" class="level3">
-<h3 class="anchored" data-anchor-id="lembedding-naïf">L’embedding naïf</h3>
+<section id="lembedding-naïf" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="lembedding-naïf"><span class="header-section-number">1.2</span> L’embedding naïf</h3>
 <p>Avec un vocabulaire de tokens de taille ( n ), on peut créer un <strong>espace vectoriel de dimension ( n )</strong>, où chaque token est représenté par un <strong>vecteur unitaire canonique</strong> (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :<br>
 1. L’espace vectoriel devient <strong>très grand</strong> lorsque ( n ) est important.<br>
 2. Les représentations sont <strong>orthogonales</strong>, ce qui signifie qu’elles ne capturent <strong>aucune relation sémantique</strong> entre les mots.</p>
 </section>
-<section id="apprentissage-des-relations-sémantiques" class="level3">
-<h3 class="anchored" data-anchor-id="apprentissage-des-relations-sémantiques">Apprentissage des relations sémantiques</h3>
+<section id="apprentissage-des-relations-sémantiques" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="apprentissage-des-relations-sémantiques"><span class="header-section-number">1.3</span> Apprentissage des relations sémantiques</h3>
 <p>En s’appuyant sur <strong>l’hypothèse distributionnelle</strong> et les <strong>réseaux de neurones</strong>, les modèles neuronaux <strong>Bag of Words</strong> (CBOW et Skip-Gram) permettent d’apprendre des <strong>représentations vectorielles compressées</strong> tout en conservant les <strong>proximités et distances sémantiques</strong> entre les tokens.</p>
 </section>
 </section>
-<section id="les-premiers-algorithmes-sémantiques" class="level2">
-<h2 class="anchored" data-anchor-id="les-premiers-algorithmes-sémantiques">Les premiers algorithmes sémantiques</h2>
-<section id="lalgorithme-cbow" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-cbow">L’algorithme CBOW</h3>
+<section id="les-premiers-algorithmes-sémantiques" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="les-premiers-algorithmes-sémantiques"><span class="header-section-number">2</span> Les premiers algorithmes sémantiques</h2>
+<section id="lalgorithme-cbow" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="lalgorithme-cbow"><span class="header-section-number">2.1</span> L’algorithme CBOW</h3>
 <p>L’algorithme <strong>Continuous Bag of Words (CBOW)</strong> repose sur un <strong>réseau de neurones</strong> composé de deux étapes :<br>
 1. <strong>Encodage</strong> : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.<br>
 2. <strong>Décodage</strong> : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.</p>
@@ -234,8 +230,8 @@ ul.task-list li input[type="checkbox"] {
 - Base d’entraînement : ((“Le”, “dort”, “sur”, “le”), “chat”)</p>
 <p>En parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on <strong>récupère la représentation vectorielle intermédiaire</strong> pour associer chaque mot à son embedding.</p>
 </section>
-<section id="lalgorithme-skip-gram" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-skip-gram">L’algorithme Skip-Gram</h3>
+<section id="lalgorithme-skip-gram" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="lalgorithme-skip-gram"><span class="header-section-number">2.2</span> L’algorithme Skip-Gram</h3>
 <p>L’architecture du réseau est similaire à CBOW, mais avec une approche inversée :<br>
 - Plutôt que de <strong>prédire un mot à partir de son contexte</strong>, Skip-Gram <strong>prédit les mots du contexte à partir d’un mot donné</strong>.<br>
 - On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.</p>
@@ -246,8 +242,8 @@ ul.task-list li input[type="checkbox"] {
 - Base d’entraînement : (“Le”,“chat”) ; (“dort”,“chat”) ; (“sur”,“chat”) ; (“le”,“chat”)</p>
 <p>Une fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.</p>
 </section>
-<section id="lalgorithme-glove" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-glove">L’algorithme GloVe</h3>
+<section id="lalgorithme-glove" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="lalgorithme-glove"><span class="header-section-number">2.3</span> L’algorithme GloVe</h3>
 <p>L’algorithme <strong>GloVe (Global Vectors for Word Representation)</strong> adopte une approche différente :<br>
 - Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe <strong>apprend des cooccurrences de mots</strong> à partir d’un large corpus.<br>
 - Il construit une <strong>matrice de cooccurrence</strong> indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.<br>
@@ -257,8 +253,8 @@ ul.task-list li input[type="checkbox"] {
 - <em>France – Paris</em>,<br>
 - <em>Banque – Argent</em>.</p>
 </section>
-<section id="lalgorithme-fasttext" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-fasttext">L’algorithme FastText</h3>
+<section id="lalgorithme-fasttext" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="lalgorithme-fasttext"><span class="header-section-number">2.4</span> L’algorithme FastText</h3>
 <p>FastText est une amélioration de CBOW et Skip-Gram :<br>
 - <strong>Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).</strong><br>
 - Cela permet de mieux gérer les <strong>mots rares ou inconnus</strong> en générant des embeddings dynamiques.</p>
@@ -268,8 +264,8 @@ ul.task-list li input[type="checkbox"] {
 <p>FastText est particulièrement utile pour <strong>les langues morphologiquement riches</strong> (comme l’allemand ou le turc) et pour gérer les <strong>fautes d’orthographe ou les variantes linguistiques</strong>.</p>
 </section>
 </section>
-<section id="les-embeddings-contextuels" class="level2">
-<h2 class="anchored" data-anchor-id="les-embeddings-contextuels">Les embeddings contextuels</h2>
+<section id="les-embeddings-contextuels" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="les-embeddings-contextuels"><span class="header-section-number">3</span> Les embeddings contextuels</h2>
 <p>Le principal problème des embeddings classiques est que leur <strong>représentation est fixe</strong> : un même token possède toujours le <strong>même vecteur numérique</strong>, quel que soit le contexte. Or, dans de nombreuses langues, notamment en français, <strong>un même mot peut avoir plusieurs significations</strong> selon son usage. De plus, <strong>des notions différentes peuvent s’écrire de la même façon</strong> (homonymes).</p>
 <p>Pour désambiguïser ces cas, il est essentiel de prendre en compte <strong>le contexte</strong> dans lequel un mot apparaît afin de déterminer son sens précis.</p>
 <p>Les <strong>embeddings contextuels</strong> permettent d’adapter la représentation numérique d’un mot <strong>en fonction de son contexte</strong>. Contrairement aux approches statiques, ils tiennent compte <strong>de la position et de l’interaction entre les mots</strong> dans une phrase.</p>
@@ -278,8 +274,8 @@ ul.task-list li input[type="checkbox"] {
 - <em>“J’ai un mal de <strong>baleine</strong> après ce repas.”</em> 🤕 → <strong>baleine (expression signifiant une douleur intense)</strong></p>
 <p>Les modèles basés sur les <strong>transformers</strong> (ex. <strong>BERT, GPT, T5</strong>) sont capables d’encoder ces différences en générant un <strong>vecteur unique pour chaque occurrence d’un mot</strong> selon son contexte. Ainsi, un mot aura un embedding spécifique <strong>qui varie en fonction des mots qui l’entourent</strong>, tout en <strong>conservant les relations sémantiques</strong> apprises (synonymie, antonymie, etc.).</p>
 </section>
-<section id="travaux-pratiques" class="level2">
-<h2 class="anchored" data-anchor-id="travaux-pratiques">Travaux pratiques</h2>
+<section id="travaux-pratiques" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">4</span> Travaux pratiques</h2>
 
 
 </section>
@@ -305,150 +301,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -787,25 +639,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
           }
-        });
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
