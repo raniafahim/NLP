@@ -158,10 +158,10 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#les-premiers-algorithmes-sémantiques" id="toc-les-premiers-algorithmes-sémantiques" class="nav-link" data-scroll-target="#les-premiers-algorithmes-sémantiques">Les premiers algorithmes sémantiques</a>
   <ul class="collapse">
-  <li><a href="#lalgorithme-cbow" id="toc-lalgorithme-cbow" class="nav-link" data-scroll-target="#lalgorithme-cbow">🔹 L’algorithme CBOW</a></li>
-  <li><a href="#lalgorithme-skip-gram" id="toc-lalgorithme-skip-gram" class="nav-link" data-scroll-target="#lalgorithme-skip-gram">🔹 L’algorithme Skip-Gram</a></li>
-  <li><a href="#lalgorithme-glove" id="toc-lalgorithme-glove" class="nav-link" data-scroll-target="#lalgorithme-glove">🔹 L’algorithme GloVe</a></li>
-  <li><a href="#lalgorithme-fasttext" id="toc-lalgorithme-fasttext" class="nav-link" data-scroll-target="#lalgorithme-fasttext">🔹 L’algorithme FastText</a></li>
+  <li><a href="#lalgorithme-cbow" id="toc-lalgorithme-cbow" class="nav-link" data-scroll-target="#lalgorithme-cbow">L’algorithme CBOW</a></li>
+  <li><a href="#lalgorithme-skip-gram" id="toc-lalgorithme-skip-gram" class="nav-link" data-scroll-target="#lalgorithme-skip-gram">L’algorithme Skip-Gram</a></li>
+  <li><a href="#lalgorithme-glove" id="toc-lalgorithme-glove" class="nav-link" data-scroll-target="#lalgorithme-glove">L’algorithme GloVe</a></li>
+  <li><a href="#lalgorithme-fasttext" id="toc-lalgorithme-fasttext" class="nav-link" data-scroll-target="#lalgorithme-fasttext">L’algorithme FastText</a></li>
   </ul></li>
   <li><a href="#les-embeddings-contextuels" id="toc-les-embeddings-contextuels" class="nav-link" data-scroll-target="#les-embeddings-contextuels">Les embeddings contextuels</a></li>
   <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques">Travaux pratiques</a></li>
@@ -222,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="les-premiers-algorithmes-sémantiques" class="level2">
 <h2 class="anchored" data-anchor-id="les-premiers-algorithmes-sémantiques">Les premiers algorithmes sémantiques</h2>
 <section id="lalgorithme-cbow" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-cbow">🔹 L’algorithme CBOW</h3>
+<h3 class="anchored" data-anchor-id="lalgorithme-cbow">L’algorithme CBOW</h3>
 <p>L’algorithme <strong>Continuous Bag of Words (CBOW)</strong> repose sur un <strong>réseau de neurones</strong> composé de deux étapes :<br>
 1. <strong>Encodage</strong> : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.<br>
 2. <strong>Décodage</strong> : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.</p>
@@ -235,7 +235,7 @@ ul.task-list li input[type="checkbox"] {
 <p>En parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on <strong>récupère la représentation vectorielle intermédiaire</strong> pour associer chaque mot à son embedding.</p>
 </section>
 <section id="lalgorithme-skip-gram" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-skip-gram">🔹 L’algorithme Skip-Gram</h3>
+<h3 class="anchored" data-anchor-id="lalgorithme-skip-gram">L’algorithme Skip-Gram</h3>
 <p>L’architecture du réseau est similaire à CBOW, mais avec une approche inversée :<br>
 - Plutôt que de <strong>prédire un mot à partir de son contexte</strong>, Skip-Gram <strong>prédit les mots du contexte à partir d’un mot donné</strong>.<br>
 - On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.</p>
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Une fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.</p>
 </section>
 <section id="lalgorithme-glove" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-glove">🔹 L’algorithme GloVe</h3>
+<h3 class="anchored" data-anchor-id="lalgorithme-glove">L’algorithme GloVe</h3>
 <p>L’algorithme <strong>GloVe (Global Vectors for Word Representation)</strong> adopte une approche différente :<br>
 - Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe <strong>apprend des cooccurrences de mots</strong> à partir d’un large corpus.<br>
 - Il construit une <strong>matrice de cooccurrence</strong> indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.<br>
@@ -258,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
 - <em>Banque – Argent</em>.</p>
 </section>
 <section id="lalgorithme-fasttext" class="level3">
-<h3 class="anchored" data-anchor-id="lalgorithme-fasttext">🔹 L’algorithme FastText</h3>
+<h3 class="anchored" data-anchor-id="lalgorithme-fasttext">L’algorithme FastText</h3>
 <p>FastText est une amélioration de CBOW et Skip-Gram :<br>
 - <strong>Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).</strong><br>
 - Cela permet de mieux gérer les <strong>mots rares ou inconnus</strong> en générant des embeddings dynamiques.</p>
