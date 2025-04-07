@@ -29,8 +29,9 @@ Pour plus de détails, vous pouvez consulter l'article original de **Blei, Ng et
 ### LDA - Génération de documents
 
 L'algorithme de **génération de documents** sous LDA suit les étapes suivantes :
+
 1. Choisir le nombre de mots à générer pour le document (N)
-2. Choisir la distribution des sujets pour un document selon une distribution de Dirichlet. (Theta)
+2. Choisir la distribution des sujets pour un document selon une distribution de Dirichlet. ($\theta$)
 3. Pour chaque mot du document :
    - Sélectionner un sujet selon la distribution de sujets du document.
    - Sélectionner un mot selon la distribution de mots associée à ce sujet.
@@ -41,36 +42,42 @@ Cela permet de générer un document synthétique basé sur un modèle probabili
 
 #### Exemple à deux sujets
 
-* sujet_1 = CET; sujet_2 = télétravail
-* Soit la distribution suivante:
-    * sujet_1_distribution = {"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}
-    * sujet_2_distribution = {"télétravail":0.7,"droit":0.15,"déconnexion":0.15}
-* Génération de 4 mots (N=4)
-* Génération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4)
-* Pour le premier mot :
-    * selection d'un sujet selon la distribution 3/4 ; 1/4   => sujet_1
-    * parmi la distribution du sujet_1 ={"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}, on tire un mot  => "CET"
+> sujet_1 = CET; sujet_2 = télétravail
+Soit la distribution suivante:
 
-* phrase générée = CET
+* sujet_1_distribution = {"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}
+* sujet_2_distribution = {"télétravail":0.7,"droit":0.15,"déconnexion":0.15}
 
-* Pour le deuxième mot : 
-    * selection d'un sujet selon la distribution 3/4 ; 1/4   => sujet_1
-    * parmi la distribution du sujet_1 ={"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}, on tire un mot  => "compte"
+> Génération de 4 mots (N=4)
 
-* phrase générée = CET compte
+Génération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4)
+Pour le premier mot :
 
-* etc.
+* selection d'un sujet selon la distribution 3/4 ; 1/4   => sujet_1
+* parmi la distribution du sujet_1 ={"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}, on tire un mot  => "CET"
+
+>phrase générée = CET
+
+Pour le deuxième mot : 
+* selection d'un sujet selon la distribution 3/4 ; 1/4   => sujet_1
+* parmi la distribution du sujet_1 ={"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}, on tire un mot  => "compte"
+
+>phrase générée = CET compte
+
+etc.
 
 ### LDA - Génération de topics
 
 L'algorithme de **génération de topics** sous LDA repose sur une approche de type **inférence bayésienne** :
+
 1. Initialiser aléatoirement une attribution de sujets aux mots du corpus.
 2. Mettre à jour ces attributions en fonction de la probabilité conditionnelle d'un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.
 3. Répéter l’opération jusqu’à convergence.
 
 Deux techniques principales sont utilisées pour l’inférence :
-- **Gibbs Sampling**, une méthode de Monte Carlo par chaînes de Markov (MCMC).
-- **Variationnal Bayes**, une approximation de l’inférence exacte.
+
+* **Gibbs Sampling**, une méthode de Monte Carlo par chaînes de Markov (MCMC).
+* **Variationnal Bayes**, une approximation de l’inférence exacte.
 
 Ce processus permet d'extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.
 
