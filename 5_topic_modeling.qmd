@@ -16,8 +16,6 @@ Le concept de modélisation de sujets a émergé dans les années 1990 avec l'av
 ### Vocable indifférent entre topic et sujet
 En français, le terme *topic* peut être traduit par *sujet* ou *thème*. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.
 
----
-
 ## LDA (Latent Dirichlet Allocation)
 
 ### Définition du LDA
@@ -80,6 +78,8 @@ Ce processus permet d'extraire des distributions de sujets et de mots qui défin
 
 #### Exemple à deux sujets avec trois documents
 
+
+##### Initialisation
 * Document_1 = "Le télétravail est un droit"
 * Document_2 = "Le droit à la deconnexion est un droit"
 * Document_3 = "Le plafond annuel du CET est de 40 jours"
@@ -90,6 +90,7 @@ Ce processus permet d'extraire des distributions de sujets et de mots qui défin
 * Document_2 = "droit deconnexion être droit"
 * Document_3 = "plafond annuel CET être 40 jours"
 
+##### Calcul de probabilités
 
 * k=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet
 
@@ -97,20 +98,21 @@ Ce processus permet d'extraire des distributions de sujets et de mots qui défin
 * Document_2 = "droit(2) deconnexion(1) être(2) droit(2)"
 * Document_3 = "plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)"
 
-* Ceci donne la répartition suivante :
+* Ceci donne la répartition suivante (***ces contours vont bouger à chaque étape!***) :
 
-* sujet_1={être,droit,deconnexion,plafond,annuel,être,40} ; sujet_2={télétravail, droit, être, droit, CET, jours}
+* $sujet_1={être,droit,deconnexion,plafond,annuel,être,40}$ ; $sujet_2={télétravail, droit, être, droit, CET, jours}$
 * on remarque le mot "droit" est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [***Représentativité du mot dans un sujet ou poids***]
-* P(mot="droit"| "droit" appartient au sujet_1)=1/7  et P(mot="droit"| "droit" appartient au sujet_2)=2/6
+* $P(mot="droit"| "droit" appartient au sujet_1)=1/7$  et $P(mot="droit"| "droit" appartient au sujet_2)=2/6$
 * On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents
-* P(mot="droit"| document=document_1)=1/3 et P(mot="droit"| document=document_2)=2/4
+* $P(mot="droit"| document=document_1)=1/3$ et $P(mot="droit"| document=document_2)=2/4$
 * Et même comment les sujets sont représentés dans les documents [***Répresentativité des sujets dans un document***]:
-* P(sujet=sujet_1 | document=document_1)=2/3 et P(sujet=sujet_1 | document=document_2)=1/4
+* $P(sujet=sujet_1 | document=document_1)=2/3$ et $P(sujet=sujet_1 | document=document_2)=1/4$
 
+##### Réévaluation et bis repetita
 * Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i
 
 
-* P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)  
+* $P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)$
 * on calcule pour les autres sujets et on affecte au plus probable
 * on arrête l'algorithme quand il converge
 
