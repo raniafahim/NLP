@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="raniafhm">
-<meta name="dcterms.date" content="2026-05-03">
+<meta name="dcterms.date" content="2025-04-07">
 
-<title>Les étapes du pre-processing – Cours introduction NLP</title>
+<title>Modélisation de sujets – Cours introduction NLP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_preprocessing.html">Prétraitement des données</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5_topic_modeling.html">Topic Modeling</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_preprocessing.html" class="sidebar-item-text sidebar-link active">
+  <a href="./3_preprocessing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prétraitement des données</span></a>
   </div>
 </li>
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_topic_modeling.html" class="sidebar-item-text sidebar-link">
+  <a href="./5_topic_modeling.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Topic Modeling</span></a>
   </div>
 </li>
@@ -152,16 +152,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#les-étapes-du-pre-processing" id="toc-les-étapes-du-pre-processing" class="nav-link active" data-scroll-target="#les-étapes-du-pre-processing"><span class="header-section-number">1</span> Les étapes du pre-processing</a>
+  <li><a href="#topic-modeling" id="toc-topic-modeling" class="nav-link active" data-scroll-target="#topic-modeling"><span class="header-section-number">1</span> Topic Modeling</a>
   <ul class="collapse">
-  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition"><span class="header-section-number">1.1</span> Définition</a></li>
-  <li><a href="#tokenisation" id="toc-tokenisation" class="nav-link" data-scroll-target="#tokenisation"><span class="header-section-number">1.2</span> Tokenisation</a></li>
-  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation"><span class="header-section-number">1.3</span> Normalisation</a></li>
-  <li><a href="#suppression-des-stopwords" id="toc-suppression-des-stopwords" class="nav-link" data-scroll-target="#suppression-des-stopwords"><span class="header-section-number">1.4</span> Suppression des stopwords</a></li>
-  <li><a href="#lemmatisation-et-stemmatisation" id="toc-lemmatisation-et-stemmatisation" class="nav-link" data-scroll-target="#lemmatisation-et-stemmatisation"><span class="header-section-number">1.5</span> Lemmatisation et Stemmatisation</a></li>
-  <li><a href="#modélisation" id="toc-modélisation" class="nav-link" data-scroll-target="#modélisation"><span class="header-section-number">1.6</span> Modélisation</a></li>
+  <li><a href="#définition-du-topic-modeling" id="toc-définition-du-topic-modeling" class="nav-link" data-scroll-target="#définition-du-topic-modeling"><span class="header-section-number">1.1</span> Définition du Topic Modeling</a></li>
+  <li><a href="#historique-du-topic-modeling" id="toc-historique-du-topic-modeling" class="nav-link" data-scroll-target="#historique-du-topic-modeling"><span class="header-section-number">1.2</span> Historique du Topic Modeling</a></li>
+  <li><a href="#vocable-indifférent-entre-topic-et-sujet" id="toc-vocable-indifférent-entre-topic-et-sujet" class="nav-link" data-scroll-target="#vocable-indifférent-entre-topic-et-sujet"><span class="header-section-number">1.3</span> Vocable indifférent entre topic et sujet</a></li>
   </ul></li>
-  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">2</span> Travaux pratiques</a></li>
+  <li><a href="#lda-latent-dirichlet-allocation" id="toc-lda-latent-dirichlet-allocation" class="nav-link" data-scroll-target="#lda-latent-dirichlet-allocation"><span class="header-section-number">2</span> LDA (Latent Dirichlet Allocation)</a>
+  <ul class="collapse">
+  <li><a href="#définition-du-lda" id="toc-définition-du-lda" class="nav-link" data-scroll-target="#définition-du-lda"><span class="header-section-number">2.1</span> Définition du LDA</a></li>
+  <li><a href="#lien-vers-article" id="toc-lien-vers-article" class="nav-link" data-scroll-target="#lien-vers-article"><span class="header-section-number">2.2</span> Lien vers article</a></li>
+  <li><a href="#lda---génération-de-documents" id="toc-lda---génération-de-documents" class="nav-link" data-scroll-target="#lda---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Génération de documents</a></li>
+  <li><a href="#lda---génération-de-topics" id="toc-lda---génération-de-topics" class="nav-link" data-scroll-target="#lda---génération-de-topics"><span class="header-section-number">2.4</span> LDA - Génération de topics</a></li>
+  </ul></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">3</span> Travaux pratiques</a></li>
   </ul>
 </nav>
     </div>
@@ -170,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Les étapes du pre-processing</h1>
+<h1 class="title">Modélisation de sujets</h1>
 </div>
 
 
@@ -187,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 3, 2026</p>
+      <p class="date">April 7, 2025</p>
     </div>
   </div>
   
@@ -199,48 +203,103 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="les-étapes-du-pre-processing" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="les-étapes-du-pre-processing"><span class="header-section-number">1</span> Les étapes du pre-processing</h2>
-<section id="définition" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="définition"><span class="header-section-number">1.1</span> Définition</h3>
-<p>Le <strong>préprocessing</strong> consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).</p>
+<section id="topic-modeling" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="topic-modeling"><span class="header-section-number">1</span> Topic Modeling</h2>
+<section id="définition-du-topic-modeling" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="définition-du-topic-modeling"><span class="header-section-number">1.1</span> Définition du Topic Modeling</h3>
+<p>Le <strong>Topic Modeling</strong> est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.</p>
 </section>
-<section id="tokenisation" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="tokenisation"><span class="header-section-number">1.2</span> Tokenisation</h3>
-<p>La <strong>tokenisation</strong> fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.</p>
+<section id="historique-du-topic-modeling" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="historique-du-topic-modeling"><span class="header-section-number">1.2</span> Historique du Topic Modeling</h3>
+<p>Le concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve <strong>Latent Semantic Analysis (LSA)</strong> introduite en 1988 et le <strong>Latent Dirichlet Allocation (LDA)</strong> proposé par <strong>Blei, Ng et Jordan en 2003</strong>.</p>
 </section>
-<section id="normalisation" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="normalisation"><span class="header-section-number">1.3</span> Normalisation</h3>
-<p>La <strong>normalisation</strong> consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :<br>
-- La conversion en <strong>majuscules ou minuscules</strong> pour éviter de traiter <em>“Paris”</em> et <em>“paris”</em> comme deux mots distincts.<br>
-- La suppression des <strong>accents</strong> (ex. <em>é</em> → <em>e</em>) pour uniformiser les termes.</p>
+<section id="vocable-indifférent-entre-topic-et-sujet" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="vocable-indifférent-entre-topic-et-sujet"><span class="header-section-number">1.3</span> Vocable indifférent entre topic et sujet</h3>
+<p>En français, le terme <em>topic</em> peut être traduit par <em>sujet</em> ou <em>thème</em>. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.</p>
+<hr>
 </section>
-<section id="suppression-des-stopwords" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="suppression-des-stopwords"><span class="header-section-number">1.4</span> Suppression des stopwords</h3>
-<p>Les <strong>stopwords</strong> sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des <strong>articles</strong> (<em>le, la, un, des</em>), des <strong>prépositions</strong> (<em>à, de, pour</em>), ou encore des <strong>conjonctions</strong> (<em>et, mais, donc</em>). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.</p>
 </section>
-<section id="lemmatisation-et-stemmatisation" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="lemmatisation-et-stemmatisation"><span class="header-section-number">1.5</span> Lemmatisation et Stemmatisation</h3>
+<section id="lda-latent-dirichlet-allocation" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="lda-latent-dirichlet-allocation"><span class="header-section-number">2</span> LDA (Latent Dirichlet Allocation)</h2>
+<section id="définition-du-lda" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="définition-du-lda"><span class="header-section-number">2.1</span> Définition du LDA</h3>
+<p>Le <strong>Latent Dirichlet Allocation (LDA)</strong> est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.</p>
+</section>
+<section id="lien-vers-article" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="lien-vers-article"><span class="header-section-number">2.2</span> Lien vers article</h3>
+<p>Pour plus de détails, vous pouvez consulter l’article original de <strong>Blei, Ng et Jordan (2003)</strong> : <a href="https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf">Latent Dirichlet Allocation</a></p>
+</section>
+<section id="lda---génération-de-documents" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="lda---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Génération de documents</h3>
+<p>L’algorithme de <strong>génération de documents</strong> sous LDA suit les étapes suivantes : 1. Choisir le nombre de mots à générer pour le document (N) 2. Choisir la distribution des sujets pour un document selon une distribution de Dirichlet. (Theta) 3. Pour chaque mot du document : - Sélectionner un sujet selon la distribution de sujets du document. - Sélectionner un mot selon la distribution de mots associée à ce sujet.</p>
+<p>Cela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.</p>
+<p>*** Sachant une distribution de topics, comment construire un document ?***</p>
+<section id="exemple-à-deux-sujets" class="level4" data-number="2.3.1">
+<h4 data-number="2.3.1" class="anchored" data-anchor-id="exemple-à-deux-sujets"><span class="header-section-number">2.3.1</span> Exemple à deux sujets</h4>
 <ul>
-<li>La <strong>lemmatisation</strong> consiste à réduire un mot à sa <strong>forme canonique</strong> (ou <strong>lemme</strong>), c’est-à-dire sa version trouvée dans le dictionnaire.
+<li><p>sujet_1 = CET; sujet_2 = télétravail</p></li>
+<li><p>Soit la distribution suivante:</p>
 <ul>
-<li>Ex. <em>“mangé”</em>, <em>“mangeons”</em>, <em>“mangeaient”</em> → <strong>“manger”</strong><br>
-</li>
+<li>sujet_1_distribution = {“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}</li>
+<li>sujet_2_distribution = {“télétravail”:0.7,“droit”:0.15,“déconnexion”:0.15}</li>
 </ul></li>
-<li>La <strong>stemmatisation</strong>, plus rudimentaire, tronque les mots à leur <strong>racine</strong> commune sans tenir compte des règles linguistiques.
+<li><p>Génération de 4 mots (N=4)</p></li>
+<li><p>Génération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4)</p></li>
+<li><p>Pour le premier mot :</p>
 <ul>
-<li>Ex. <em>“manger”</em>, <em>“mangé”</em>, <em>“mangeons”</em> → <strong>“mang”</strong></li>
+<li>selection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1</li>
+<li>parmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “CET”</li>
 </ul></li>
+<li><p>phrase générée = CET</p></li>
+<li><p>Pour le deuxième mot :</p>
+<ul>
+<li>selection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1</li>
+<li>parmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “compte”</li>
+</ul></li>
+<li><p>phrase générée = CET compte</p></li>
+<li><p>etc.</p></li>
 </ul>
-<p>Ces techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.</p>
-</section>
-<section id="modélisation" class="level3" data-number="1.6">
-<h3 data-number="1.6" class="anchored" data-anchor-id="modélisation"><span class="header-section-number">1.6</span> Modélisation</h3>
-<p>Toutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.</p>
 </section>
 </section>
-<section id="travaux-pratiques" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">2</span> Travaux pratiques</h2>
+<section id="lda---génération-de-topics" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="lda---génération-de-topics"><span class="header-section-number">2.4</span> LDA - Génération de topics</h3>
+<p>L’algorithme de <strong>génération de topics</strong> sous LDA repose sur une approche de type <strong>inférence bayésienne</strong> : 1. Initialiser aléatoirement une attribution de sujets aux mots du corpus. 2. Mettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus. 3. Répéter l’opération jusqu’à convergence.</p>
+<p>Deux techniques principales sont utilisées pour l’inférence : - <strong>Gibbs Sampling</strong>, une méthode de Monte Carlo par chaînes de Markov (MCMC). - <strong>Variationnal Bayes</strong>, une approximation de l’inférence exacte.</p>
+<p>Ce processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.</p>
+<p>*** Sachant des documents observés, comment retrouver/construire les topics ?***</p>
+<section id="exemple-à-deux-sujets-avec-trois-documents" class="level4" data-number="2.4.1">
+<h4 data-number="2.4.1" class="anchored" data-anchor-id="exemple-à-deux-sujets-avec-trois-documents"><span class="header-section-number">2.4.1</span> Exemple à deux sujets avec trois documents</h4>
+<ul>
+<li><p>Document_1 = “Le télétravail est un droit”</p></li>
+<li><p>Document_2 = “Le droit à la deconnexion est un droit”</p></li>
+<li><p>Document_3 = “Le plafond annuel du CET est de 40 jours”</p></li>
+<li><p>pour l’exemple, travaillons en concept :</p></li>
+<li><p>Document_1 = “télétravail être droit”</p></li>
+<li><p>Document_2 = “droit deconnexion être droit”</p></li>
+<li><p>Document_3 = “plafond annuel CET être 40 jours”</p></li>
+<li><p>k=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet</p></li>
+<li><p>Document_1 = “télétravail(2) être(1) droit(1)”</p></li>
+<li><p>Document_2 = “droit(2) deconnexion(1) être(2) droit(2)”</p></li>
+<li><p>Document_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”</p></li>
+<li><p>Ceci donne la répartition suivante :</p></li>
+<li><p>sujet_1={être,droit,deconnexion,plafond,annuel,être,40} ; sujet_2={télétravail, droit, être, droit, CET, jours}</p></li>
+<li><p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>]</p></li>
+<li><p>P(mot=“droit”| “droit” appartient au sujet_1)=1/7 et P(mot=“droit”| “droit” appartient au sujet_2)=2/6</p></li>
+<li><p>On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents</p></li>
+<li><p>P(mot=“droit”| document=document_1)=1/3 et P(mot=“droit”| document=document_2)=2/4</p></li>
+<li><p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]:</p></li>
+<li><p>P(sujet=sujet_1 | document=document_1)=2/3 et P(sujet=sujet_1 | document=document_2)=1/4</p></li>
+<li><p>Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i</p></li>
+<li><p>P(“droit” appartient au sujet_1 | mot=“droit” ) P(mot=“droit”| “droit” appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)<br>
+</p></li>
+<li><p>on calcule pour les autres sujets et on affecte au plus probable</p></li>
+<li><p>on arrête l’algorithme quand il converge</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="travaux-pratiques" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">3</span> Travaux pratiques</h2>
 
 
 </section>
