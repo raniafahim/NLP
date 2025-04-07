@@ -261,7 +261,7 @@ window.Quarto = {
 <h3 data-number="2.3" class="anchored" data-anchor-id="lda---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Génération de documents</h3>
 <p>L’algorithme de <strong>génération de documents</strong> sous LDA suit les étapes suivantes : 1. Choisir le nombre de mots à générer pour le document (N) 2. Choisir la distribution des sujets pour un document selon une distribution de Dirichlet. (Theta) 3. Pour chaque mot du document : - Sélectionner un sujet selon la distribution de sujets du document. - Sélectionner un mot selon la distribution de mots associée à ce sujet.</p>
 <p>Cela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.</p>
-<p>*** Sachant une distribution de topics, comment construire un document ?***</p>
+<p><strong><em>Sachant une distribution de topics, comment construire un document ?</em></strong></p>
 <section id="exemple-à-deux-sujets" class="level4" data-number="2.3.1">
 <h4 data-number="2.3.1" class="anchored" data-anchor-id="exemple-à-deux-sujets"><span class="header-section-number">2.3.1</span> Exemple à deux sujets</h4>
 <ul>
@@ -294,45 +294,47 @@ window.Quarto = {
 <p>L’algorithme de <strong>génération de topics</strong> sous LDA repose sur une approche de type <strong>inférence bayésienne</strong> : 1. Initialiser aléatoirement une attribution de sujets aux mots du corpus. 2. Mettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus. 3. Répéter l’opération jusqu’à convergence.</p>
 <p>Deux techniques principales sont utilisées pour l’inférence : - <strong>Gibbs Sampling</strong>, une méthode de Monte Carlo par chaînes de Markov (MCMC). - <strong>Variationnal Bayes</strong>, une approximation de l’inférence exacte.</p>
 <p>Ce processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.</p>
-<p>*** Sachant des documents observés, comment retrouver/construire les topics ?***</p>
+<p><strong><em>Sachant des documents observés, comment retrouver/construire les topics ?</em></strong></p>
 <section id="exemple-à-deux-sujets-avec-trois-documents" class="level4" data-number="2.4.1">
 <h4 data-number="2.4.1" class="anchored" data-anchor-id="exemple-à-deux-sujets-avec-trois-documents"><span class="header-section-number">2.4.1</span> Exemple à deux sujets avec trois documents</h4>
 <section id="initialisation" class="level5" data-number="2.4.1.1">
 <h5 data-number="2.4.1.1" class="anchored" data-anchor-id="initialisation"><span class="header-section-number">2.4.1.1</span> Initialisation</h5>
+<p>Corpus de trois documents :</p>
 <ul>
-<li><p>Document_1 = “Le télétravail est un droit”</p></li>
-<li><p>Document_2 = “Le droit à la deconnexion est un droit”</p></li>
-<li><p>Document_3 = “Le plafond annuel du CET est de 40 jours”</p></li>
-<li><p>pour l’exemple, travaillons en concept :</p></li>
-<li><p>Document_1 = “télétravail être droit”</p></li>
-<li><p>Document_2 = “droit deconnexion être droit”</p></li>
-<li><p>Document_3 = “plafond annuel CET être 40 jours”</p></li>
+<li>Document_1 = “Le télétravail est un droit”</li>
+<li>Document_2 = “Le droit à la deconnexion est un droit”</li>
+<li>Document_3 = “Le plafond annuel du CET est de 40 jours”</li>
+</ul>
+<p>pour l’exemple, travaillons en concept :</p>
+<ul>
+<li>Document_1 = “télétravail être droit”</li>
+<li>Document_2 = “droit deconnexion être droit”</li>
+<li>Document_3 = “plafond annuel CET être 40 jours”</li>
 </ul>
 </section>
 <section id="calcul-de-probabilités" class="level5" data-number="2.4.1.2">
 <h5 data-number="2.4.1.2" class="anchored" data-anchor-id="calcul-de-probabilités"><span class="header-section-number">2.4.1.2</span> Calcul de probabilités</h5>
+<p>k=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet</p>
 <ul>
-<li><p>k=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet</p></li>
-<li><p>Document_1 = “télétravail(2) être(1) droit(1)”</p></li>
-<li><p>Document_2 = “droit(2) deconnexion(1) être(2) droit(2)”</p></li>
-<li><p>Document_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”</p></li>
-<li><p>Ceci donne la répartition suivante (<strong><em>ces contours vont bouger à chaque étape!</em></strong>) :</p></li>
-<li><p><span class="math inline">\(sujet_1={être,droit,deconnexion,plafond,annuel,être,40}\)</span> ; <span class="math inline">\(sujet_2={télétravail, droit, être, droit, CET, jours}\)</span></p></li>
-<li><p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>]</p></li>
-<li><p><span class="math inline">\(P(mot="droit"| "droit" appartient au sujet_1)=1/7\)</span> et <span class="math inline">\(P(mot="droit"| "droit" appartient au sujet_2)=2/6\)</span></p></li>
-<li><p>On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents</p></li>
-<li><p><span class="math inline">\(P(mot="droit"| document=document_1)=1/3\)</span> et <span class="math inline">\(P(mot="droit"| document=document_2)=2/4\)</span></p></li>
-<li><p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]:</p></li>
-<li><p><span class="math inline">\(P(sujet=sujet_1 | document=document_1)=2/3\)</span> et <span class="math inline">\(P(sujet=sujet_1 | document=document_2)=1/4\)</span></p></li>
+<li>Document_1 = “télétravail(2) être(1) droit(1)”</li>
+<li>Document_2 = “droit(2) deconnexion(1) être(2) droit(2)”</li>
+<li>Document_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”</li>
 </ul>
+<p>Ceci donne la répartition suivante (<strong><em>ces contours vont bouger à chaque étape!</em></strong>) :</p>
+<ul>
+<li><span class="math inline">\(sujet_1=\{être,droit,deconnexion,plafond,annuel,être,40\}\)</span> ; <span class="math inline">\(sujet_2=\{télétravail, droit, être, droit, CET, jours\}\)</span></li>
+</ul>
+<p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>] * <span class="math inline">\(P(mot='droit'| 'droit' appartient au sujet_1)=1/7\)</span> et <span class="math inline">\(P(mot='droit'| 'droit' appartient au sujet_2)=2/6\)</span></p>
+<p>On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents * <span class="math inline">\(P(mot='droit'| document=document_1)=1/3\)</span> et <span class="math inline">\(P(mot='droit'| document=document_2)=2/4\)</span></p>
+<p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]: * <span class="math inline">\(P(sujet=sujet_1 | document=document_1)=2/3\)</span> et <span class="math inline">\(P(sujet=sujet_1 | document=document_2)=1/4\)</span></p>
 </section>
 <section id="réévaluation-et-bis-repetita" class="level5" data-number="2.4.1.3">
 <h5 data-number="2.4.1.3" class="anchored" data-anchor-id="réévaluation-et-bis-repetita"><span class="header-section-number">2.4.1.3</span> Réévaluation et bis repetita</h5>
+<p>Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i</p>
 <ul>
-<li><p>Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i</p></li>
-<li><p><span class="math inline">\(P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\)</span></p></li>
-<li><p>on calcule pour les autres sujets et on affecte au plus probable</p></li>
-<li><p>on arrête l’algorithme quand il converge</p></li>
+<li><span class="math inline">\(P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\)</span></li>
+<li>on calcule pour les autres sujets et on affecte au plus probable</li>
+<li>on arrête l’algorithme quand il converge</li>
 </ul>
 </section>
 </section>
