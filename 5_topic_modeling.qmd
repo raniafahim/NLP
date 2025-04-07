@@ -1,0 +1,118 @@
+---
+title: "Modélisation de sujets"
+author: "raniafhm"
+date: "2025-04-07"
+format: html
+---
+
+## Topic Modeling
+
+### Définition du Topic Modeling
+Le **Topic Modeling** est une technique de traitement du langage naturel (NLP) permettant d'extraire automatiquement des sujets latents à partir d'un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.
+
+### Historique du Topic Modeling
+Le concept de modélisation de sujets a émergé dans les années 1990 avec l'avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve **Latent Semantic Analysis (LSA)** introduite en 1988 et le **Latent Dirichlet Allocation (LDA)** proposé par **Blei, Ng et Jordan en 2003**.
+
+### Vocable indifférent entre topic et sujet
+En français, le terme *topic* peut être traduit par *sujet* ou *thème*. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.
+
+---
+
+## LDA (Latent Dirichlet Allocation)
+
+### Définition du LDA
+Le **Latent Dirichlet Allocation (LDA)** est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.
+
+### Lien vers article
+Pour plus de détails, vous pouvez consulter l'article original de **Blei, Ng et Jordan (2003)** : [Latent Dirichlet Allocation](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)
+
+
+
+### LDA - Génération de documents
+
+L'algorithme de **génération de documents** sous LDA suit les étapes suivantes :
+1. Choisir le nombre de mots à générer pour le document (N)
+2. Choisir la distribution des sujets pour un document selon une distribution de Dirichlet. (Theta)
+3. Pour chaque mot du document :
+   - Sélectionner un sujet selon la distribution de sujets du document.
+   - Sélectionner un mot selon la distribution de mots associée à ce sujet.
+
+Cela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.
+
+*** Sachant une distribution de topics, comment construire un document ?***
+
+#### Exemple à deux sujets
+
+* sujet_1 = CET; sujet_2 = télétravail
+* Soit la distribution suivante:
+    * sujet_1_distribution = {"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}
+    * sujet_2_distribution = {"télétravail":0.7,"droit":0.15,"déconnexion":0.15}
+* Génération de 4 mots (N=4)
+* Génération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4)
+* Pour le premier mot :
+    * selection d'un sujet selon la distribution 3/4 ; 1/4   => sujet_1
+    * parmi la distribution du sujet_1 ={"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}, on tire un mot  => "CET"
+
+* phrase générée = CET
+
+* Pour le deuxième mot : 
+    * selection d'un sujet selon la distribution 3/4 ; 1/4   => sujet_1
+    * parmi la distribution du sujet_1 ={"compte":0.16,"CET":0.5,"épargne":0.16,"temps":0.16}, on tire un mot  => "compte"
+
+* phrase générée = CET compte
+
+* etc.
+
+### LDA - Génération de topics
+
+L'algorithme de **génération de topics** sous LDA repose sur une approche de type **inférence bayésienne** :
+1. Initialiser aléatoirement une attribution de sujets aux mots du corpus.
+2. Mettre à jour ces attributions en fonction de la probabilité conditionnelle d'un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.
+3. Répéter l’opération jusqu’à convergence.
+
+Deux techniques principales sont utilisées pour l’inférence :
+- **Gibbs Sampling**, une méthode de Monte Carlo par chaînes de Markov (MCMC).
+- **Variationnal Bayes**, une approximation de l’inférence exacte.
+
+Ce processus permet d'extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.
+
+*** Sachant des documents observés, comment retrouver/construire les topics ?***
+
+#### Exemple à deux sujets avec trois documents
+
+* Document_1 = "Le télétravail est un droit"
+* Document_2 = "Le droit à la deconnexion est un droit"
+* Document_3 = "Le plafond annuel du CET est de 40 jours"
+
+* pour l'exemple, travaillons en concept :
+
+* Document_1 = "télétravail être droit"
+* Document_2 = "droit deconnexion être droit"
+* Document_3 = "plafond annuel CET être 40 jours"
+
+
+* k=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet
+
+* Document_1 = "télétravail(2) être(1) droit(1)"
+* Document_2 = "droit(2) deconnexion(1) être(2) droit(2)"
+* Document_3 = "plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)"
+
+* Ceci donne la répartition suivante :
+
+* sujet_1={être,droit,deconnexion,plafond,annuel,être,40} ; sujet_2={télétravail, droit, être, droit, CET, jours}
+* on remarque le mot "droit" est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [***Représentativité du mot dans un sujet ou poids***]
+* P(mot="droit"| "droit" appartient au sujet_1)=1/7  et P(mot="droit"| "droit" appartient au sujet_2)=2/6
+* On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents
+* P(mot="droit"| document=document_1)=1/3 et P(mot="droit"| document=document_2)=2/4
+* Et même comment les sujets sont représentés dans les documents [***Répresentativité des sujets dans un document***]:
+* P(sujet=sujet_1 | document=document_1)=2/3 et P(sujet=sujet_1 | document=document_2)=1/4
+
+* Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i
+
+
+* P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)  
+* on calcule pour les autres sujets et on affecte au plus probable
+* on arrête l'algorithme quand il converge
+
+
+## Travaux pratiques

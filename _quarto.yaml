@@ -23,6 +23,8 @@ website:
         text: Prétraitement des données 
       - href: 4_embedding.qmd
         text: Word Embedding
+      - href: 5_topic_modeling.qmd
+        text: Topic Modeling
       - href: 5_ressources.qmd
         text: Ressources  
         
