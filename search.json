@@ -1,25 +1,5 @@
 [
   {
-    "objectID": "5_ressources.html",
-    "href": "5_ressources.html",
-    "title": "Pour aller plus loin",
-    "section": "",
-    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
-    "crumbs": [
-      "Ressources"
-    ]
-  },
-  {
-    "objectID": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
-    "href": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
-    "title": "Pour aller plus loin",
-    "section": "",
-    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
-    "crumbs": [
-      "Ressources"
-    ]
-  },
-  {
     "objectID": "3_preprocessing.html",
     "href": "3_preprocessing.html",
     "title": "Les étapes du pre-processing",
@@ -90,6 +70,101 @@
     ]
   },
   {
+    "objectID": "5_topic_modeling.html",
+    "href": "5_topic_modeling.html",
+    "title": "Modélisation de sujets",
+    "section": "",
+    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
+    "crumbs": [
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "5_topic_modeling.html#topic-modeling",
+    "href": "5_topic_modeling.html#topic-modeling",
+    "title": "Modélisation de sujets",
+    "section": "",
+    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
+    "crumbs": [
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
+    "href": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
+    "title": "Modélisation de sujets",
+    "section": "2 LDA (Latent Dirichlet Allocation)",
+    "text": "2 LDA (Latent Dirichlet Allocation)\n\n2.1 Définition du LDA\nLe Latent Dirichlet Allocation (LDA) est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.\n\n\n2.2 Lien vers article\nPour plus de détails, vous pouvez consulter l’article original de Blei, Ng et Jordan (2003) : Latent Dirichlet Allocation\n\n\n2.3 LDA - Génération de documents\nL’algorithme de génération de documents sous LDA suit les étapes suivantes :\n\nChoisir le nombre de mots à générer pour le document (N)\nChoisir la distribution des sujets pour un document selon une distribution de Dirichlet. (\\(\\theta\\))\nPour chaque mot du document :\n\nSélectionner un sujet selon la distribution de sujets du document.\nSélectionner un mot selon la distribution de mots associée à ce sujet.\n\n\nCela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.\nSachant une distribution de topics, comment construire un document ?\n\n2.3.1 Exemple à deux sujets\n\nsujet_1 = CET; sujet_2 = télétravail Soit la distribution suivante:\n\n\nsujet_1_distribution = {“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}\nsujet_2_distribution = {“télétravail”:0.7,“droit”:0.15,“déconnexion”:0.15}\n\n\nGénération de 4 mots (N=4)\n\nGénération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4) Pour le premier mot :\n\nselection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1\nparmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “CET”\n\n\nphrase générée = CET\n\nPour le deuxième mot : * selection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1 * parmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “compte”\n\nphrase générée = CET compte\n\netc.\n\n\n\n2.4 LDA - Génération de topics\nL’algorithme de génération de topics sous LDA repose sur une approche de type inférence bayésienne :\n\nInitialiser aléatoirement une attribution de sujets aux mots du corpus.\nMettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.\nRépéter l’opération jusqu’à convergence.\n\nDeux techniques principales sont utilisées pour l’inférence :\n\nGibbs Sampling, une méthode de Monte Carlo par chaînes de Markov (MCMC).\nVariationnal Bayes, une approximation de l’inférence exacte.\n\nCe processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.\nSachant des documents observés, comment retrouver/construire les topics ?\n\n2.4.1 Exemple à deux sujets avec trois documents\n\n2.4.1.1 Initialisation\nCorpus de trois documents :\n\nDocument_1 = “Le télétravail est un droit”\nDocument_2 = “Le droit à la deconnexion est un droit”\nDocument_3 = “Le plafond annuel du CET est de 40 jours”\n\npour l’exemple, travaillons en concept :\n\nDocument_1 = “télétravail être droit”\nDocument_2 = “droit deconnexion être droit”\nDocument_3 = “plafond annuel CET être 40 jours”\n\n\n\n2.4.1.2 Calcul de probabilités\nk=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet\n\nDocument_1 = “télétravail(2) être(1) droit(1)”\nDocument_2 = “droit(2) deconnexion(1) être(2) droit(2)”\nDocument_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”\n\nCeci donne la répartition suivante (ces contours vont bouger à chaque étape!) :\n\n\\(sujet_1=\\{être,droit,deconnexion,plafond,annuel,être,40\\}\\) ; \\(sujet_2=\\{télétravail, droit, être, droit, CET, jours\\}\\)\n\non remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [Représentativité du mot dans un sujet ou poids] * \\(P(mot='droit'| 'droit' appartient au sujet_1)=1/7\\) et \\(P(mot='droit'| 'droit' appartient au sujet_2)=2/6\\)\nOn peut aussi calcul des probabilités conditionnelles empiriques sachant les documents * \\(P(mot='droit'| document=document_1)=1/3\\) et \\(P(mot='droit'| document=document_2)=2/4\\)\nEt même comment les sujets sont représentés dans les documents [Répresentativité des sujets dans un document]: * \\(P(sujet=sujet_1 | document=document_1)=2/3\\) et \\(P(sujet=sujet_1 | document=document_2)=1/4\\)\n\n\n2.4.1.3 Réévaluation et bis repetita\nPour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i\n\n\\(P(\"droit\" appartient au sujet_1 | mot=\"droit\" ) \\alpha P(mot=\"droit\"| \"droit\" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\\)\non calcule pour les autres sujets et on affecte au plus probable\non arrête l’algorithme quand il converge",
+    "crumbs": [
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "5_topic_modeling.html#travaux-pratiques",
+    "href": "5_topic_modeling.html#travaux-pratiques",
+    "title": "Modélisation de sujets",
+    "section": "3 Travaux pratiques",
+    "text": "3 Travaux pratiques",
+    "crumbs": [
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "5_ressources.html",
+    "href": "5_ressources.html",
+    "title": "Pour aller plus loin",
+    "section": "",
+    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
+    "crumbs": [
+      "Ressources"
+    ]
+  },
+  {
+    "objectID": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
+    "href": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
+    "title": "Pour aller plus loin",
+    "section": "",
+    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
+    "crumbs": [
+      "Ressources"
+    ]
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html",
+    "href": "6_topic_modeling_BERTopic.html",
+    "title": "BERTopic",
+    "section": "",
+    "text": "BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic."
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#bertopic",
+    "href": "6_topic_modeling_BERTopic.html#bertopic",
+    "title": "BERTopic",
+    "section": "",
+    "text": "BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic."
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#méthodologie-bertopic",
+    "href": "6_topic_modeling_BERTopic.html#méthodologie-bertopic",
+    "title": "BERTopic",
+    "section": "2 Méthodologie BERTopic",
+    "text": "2 Méthodologie BERTopic\n\n2.1 1 - Plongements lexicaux : du document aux vecteurs\nL’objectif est de projeter un document texte dans un espace vectoriel. Cette projection peut être réalisée soit sur l’ensemble du document, soit en le découpant préalablement en plusieurs sous-documents, qui sont ensuite projetés individuellement. Dans ce cas, l’analyse est menée au niveau des sous-documents. Cette approche est généralement privilégiée lorsque les documents sont particulièrement longs.\n\n\n2.2 2 - Réduction de dimension : d’un vecteur long à un vecteur court\nLe but est de réduire la dimension des vecteurs issus du plongement lexical, qui produisent généralement des représentations de grande taille, souvent supérieures à 500 dimensions. Pour que le clustering soit efficace, il est préférable de travailler dans des espaces de dimensions réduites, typiquement entre 30 et 100. Plusieurs techniques peuvent être employées à cet effet, comme l’Analyse en Composantes Principales (ACP) ou l’UMAP. Ces méthodes permettent de conserver les dimensions les plus pertinentes tout en éliminant le bruit.\n\n\n2.3 3 - Clustering : création des topics\nAprès la réduction de dimension, où seules les dimensions les plus significatives sont conservées, BERTopic procède à un regroupement des documents en appliquant un algorithme de clustering. Les documents similaires sont ainsi organisés en clusters, chacun correspondant à un topic, c’est-à-dire une thématique cohérente déduite des proximités observées dans l’espace vectoriel réduit. L’algorithme de clustering utilisé, le plus souvent HDBSCAN, présente l’avantage de s’adapter à des structures de données complexes, en identifiant automatiquement le nombre approprié de clusters sans paramétrage préalable. À l’issue de ce processus, chaque document est rattaché à un topic en fonction de sa proximité avec les autres éléments du cluster, ouvrant la voie à l’étape suivante qui consiste à caractériser le contenu sémantique de chaque topic.\n\n\n2.4 4 - Analyse des tokens : caractérisation des topics\nPour chaque topic, un document agrégé est constitué à partir de l’ensemble des documents qui lui sont associés. Une analyse fréquentielle des tokens est ensuite réalisée. BERTopic applique une pondération spécifique aux tokens en utilisant la méthode c-TF-IDF (class-based TF-IDF), qui évalue l’importance d’un token en fonction de sa fréquence dans le topic par rapport à l’ensemble du corpus. Cette approche permet de mieux identifier les termes caractéristiques de chaque topic, en mettant en avant les tokens qui sont particulièrement représentatifs d’un groupe donné, même s’ils sont peu fréquents dans l’ensemble des documents."
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#composition",
+    "href": "6_topic_modeling_BERTopic.html#composition",
+    "title": "BERTopic",
+    "section": "3 Composition",
+    "text": "3 Composition\nBERTopic offre une grande flexibilité, ce qui lui permet de répondre de manière souple à n’importe quelle problématique. La librairie autorise le choix de chaque algorithme à chaque étape du processus. Pour la génération des plongements lexicaux, il est possible d’utiliser Sentence-BERT, différents modèles de Transformers ou encore d’autres méthodes d’encodage adaptées aux spécificités du corpus. Pour la réduction de dimension, BERTopic utilise par défaut l’algorithme UMAP, mais il est également possible d’opter pour d’autres techniques telles que l’Analyse en Composantes Principales (ACP) ou t-SNE selon les besoins analytiques.\nEn ce qui concerne l’étape de clustering, BERTopic s’appuie initialement sur HDBSCAN, un algorithme de clustering hiérarchique basé sur la densité, mais l’utilisateur peut choisir d’appliquer d’autres méthodes comme K-Means ou DBSCAN en fonction de ses objectifs. De plus, BERTopic propose des fonctionnalités avancées pour guider la découverte des topics à partir de mots-clés métier, facilitant ainsi une approche semi-supervisée, ou pour organiser les topics de manière hiérarchique, en créant des structures imbriquées qui reflètent plus finement la complexité thématique du corpus.\nCette modularité rend BERTopic particulièrement adapté à des contextes variés, qu’il s’agisse d’exploration de données, d’analyse thématique dirigée ou de projets nécessitant une forte personnalisation des résultats.\n\n\n\nMéthodologie de BERTopic"
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#travaux-pratiques",
+    "href": "6_topic_modeling_BERTopic.html#travaux-pratiques",
+    "title": "BERTopic",
+    "section": "4 Travaux pratiques",
+    "text": "4 Travaux pratiques"
+  },
+  {
     "objectID": "4_embedding.html",
     "href": "4_embedding.html",
     "title": "Du mot au vecteur",
@@ -137,46 +212,6 @@
     "text": "4 Travaux pratiques",
     "crumbs": [
       "Word Embedding"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html",
-    "href": "5_topic_modeling.html",
-    "title": "Modélisation de sujets",
-    "section": "",
-    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
-    "crumbs": [
-      "Topic Modeling"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html#topic-modeling",
-    "href": "5_topic_modeling.html#topic-modeling",
-    "title": "Modélisation de sujets",
-    "section": "",
-    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
-    "crumbs": [
-      "Topic Modeling"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
-    "href": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
-    "title": "Modélisation de sujets",
-    "section": "2 LDA (Latent Dirichlet Allocation)",
-    "text": "2 LDA (Latent Dirichlet Allocation)\n\n2.1 Définition du LDA\nLe Latent Dirichlet Allocation (LDA) est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.\n\n\n2.2 Lien vers article\nPour plus de détails, vous pouvez consulter l’article original de Blei, Ng et Jordan (2003) : Latent Dirichlet Allocation\n\n\n2.3 LDA - Génération de documents\nL’algorithme de génération de documents sous LDA suit les étapes suivantes :\n\nChoisir le nombre de mots à générer pour le document (N)\nChoisir la distribution des sujets pour un document selon une distribution de Dirichlet. (\\(\\theta\\))\nPour chaque mot du document :\n\nSélectionner un sujet selon la distribution de sujets du document.\nSélectionner un mot selon la distribution de mots associée à ce sujet.\n\n\nCela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.\nSachant une distribution de topics, comment construire un document ?\n\n2.3.1 Exemple à deux sujets\n\nsujet_1 = CET; sujet_2 = télétravail Soit la distribution suivante:\n\n\nsujet_1_distribution = {“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}\nsujet_2_distribution = {“télétravail”:0.7,“droit”:0.15,“déconnexion”:0.15}\n\n\nGénération de 4 mots (N=4)\n\nGénération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4) Pour le premier mot :\n\nselection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1\nparmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “CET”\n\n\nphrase générée = CET\n\nPour le deuxième mot : * selection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1 * parmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “compte”\n\nphrase générée = CET compte\n\netc.\n\n\n\n2.4 LDA - Génération de topics\nL’algorithme de génération de topics sous LDA repose sur une approche de type inférence bayésienne :\n\nInitialiser aléatoirement une attribution de sujets aux mots du corpus.\nMettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.\nRépéter l’opération jusqu’à convergence.\n\nDeux techniques principales sont utilisées pour l’inférence :\n\nGibbs Sampling, une méthode de Monte Carlo par chaînes de Markov (MCMC).\nVariationnal Bayes, une approximation de l’inférence exacte.\n\nCe processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.\nSachant des documents observés, comment retrouver/construire les topics ?\n\n2.4.1 Exemple à deux sujets avec trois documents\n\n2.4.1.1 Initialisation\nCorpus de trois documents :\n\nDocument_1 = “Le télétravail est un droit”\nDocument_2 = “Le droit à la deconnexion est un droit”\nDocument_3 = “Le plafond annuel du CET est de 40 jours”\n\npour l’exemple, travaillons en concept :\n\nDocument_1 = “télétravail être droit”\nDocument_2 = “droit deconnexion être droit”\nDocument_3 = “plafond annuel CET être 40 jours”\n\n\n\n2.4.1.2 Calcul de probabilités\nk=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet\n\nDocument_1 = “télétravail(2) être(1) droit(1)”\nDocument_2 = “droit(2) deconnexion(1) être(2) droit(2)”\nDocument_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”\n\nCeci donne la répartition suivante (ces contours vont bouger à chaque étape!) :\n\n\\(sujet_1=\\{être,droit,deconnexion,plafond,annuel,être,40\\}\\) ; \\(sujet_2=\\{télétravail, droit, être, droit, CET, jours\\}\\)\n\non remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [Représentativité du mot dans un sujet ou poids] * \\(P(mot='droit'| 'droit' appartient au sujet_1)=1/7\\) et \\(P(mot='droit'| 'droit' appartient au sujet_2)=2/6\\)\nOn peut aussi calcul des probabilités conditionnelles empiriques sachant les documents * \\(P(mot='droit'| document=document_1)=1/3\\) et \\(P(mot='droit'| document=document_2)=2/4\\)\nEt même comment les sujets sont représentés dans les documents [Répresentativité des sujets dans un document]: * \\(P(sujet=sujet_1 | document=document_1)=2/3\\) et \\(P(sujet=sujet_1 | document=document_2)=1/4\\)\n\n\n2.4.1.3 Réévaluation et bis repetita\nPour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i\n\n\\(P(\"droit\" appartient au sujet_1 | mot=\"droit\" ) \\alpha P(mot=\"droit\"| \"droit\" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\\)\non calcule pour les autres sujets et on affecte au plus probable\non arrête l’algorithme quand il converge",
-    "crumbs": [
-      "Topic Modeling"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html#travaux-pratiques",
-    "href": "5_topic_modeling.html#travaux-pratiques",
-    "title": "Modélisation de sujets",
-    "section": "3 Travaux pratiques",
-    "text": "3 Travaux pratiques",
-    "crumbs": [
-      "Topic Modeling"
     ]
   }
 ]
