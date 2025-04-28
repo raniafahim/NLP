@@ -1,0 +1,48 @@
+---
+title: "BERTopic"
+author: "raniafhm"
+date: "2025-04-28"
+format: html
+---
+
+## BERTopic
+
+BERTopic est une bibliothèque de Topic Modeling qui permet d'utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes.
+Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering.
+Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués.
+Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic.
+
+## Méthodologie BERTopic
+
+### 1 - Plongements lexicaux : du document aux vecteurs
+
+L'objectif est de projeter un document texte dans un espace vectoriel. Cette projection peut être réalisée soit sur l'ensemble du document, soit en le découpant préalablement en plusieurs sous-documents, qui sont ensuite projetés individuellement. Dans ce cas, l'analyse est menée au niveau des sous-documents. Cette approche est généralement privilégiée lorsque les documents sont particulièrement longs.
+
+
+### 2 - Réduction de dimension : d'un vecteur long à un vecteur court
+
+Le but est de réduire la dimension des vecteurs issus du plongement lexical, qui produisent généralement des représentations de grande taille, souvent supérieures à 500 dimensions. Pour que le clustering soit efficace, il est préférable de travailler dans des espaces de dimensions réduites, typiquement entre 30 et 100. Plusieurs techniques peuvent être employées à cet effet, comme l'Analyse en Composantes Principales (ACP) ou l'UMAP. Ces méthodes permettent de conserver les dimensions les plus pertinentes tout en éliminant le bruit.
+
+
+### 3 - Clustering : création des topics
+
+Après la réduction de dimension, où seules les dimensions les plus significatives sont conservées, BERTopic procède à un regroupement des documents en appliquant un algorithme de clustering. Les documents similaires sont ainsi organisés en clusters, chacun correspondant à un topic, c'est-à-dire une thématique cohérente déduite des proximités observées dans l’espace vectoriel réduit. L'algorithme de clustering utilisé, le plus souvent HDBSCAN, présente l'avantage de s'adapter à des structures de données complexes, en identifiant automatiquement le nombre approprié de clusters sans paramétrage préalable. À l'issue de ce processus, chaque document est rattaché à un topic en fonction de sa proximité avec les autres éléments du cluster, ouvrant la voie à l'étape suivante qui consiste à caractériser le contenu sémantique de chaque topic.
+
+### 4 - Analyse des tokens : caractérisation des topics
+
+Pour chaque topic, un document agrégé est constitué à partir de l'ensemble des documents qui lui sont associés. Une analyse fréquentielle des tokens est ensuite réalisée.
+BERTopic applique une pondération spécifique aux tokens en utilisant la méthode c-TF-IDF (class-based TF-IDF), qui évalue l'importance d'un token en fonction de sa fréquence dans le topic par rapport à l'ensemble du corpus. Cette approche permet de mieux identifier les termes caractéristiques de chaque topic, en mettant en avant les tokens qui sont particulièrement représentatifs d'un groupe donné, même s'ils sont peu fréquents dans l'ensemble des documents.
+
+
+## Composition
+
+BERTopic offre une grande flexibilité, ce qui lui permet de répondre de manière souple à n'importe quelle problématique. La librairie autorise le choix de chaque algorithme à chaque étape du processus. Pour la génération des plongements lexicaux, il est possible d'utiliser Sentence-BERT, différents modèles de Transformers ou encore d'autres méthodes d'encodage adaptées aux spécificités du corpus. Pour la réduction de dimension, BERTopic utilise par défaut l'algorithme UMAP, mais il est également possible d'opter pour d'autres techniques telles que l'Analyse en Composantes Principales (ACP) ou t-SNE selon les besoins analytiques.
+
+En ce qui concerne l'étape de clustering, BERTopic s'appuie initialement sur HDBSCAN, un algorithme de clustering hiérarchique basé sur la densité, mais l'utilisateur peut choisir d'appliquer d'autres méthodes comme K-Means ou DBSCAN en fonction de ses objectifs. De plus, BERTopic propose des fonctionnalités avancées pour guider la découverte des topics à partir de mots-clés métier, facilitant ainsi une approche semi-supervisée, ou pour organiser les topics de manière hiérarchique, en créant des structures imbriquées qui reflètent plus finement la complexité thématique du corpus.
+
+Cette modularité rend BERTopic particulièrement adapté à des contextes variés, qu'il s'agisse d'exploration de données, d'analyse thématique dirigée ou de projets nécessitant une forte personnalisation des résultats.
+
+
+![Méthodologie de BERTopic](img/BERTopic.png)
+
+## Travaux pratiques
