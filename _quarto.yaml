@@ -29,6 +29,8 @@ website:
         text: Topic Modeling - BERT
       - href: 7_RAG.qmd
         text: LLM et RAG
+      - href: 8_structured_output_generation.qmd
+        text: Structured Output Generation
       - href: 5_ressources.qmd
         text: Ressources  
         
