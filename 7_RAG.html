@@ -168,7 +168,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#llm" id="toc-llm" class="nav-link active" data-scroll-target="#llm"><span class="header-section-number">1</span> LLM</a></li>
   <li><a href="#rag" id="toc-rag" class="nav-link" data-scroll-target="#rag"><span class="header-section-number">2</span> RAG</a></li>
   <li><a href="#le-rag-en-pratique" id="toc-le-rag-en-pratique" class="nav-link" data-scroll-target="#le-rag-en-pratique"><span class="header-section-number">3</span> le RAG en pratique</a></li>
-  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">4</span> Travaux pratiques</a></li>
+  <li><a href="#implémentation-minimal-avec-langchain-et-chromadb" id="toc-implémentation-minimal-avec-langchain-et-chromadb" class="nav-link" data-scroll-target="#implémentation-minimal-avec-langchain-et-chromadb"><span class="header-section-number">4</span> Implémentation minimal avec Langchain et ChromaDB</a></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">5</span> Travaux pratiques</a></li>
   </ul>
 </nav>
     </div>
@@ -232,8 +233,142 @@ ul.task-list li input[type="checkbox"] {
 <p>Une fois les outils choisis, il convient de définir l’architecture. Le processus commence par le découpage du document en chunks, qui sont ensuite convertis en vecteurs via un embedder. Ces vecteurs sont stockés dans la base vectorielle. Lorsque l’utilisateur pose une question, elle est transformée en vecteur et comparée aux vecteurs stockés pour retrouver les chunks les plus pertinents. Ces derniers sont combinés avec la question pour créer une question augmentée. Enfin, cette question enrichie est envoyée à un LLM (comme GPT-4 ou Claude) pour générer une réponse.</p>
 <p>Cette architecture optimise l’efficacité du modèle en ne fournissant que les informations pertinentes, ce qui réduit le coût computationnel et améliore la qualité des réponses. Elle est également flexible, permettant de personnaliser chaque étape du processus en fonction des besoins spécifiques du projet.</p>
 </section>
-<section id="travaux-pratiques" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">4</span> Travaux pratiques</h2>
+<section id="implémentation-minimal-avec-langchain-et-chromadb" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="implémentation-minimal-avec-langchain-et-chromadb"><span class="header-section-number">4</span> Implémentation minimal avec Langchain et ChromaDB</h2>
+<ul>
+<li>Vectorisation</li>
+</ul>
+<pre><code>FILE="10p_accords_publics_et_thematiques_240815.parquet"
+
+import pandas as pd
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain.vectorstores import Chroma
+from langchain_chroma import Chroma
+from langchain_text_splitters import CharacterTextSplitter
+from tqdm import tqdm
+
+text_splitter = CharacterTextSplitter(
+    separator="\n\n",
+    chunk_size=3000,
+    chunk_overlap=200,
+    length_function=len,
+    is_separator_regex=False,
+)
+
+
+
+model_kwargs = {'device': 'cuda'}
+embedder = HuggingFaceEmbeddings(model_name="BAAI/bge-m3", model_kwargs=model_kwargs,show_progress=False)
+
+df=pd.read_parquet(FILE)
+
+vector_store = Chroma(embedding_function=embedder, persist_directory="./chroma_db")
+for index, row in tqdm(df_cet.iterrows(), total=len(df_cet)):
+    text=df_cet.loc[index].texte
+    texts = text_splitter.create_documents([text])
+    i=0
+    for t in texts:
+        t.metadata["id"]=f"{index}_{i}"
+        t.metadata["index"]=f"{index}"
+        vector_store.add_documents([t])
+        i+=1</code></pre>
+<ul>
+<li>RAG</li>
+</ul>
+<pre><code>import json
+import numpy as np
+import pandas as pd
+import requests
+
+from langchain.chains import StuffDocumentsChain, RetrievalQA, LLMChain, create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain.document_loaders import TextLoader
+from langchain.embeddings import OpenAIEmbeddings, OllamaEmbeddings
+from langchain.llms import Ollama, BaseLLM
+from langchain.schema import Document, Generation, LLMResult
+from langchain.vectorstores import Chroma
+from langchain_chroma import Chroma
+from langchain_community.llms import OpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_text_splitters import CharacterTextSplitter
+from pathlib import Path
+from tqdm import tqdm
+from glob import glob
+
+class LocalOllamaLLM(BaseLLM):
+    api_url : str
+    def _generate(self, prompt, stop):
+        response = requests.post(f"{self.api_url}/api/generate", json={"model": "llama3.1", "prompt": str(prompt) })
+        response.raise_for_status()
+        response_text=''.join([json.loads(line)['response'] for line in response.text.splitlines()])
+        generations=[]
+        generations.append([Generation(text=response_text)])
+        return LLMResult(generations=generations)
+
+
+    def _llm_type(self):
+        return "local"  # Or whatever type is appropriate for your local setup
+
+llm = LocalOllamaLLM(api_url="http://127.0.0.1:11434")
+
+embedder = HuggingFaceEmbeddings(model_name="BAAI/bge-m3")
+vector_store = Chroma(embedding_function=embedder, persist_directory="./chroma_db")
+
+
+system_prompt = (
+    " Répondez à la question posée "
+    " Utilisez le contexte (sélection des meilleurs paragraphes liés à la question) donné pour répondre à la question "
+    " Si la réponse ne se trouve pas dans le contexte, répondez par 'Je ne sais pas'"
+    " Contexte : {context}  "
+)
+
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", system_prompt),
+        ("human", "{input}"),
+    ]
+)
+question_answer_chain = create_stuff_documents_chain(llm, prompt)
+
+
+def search_and_invoke_llm(vector_store,index,query,k=5):
+    if k==0:
+        print(f"bug with {index}")
+        return None
+    else:
+        pass
+    try:
+        retriever=vector_store.as_retriever(
+        search_kwargs={
+                "k": k, 
+                "filter": {'index': index}
+            }
+        )
+        chain = create_retrieval_chain(retriever, question_answer_chain)
+        result=chain.invoke({"input": query})
+        return result
+    except:
+        search_and_invoke_llm(vector_store,index,query,k=k-1)
+    return None
+    
+QUESTIONS=["Ma question : "]    
+    
+list_of_df=[]
+Path("results").mkdir(parents=True, exist_ok=True)
+for index, row in df.iterrows():
+    dict_answer=dict()
+    answer=""
+    for Q0 in QUESTIONS:
+        if ans:=search_and_invoke_llm(vector_store,index,Q0,k=2):
+            answer_txt=ans['answer']
+            answer+=answer_txt
+
+    with open(f"results/{index}.answer","w") as file:
+        file.write(answer)</code></pre>
+</section>
+<section id="travaux-pratiques" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">5</span> Travaux pratiques</h2>
 
 
 </section>
