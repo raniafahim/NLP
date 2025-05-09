@@ -24,7 +24,9 @@ website:
       - href: 4_embedding.qmd
         text: Word Embedding
       - href: 5_topic_modeling.qmd
-        text: Topic Modeling
+        text: Topic Modeling - LDA
+      - href: 5_topic_modeling_BERTopic.qmd
+        text: Topic Modeling - BERT
       - href: 5_ressources.qmd
         text: Ressources  
         
