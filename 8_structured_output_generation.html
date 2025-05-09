@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="raniafhm">
-<meta name="dcterms.date" content="2025-04-28">
+<meta name="dcterms.date" content="2025-05-09">
 
-<title>BERTopic – Cours introduction NLP</title>
+<title>Structured output generation – Cours introduction NLP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -82,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6_topic_modeling_BERTopic.html">Topic Modeling - BERT</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_structured_output_generation.html">Structured Output Generation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_topic_modeling_BERTopic.html" class="sidebar-item-text sidebar-link active">
+  <a href="./6_topic_modeling_BERTopic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic Modeling - BERT</span></a>
   </div>
 </li>
@@ -151,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_structured_output_generation.html" class="sidebar-item-text sidebar-link">
+  <a href="./8_structured_output_generation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Structured Output Generation</span></a>
   </div>
 </li>
@@ -171,16 +206,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#bertopic" id="toc-bertopic" class="nav-link active" data-scroll-target="#bertopic"><span class="header-section-number">1</span> BERTopic</a></li>
-  <li><a href="#méthodologie-bertopic" id="toc-méthodologie-bertopic" class="nav-link" data-scroll-target="#méthodologie-bertopic"><span class="header-section-number">2</span> Méthodologie BERTopic</a>
-  <ul class="collapse">
-  <li><a href="#plongements-lexicaux-du-document-aux-vecteurs" id="toc-plongements-lexicaux-du-document-aux-vecteurs" class="nav-link" data-scroll-target="#plongements-lexicaux-du-document-aux-vecteurs"><span class="header-section-number">2.1</span> 1 - Plongements lexicaux : du document aux vecteurs</a></li>
-  <li><a href="#réduction-de-dimension-dun-vecteur-long-à-un-vecteur-court" id="toc-réduction-de-dimension-dun-vecteur-long-à-un-vecteur-court" class="nav-link" data-scroll-target="#réduction-de-dimension-dun-vecteur-long-à-un-vecteur-court"><span class="header-section-number">2.2</span> 2 - Réduction de dimension : d’un vecteur long à un vecteur court</a></li>
-  <li><a href="#clustering-création-des-topics" id="toc-clustering-création-des-topics" class="nav-link" data-scroll-target="#clustering-création-des-topics"><span class="header-section-number">2.3</span> 3 - Clustering : création des topics</a></li>
-  <li><a href="#analyse-des-tokens-caractérisation-des-topics" id="toc-analyse-des-tokens-caractérisation-des-topics" class="nav-link" data-scroll-target="#analyse-des-tokens-caractérisation-des-topics"><span class="header-section-number">2.4</span> 4 - Analyse des tokens : caractérisation des topics</a></li>
-  </ul></li>
-  <li><a href="#composition" id="toc-composition" class="nav-link" data-scroll-target="#composition"><span class="header-section-number">3</span> Composition</a></li>
-  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">4</span> Travaux pratiques</a></li>
+  <li><a href="#limites-des-llm" id="toc-limites-des-llm" class="nav-link active" data-scroll-target="#limites-des-llm"><span class="header-section-number">1</span> Limites des LLM</a></li>
+  <li><a href="#limites-des-llm-1" id="toc-limites-des-llm-1" class="nav-link" data-scroll-target="#limites-des-llm-1"><span class="header-section-number">2</span> Limites des LLM</a></li>
+  <li><a href="#structured-output-generation" id="toc-structured-output-generation" class="nav-link" data-scroll-target="#structured-output-generation"><span class="header-section-number">3</span> Structured Output Generation</a></li>
+  <li><a href="#sog-en-pratique" id="toc-sog-en-pratique" class="nav-link" data-scroll-target="#sog-en-pratique"><span class="header-section-number">4</span> SOG en pratique</a></li>
+  <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">5</span> Travaux pratiques</a></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BERTopic</h1>
+<h1 class="title">Structured output generation</h1>
 </div>
 
 
@@ -206,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 28, 2025</p>
+      <p class="date">May 9, 2025</p>
     </div>
   </div>
   
@@ -218,43 +248,48 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="bertopic" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="bertopic"><span class="header-section-number">1</span> BERTopic</h2>
-<p>BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic.</p>
+<section id="limites-des-llm" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="limites-des-llm"><span class="header-section-number">1</span> Limites des LLM</h2>
+<p>Voici une version corrigée et complétée du texte :</p>
+<hr>
 </section>
-<section id="méthodologie-bertopic" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="méthodologie-bertopic"><span class="header-section-number">2</span> Méthodologie BERTopic</h2>
-<section id="plongements-lexicaux-du-document-aux-vecteurs" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="plongements-lexicaux-du-document-aux-vecteurs"><span class="header-section-number">2.1</span> 1 - Plongements lexicaux : du document aux vecteurs</h3>
-<p>L’objectif est de projeter un document texte dans un espace vectoriel. Cette projection peut être réalisée soit sur l’ensemble du document, soit en le découpant préalablement en plusieurs sous-documents, qui sont ensuite projetés individuellement. Dans ce cas, l’analyse est menée au niveau des sous-documents. Cette approche est généralement privilégiée lorsque les documents sont particulièrement longs.</p>
+<section id="limites-des-llm-1" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="limites-des-llm-1"><span class="header-section-number">2</span> Limites des LLM</h2>
+<p>Les <strong>LLMs</strong> (Large Language Models), en raison de leur nature de “perroquet stochastique”, sont susceptibles de générer des <strong>hallucinations</strong>. Ce terme désigne le phénomène où un modèle génère des informations qui, bien que plausibles, sont factuellement incorrectes. Cela survient car les modèles de langage prédisent des tokens en fonction des probabilités, sans forcément vérifier leur exactitude par rapport à la réalité.</p>
+<p>Parfois, il est également nécessaire de générer des réponses suivant un certain standard ou de restreindre les choix parmi un ensemble limité de réponses possibles. Dans ces cas, il est crucial de contraindre la génération des tokens pour orienter le modèle vers des sorties plus pertinentes et cohérentes avec les attentes.</p>
+<p>Un exemple de contrainte de génération est l’utilisation de formats spécifiques, comme un fichier <strong>JSON</strong> où les réponses doivent être structurées dans un format précis, par exemple :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"success"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"message"</span><span class="fu">:</span> <span class="st">"Operation completed successfully"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"data"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"user_id"</span><span class="fu">:</span> <span class="dv">12345</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"username"</span><span class="fu">:</span> <span class="st">"example_user"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Dans ce cas, le modèle doit être contraint pour générer une réponse conforme à ce format, respectant ainsi la structure des clés et des valeurs.</p>
+<p>De manière similaire, un autre exemple de contrainte pourrait être la simulation du lancer d’un <strong>dé à six faces</strong>. Ici, le modèle devrait générer une réponse dans un espace limité, par exemple en choisissant un nombre entre 1 et 6. Il est essentiel que la génération respecte ces contraintes, sinon le modèle pourrait produire des résultats non valides, comme un nombre supérieur à 6 ou un texte au lieu d’un chiffre.</p>
+<p>Ces exemples illustrent comment il est possible de guider la génération des LLMs pour obtenir des réponses qui respectent des contraintes spécifiques, tout en minimisant les risques d’hallucinations ou de résultats incohérents.</p>
 </section>
-<section id="réduction-de-dimension-dun-vecteur-long-à-un-vecteur-court" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="réduction-de-dimension-dun-vecteur-long-à-un-vecteur-court"><span class="header-section-number">2.2</span> 2 - Réduction de dimension : d’un vecteur long à un vecteur court</h3>
-<p>Le but est de réduire la dimension des vecteurs issus du plongement lexical, qui produisent généralement des représentations de grande taille, souvent supérieures à 500 dimensions. Pour que le clustering soit efficace, il est préférable de travailler dans des espaces de dimensions réduites, typiquement entre 30 et 100. Plusieurs techniques peuvent être employées à cet effet, comme l’Analyse en Composantes Principales (ACP) ou l’UMAP. Ces méthodes permettent de conserver les dimensions les plus pertinentes tout en éliminant le bruit.</p>
+<section id="structured-output-generation" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="structured-output-generation"><span class="header-section-number">3</span> Structured Output Generation</h2>
+<p>La <strong>Structured Output Generation</strong> est une méthode qui consiste à ajuster les distributions de probabilités lors de l’étape de génération ou d’inférence d’un modèle. L’objectif est de restreindre l’espace des sorties possibles pour répondre à des contraintes spécifiques.</p>
+<p>Par exemple, si l’on souhaite générer une valeur correspondant à un <strong>dé à 6 faces</strong> (c’est-à-dire un nombre entre 1 et 6), on peut ajuster les probabilités associées aux tokens pour n’inclure que ces six valeurs. Concrètement, cela signifie que l’on va conserver les probabilités associées aux tokens représentant les nombres 1, 2, 3, 4, 5 et 6, tout en mettant à zéro les probabilités des autres tokens. Ensuite, on normalise la distribution résultante (c’est-à-dire, on réajuste les probabilités pour que leur somme soit égale à 1) et on génère la sortie en tirant au hasard dans cette nouvelle distribution.</p>
+<p>Cette approche permet de garantir que la génération respecte les contraintes spécifiques, en l’occurrence de n’opter que pour l’une des six valeurs valides. Elle est particulièrement utile lorsqu’on veut que le modèle respecte des formats structurés ou des ensembles de sorties finies et prédéfinies. Cela réduit ainsi le risque d’hallucinations ou de résultats non pertinents, tout en offrant un contrôle plus précis sur le type de réponse générée.</p>
+<p>De manière générale, la <strong>Structured Output Generation</strong> est souvent utilisée dans des applications où la sortie doit suivre une certaine structure ou un ensemble de règles définies à l’avance, comme la génération de code, de réponses en format JSON, ou encore la génération de nombres dans des plages spécifiques (comme le lancer de dés, ou la génération de réponses à choix multiples).</p>
 </section>
-<section id="clustering-création-des-topics" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="clustering-création-des-topics"><span class="header-section-number">2.3</span> 3 - Clustering : création des topics</h3>
-<p>Après la réduction de dimension, où seules les dimensions les plus significatives sont conservées, BERTopic procède à un regroupement des documents en appliquant un algorithme de clustering. Les documents similaires sont ainsi organisés en clusters, chacun correspondant à un topic, c’est-à-dire une thématique cohérente déduite des proximités observées dans l’espace vectoriel réduit. L’algorithme de clustering utilisé, le plus souvent HDBSCAN, présente l’avantage de s’adapter à des structures de données complexes, en identifiant automatiquement le nombre approprié de clusters sans paramétrage préalable. À l’issue de ce processus, chaque document est rattaché à un topic en fonction de sa proximité avec les autres éléments du cluster, ouvrant la voie à l’étape suivante qui consiste à caractériser le contenu sémantique de chaque topic.</p>
+<section id="sog-en-pratique" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sog-en-pratique"><span class="header-section-number">4</span> SOG en pratique</h2>
+<ul>
+<li>Pydantic Pydantic est une bibliothèque Python largement utilisée pour la validation des données et la gestion des types de manière stricte. Dans le cadre de Structured Output Generation (SOG), Pydantic s’avère très utile pour garantir que les sorties générées respectent une structure bien définie et des types spécifiques.</li>
+</ul>
+<p>Avec Pydantic, vous pouvez créer des modèles de données qui définissent des schémas attendus pour les sorties. Par exemple, si vous voulez que la sortie d’un modèle de langage soit un dictionnaire JSON avec des clés comme status, message, et data, vous pouvez définir un modèle Pydantic qui impose la structure exacte de ces champs, ainsi que leurs types. Cela permet de valider que les données générées par le modèle sont bien conformes à ce format et aux exigences de votre application. Si les données ne respectent pas ces règles, Pydantic lèvera une erreur, facilitant ainsi la gestion des anomalies et des incohérences dans la sortie du modèle.</p>
+<p>Pydantic est particulièrement utile lorsqu’il s’agit de garantir la conformité des réponses dans des systèmes nécessitant des formats bien définis, comme les API, les bases de données ou les formulaires web.</p>
+<ul>
+<li>librarie outlines (https://dottxt-ai.github.io/outlines/latest/welcome/)</li>
+</ul>
 </section>
-<section id="analyse-des-tokens-caractérisation-des-topics" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="analyse-des-tokens-caractérisation-des-topics"><span class="header-section-number">2.4</span> 4 - Analyse des tokens : caractérisation des topics</h3>
-<p>Pour chaque topic, un document agrégé est constitué à partir de l’ensemble des documents qui lui sont associés. Une analyse fréquentielle des tokens est ensuite réalisée. BERTopic applique une pondération spécifique aux tokens en utilisant la méthode c-TF-IDF (class-based TF-IDF), qui évalue l’importance d’un token en fonction de sa fréquence dans le topic par rapport à l’ensemble du corpus. Cette approche permet de mieux identifier les termes caractéristiques de chaque topic, en mettant en avant les tokens qui sont particulièrement représentatifs d’un groupe donné, même s’ils sont peu fréquents dans l’ensemble des documents.</p>
-</section>
-</section>
-<section id="composition" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="composition"><span class="header-section-number">3</span> Composition</h2>
-<p>BERTopic offre une grande flexibilité, ce qui lui permet de répondre de manière souple à n’importe quelle problématique. La librairie autorise le choix de chaque algorithme à chaque étape du processus. Pour la génération des plongements lexicaux, il est possible d’utiliser Sentence-BERT, différents modèles de Transformers ou encore d’autres méthodes d’encodage adaptées aux spécificités du corpus. Pour la réduction de dimension, BERTopic utilise par défaut l’algorithme UMAP, mais il est également possible d’opter pour d’autres techniques telles que l’Analyse en Composantes Principales (ACP) ou t-SNE selon les besoins analytiques.</p>
-<p>En ce qui concerne l’étape de clustering, BERTopic s’appuie initialement sur HDBSCAN, un algorithme de clustering hiérarchique basé sur la densité, mais l’utilisateur peut choisir d’appliquer d’autres méthodes comme K-Means ou DBSCAN en fonction de ses objectifs. De plus, BERTopic propose des fonctionnalités avancées pour guider la découverte des topics à partir de mots-clés métier, facilitant ainsi une approche semi-supervisée, ou pour organiser les topics de manière hiérarchique, en créant des structures imbriquées qui reflètent plus finement la complexité thématique du corpus.</p>
-<p>Cette modularité rend BERTopic particulièrement adapté à des contextes variés, qu’il s’agisse d’exploration de données, d’analyse thématique dirigée ou de projets nécessitant une forte personnalisation des résultats.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/BERTopic.png" class="img-fluid figure-img"></p>
-<figcaption>Méthodologie de BERTopic</figcaption>
-</figure>
-</div>
-</section>
-<section id="travaux-pratiques" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">4</span> Travaux pratiques</h2>
+<section id="travaux-pratiques" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="travaux-pratiques"><span class="header-section-number">5</span> Travaux pratiques</h2>
 
 
 </section>

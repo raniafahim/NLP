@@ -1,212 +1,82 @@
 [
   {
-    "objectID": "3_preprocessing.html",
-    "href": "3_preprocessing.html",
-    "title": "Les étapes du pre-processing",
+    "objectID": "8_structured_output_generation.html",
+    "href": "8_structured_output_generation.html",
+    "title": "Structured output generation",
     "section": "",
-    "text": "Le préprocessing consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).\n\n\n\nLa tokenisation fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.\n\n\n\nLa normalisation consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :\n- La conversion en majuscules ou minuscules pour éviter de traiter “Paris” et “paris” comme deux mots distincts.\n- La suppression des accents (ex. é → e) pour uniformiser les termes.\n\n\n\nLes stopwords sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des articles (le, la, un, des), des prépositions (à, de, pour), ou encore des conjonctions (et, mais, donc). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.\n\n\n\n\nLa lemmatisation consiste à réduire un mot à sa forme canonique (ou lemme), c’est-à-dire sa version trouvée dans le dictionnaire.\n\nEx. “mangé”, “mangeons”, “mangeaient” → “manger”\n\n\nLa stemmatisation, plus rudimentaire, tronque les mots à leur racine commune sans tenir compte des règles linguistiques.\n\nEx. “manger”, “mangé”, “mangeons” → “mang”\n\n\nCes techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.\n\n\n\nToutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.",
+    "text": "Voici une version corrigée et complétée du texte :",
     "crumbs": [
-      "Prétraitement des données"
+      "Structured Output Generation"
     ]
   },
   {
-    "objectID": "3_preprocessing.html#les-étapes-du-pre-processing",
-    "href": "3_preprocessing.html#les-étapes-du-pre-processing",
-    "title": "Les étapes du pre-processing",
+    "objectID": "8_structured_output_generation.html#limites-des-llm",
+    "href": "8_structured_output_generation.html#limites-des-llm",
+    "title": "Structured output generation",
     "section": "",
-    "text": "Le préprocessing consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).\n\n\n\nLa tokenisation fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.\n\n\n\nLa normalisation consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :\n- La conversion en majuscules ou minuscules pour éviter de traiter “Paris” et “paris” comme deux mots distincts.\n- La suppression des accents (ex. é → e) pour uniformiser les termes.\n\n\n\nLes stopwords sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des articles (le, la, un, des), des prépositions (à, de, pour), ou encore des conjonctions (et, mais, donc). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.\n\n\n\n\nLa lemmatisation consiste à réduire un mot à sa forme canonique (ou lemme), c’est-à-dire sa version trouvée dans le dictionnaire.\n\nEx. “mangé”, “mangeons”, “mangeaient” → “manger”\n\n\nLa stemmatisation, plus rudimentaire, tronque les mots à leur racine commune sans tenir compte des règles linguistiques.\n\nEx. “manger”, “mangé”, “mangeons” → “mang”\n\n\nCes techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.\n\n\n\nToutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.",
+    "text": "Voici une version corrigée et complétée du texte :",
     "crumbs": [
-      "Prétraitement des données"
+      "Structured Output Generation"
     ]
   },
   {
-    "objectID": "3_preprocessing.html#travaux-pratiques",
-    "href": "3_preprocessing.html#travaux-pratiques",
-    "title": "Les étapes du pre-processing",
-    "section": "2 Travaux pratiques",
-    "text": "2 Travaux pratiques",
+    "objectID": "8_structured_output_generation.html#limites-des-llm-1",
+    "href": "8_structured_output_generation.html#limites-des-llm-1",
+    "title": "Structured output generation",
+    "section": "2 Limites des LLM",
+    "text": "2 Limites des LLM\nLes LLMs (Large Language Models), en raison de leur nature de “perroquet stochastique”, sont susceptibles de générer des hallucinations. Ce terme désigne le phénomène où un modèle génère des informations qui, bien que plausibles, sont factuellement incorrectes. Cela survient car les modèles de langage prédisent des tokens en fonction des probabilités, sans forcément vérifier leur exactitude par rapport à la réalité.\nParfois, il est également nécessaire de générer des réponses suivant un certain standard ou de restreindre les choix parmi un ensemble limité de réponses possibles. Dans ces cas, il est crucial de contraindre la génération des tokens pour orienter le modèle vers des sorties plus pertinentes et cohérentes avec les attentes.\nUn exemple de contrainte de génération est l’utilisation de formats spécifiques, comme un fichier JSON où les réponses doivent être structurées dans un format précis, par exemple :\n{\n  \"status\": \"success\",\n  \"message\": \"Operation completed successfully\",\n  \"data\": {\n    \"user_id\": 12345,\n    \"username\": \"example_user\"\n  }\n}\nDans ce cas, le modèle doit être contraint pour générer une réponse conforme à ce format, respectant ainsi la structure des clés et des valeurs.\nDe manière similaire, un autre exemple de contrainte pourrait être la simulation du lancer d’un dé à six faces. Ici, le modèle devrait générer une réponse dans un espace limité, par exemple en choisissant un nombre entre 1 et 6. Il est essentiel que la génération respecte ces contraintes, sinon le modèle pourrait produire des résultats non valides, comme un nombre supérieur à 6 ou un texte au lieu d’un chiffre.\nCes exemples illustrent comment il est possible de guider la génération des LLMs pour obtenir des réponses qui respectent des contraintes spécifiques, tout en minimisant les risques d’hallucinations ou de résultats incohérents.",
     "crumbs": [
-      "Prétraitement des données"
+      "Structured Output Generation"
     ]
   },
   {
-    "objectID": "6_topic_modeling_BERTopic.html",
-    "href": "6_topic_modeling_BERTopic.html",
-    "title": "BERTopic",
+    "objectID": "8_structured_output_generation.html#structured-output-generation",
+    "href": "8_structured_output_generation.html#structured-output-generation",
+    "title": "Structured output generation",
+    "section": "3 Structured Output Generation",
+    "text": "3 Structured Output Generation\nLa Structured Output Generation est une méthode qui consiste à ajuster les distributions de probabilités lors de l’étape de génération ou d’inférence d’un modèle. L’objectif est de restreindre l’espace des sorties possibles pour répondre à des contraintes spécifiques.\nPar exemple, si l’on souhaite générer une valeur correspondant à un dé à 6 faces (c’est-à-dire un nombre entre 1 et 6), on peut ajuster les probabilités associées aux tokens pour n’inclure que ces six valeurs. Concrètement, cela signifie que l’on va conserver les probabilités associées aux tokens représentant les nombres 1, 2, 3, 4, 5 et 6, tout en mettant à zéro les probabilités des autres tokens. Ensuite, on normalise la distribution résultante (c’est-à-dire, on réajuste les probabilités pour que leur somme soit égale à 1) et on génère la sortie en tirant au hasard dans cette nouvelle distribution.\nCette approche permet de garantir que la génération respecte les contraintes spécifiques, en l’occurrence de n’opter que pour l’une des six valeurs valides. Elle est particulièrement utile lorsqu’on veut que le modèle respecte des formats structurés ou des ensembles de sorties finies et prédéfinies. Cela réduit ainsi le risque d’hallucinations ou de résultats non pertinents, tout en offrant un contrôle plus précis sur le type de réponse générée.\nDe manière générale, la Structured Output Generation est souvent utilisée dans des applications où la sortie doit suivre une certaine structure ou un ensemble de règles définies à l’avance, comme la génération de code, de réponses en format JSON, ou encore la génération de nombres dans des plages spécifiques (comme le lancer de dés, ou la génération de réponses à choix multiples).",
+    "crumbs": [
+      "Structured Output Generation"
+    ]
+  },
+  {
+    "objectID": "8_structured_output_generation.html#sog-en-pratique",
+    "href": "8_structured_output_generation.html#sog-en-pratique",
+    "title": "Structured output generation",
+    "section": "4 SOG en pratique",
+    "text": "4 SOG en pratique\n\nPydantic Pydantic est une bibliothèque Python largement utilisée pour la validation des données et la gestion des types de manière stricte. Dans le cadre de Structured Output Generation (SOG), Pydantic s’avère très utile pour garantir que les sorties générées respectent une structure bien définie et des types spécifiques.\n\nAvec Pydantic, vous pouvez créer des modèles de données qui définissent des schémas attendus pour les sorties. Par exemple, si vous voulez que la sortie d’un modèle de langage soit un dictionnaire JSON avec des clés comme status, message, et data, vous pouvez définir un modèle Pydantic qui impose la structure exacte de ces champs, ainsi que leurs types. Cela permet de valider que les données générées par le modèle sont bien conformes à ce format et aux exigences de votre application. Si les données ne respectent pas ces règles, Pydantic lèvera une erreur, facilitant ainsi la gestion des anomalies et des incohérences dans la sortie du modèle.\nPydantic est particulièrement utile lorsqu’il s’agit de garantir la conformité des réponses dans des systèmes nécessitant des formats bien définis, comme les API, les bases de données ou les formulaires web.\n\nlibrarie outlines (https://dottxt-ai.github.io/outlines/latest/welcome/)",
+    "crumbs": [
+      "Structured Output Generation"
+    ]
+  },
+  {
+    "objectID": "8_structured_output_generation.html#travaux-pratiques",
+    "href": "8_structured_output_generation.html#travaux-pratiques",
+    "title": "Structured output generation",
+    "section": "5 Travaux pratiques",
+    "text": "5 Travaux pratiques",
+    "crumbs": [
+      "Structured Output Generation"
+    ]
+  },
+  {
+    "objectID": "2_tokenization.html",
+    "href": "2_tokenization.html",
+    "title": "Tokenization : première étape du NLP",
     "section": "",
-    "text": "BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic.",
+    "text": "La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.\nLa tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.\nExemples de tokenisation :\n\nDécoupage en tokens mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"tokenisation\", \"en\", \"NLP\", \"est\", \"primordiale\"\n\nDécoupage en tokens sous-mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"token\", \"isation\", \"en\", \"NLP\", \"est\", \"prim\", \"ordiale\"\n\n\n\n\n\n\nUne fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :\n- Les mots les plus fréquents (top mots).\n- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.\n- Les mots qui reviennent dans des contextes similaires.\nEn NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.\n\n\n\nLa machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille n (suffisamment grand, mais pas excessif).\nUne première approche, appelée one-hot encoding, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :\n- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.\n- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les word embeddings (ex. Word2Vec, GloVe, BERT).\n\n\n\n\nPlusieurs librairies, en général en python, permettent de tokenizer un texte :\n\nNLTK\nSpacy\nHuggingFace",
     "crumbs": [
-      "Topic Modeling - BERT"
+      "Qu'est ce que la tokenization ?"
     ]
   },
   {
-    "objectID": "6_topic_modeling_BERTopic.html#bertopic",
-    "href": "6_topic_modeling_BERTopic.html#bertopic",
-    "title": "BERTopic",
+    "objectID": "2_tokenization.html#quest-ce-que-la-tokenization",
+    "href": "2_tokenization.html#quest-ce-que-la-tokenization",
+    "title": "Tokenization : première étape du NLP",
     "section": "",
-    "text": "BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic.",
+    "text": "La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.\nLa tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.\nExemples de tokenisation :\n\nDécoupage en tokens mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"tokenisation\", \"en\", \"NLP\", \"est\", \"primordiale\"\n\nDécoupage en tokens sous-mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"token\", \"isation\", \"en\", \"NLP\", \"est\", \"prim\", \"ordiale\"\n\n\n\n\n\n\nUne fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :\n- Les mots les plus fréquents (top mots).\n- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.\n- Les mots qui reviennent dans des contextes similaires.\nEn NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.\n\n\n\nLa machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille n (suffisamment grand, mais pas excessif).\nUne première approche, appelée one-hot encoding, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :\n- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.\n- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les word embeddings (ex. Word2Vec, GloVe, BERT).\n\n\n\n\nPlusieurs librairies, en général en python, permettent de tokenizer un texte :\n\nNLTK\nSpacy\nHuggingFace",
     "crumbs": [
-      "Topic Modeling - BERT"
-    ]
-  },
-  {
-    "objectID": "6_topic_modeling_BERTopic.html#méthodologie-bertopic",
-    "href": "6_topic_modeling_BERTopic.html#méthodologie-bertopic",
-    "title": "BERTopic",
-    "section": "2 Méthodologie BERTopic",
-    "text": "2 Méthodologie BERTopic\n\n2.1 1 - Plongements lexicaux : du document aux vecteurs\nL’objectif est de projeter un document texte dans un espace vectoriel. Cette projection peut être réalisée soit sur l’ensemble du document, soit en le découpant préalablement en plusieurs sous-documents, qui sont ensuite projetés individuellement. Dans ce cas, l’analyse est menée au niveau des sous-documents. Cette approche est généralement privilégiée lorsque les documents sont particulièrement longs.\n\n\n2.2 2 - Réduction de dimension : d’un vecteur long à un vecteur court\nLe but est de réduire la dimension des vecteurs issus du plongement lexical, qui produisent généralement des représentations de grande taille, souvent supérieures à 500 dimensions. Pour que le clustering soit efficace, il est préférable de travailler dans des espaces de dimensions réduites, typiquement entre 30 et 100. Plusieurs techniques peuvent être employées à cet effet, comme l’Analyse en Composantes Principales (ACP) ou l’UMAP. Ces méthodes permettent de conserver les dimensions les plus pertinentes tout en éliminant le bruit.\n\n\n2.3 3 - Clustering : création des topics\nAprès la réduction de dimension, où seules les dimensions les plus significatives sont conservées, BERTopic procède à un regroupement des documents en appliquant un algorithme de clustering. Les documents similaires sont ainsi organisés en clusters, chacun correspondant à un topic, c’est-à-dire une thématique cohérente déduite des proximités observées dans l’espace vectoriel réduit. L’algorithme de clustering utilisé, le plus souvent HDBSCAN, présente l’avantage de s’adapter à des structures de données complexes, en identifiant automatiquement le nombre approprié de clusters sans paramétrage préalable. À l’issue de ce processus, chaque document est rattaché à un topic en fonction de sa proximité avec les autres éléments du cluster, ouvrant la voie à l’étape suivante qui consiste à caractériser le contenu sémantique de chaque topic.\n\n\n2.4 4 - Analyse des tokens : caractérisation des topics\nPour chaque topic, un document agrégé est constitué à partir de l’ensemble des documents qui lui sont associés. Une analyse fréquentielle des tokens est ensuite réalisée. BERTopic applique une pondération spécifique aux tokens en utilisant la méthode c-TF-IDF (class-based TF-IDF), qui évalue l’importance d’un token en fonction de sa fréquence dans le topic par rapport à l’ensemble du corpus. Cette approche permet de mieux identifier les termes caractéristiques de chaque topic, en mettant en avant les tokens qui sont particulièrement représentatifs d’un groupe donné, même s’ils sont peu fréquents dans l’ensemble des documents.",
-    "crumbs": [
-      "Topic Modeling - BERT"
-    ]
-  },
-  {
-    "objectID": "6_topic_modeling_BERTopic.html#composition",
-    "href": "6_topic_modeling_BERTopic.html#composition",
-    "title": "BERTopic",
-    "section": "3 Composition",
-    "text": "3 Composition\nBERTopic offre une grande flexibilité, ce qui lui permet de répondre de manière souple à n’importe quelle problématique. La librairie autorise le choix de chaque algorithme à chaque étape du processus. Pour la génération des plongements lexicaux, il est possible d’utiliser Sentence-BERT, différents modèles de Transformers ou encore d’autres méthodes d’encodage adaptées aux spécificités du corpus. Pour la réduction de dimension, BERTopic utilise par défaut l’algorithme UMAP, mais il est également possible d’opter pour d’autres techniques telles que l’Analyse en Composantes Principales (ACP) ou t-SNE selon les besoins analytiques.\nEn ce qui concerne l’étape de clustering, BERTopic s’appuie initialement sur HDBSCAN, un algorithme de clustering hiérarchique basé sur la densité, mais l’utilisateur peut choisir d’appliquer d’autres méthodes comme K-Means ou DBSCAN en fonction de ses objectifs. De plus, BERTopic propose des fonctionnalités avancées pour guider la découverte des topics à partir de mots-clés métier, facilitant ainsi une approche semi-supervisée, ou pour organiser les topics de manière hiérarchique, en créant des structures imbriquées qui reflètent plus finement la complexité thématique du corpus.\nCette modularité rend BERTopic particulièrement adapté à des contextes variés, qu’il s’agisse d’exploration de données, d’analyse thématique dirigée ou de projets nécessitant une forte personnalisation des résultats.\n\n\n\nMéthodologie de BERTopic",
-    "crumbs": [
-      "Topic Modeling - BERT"
-    ]
-  },
-  {
-    "objectID": "6_topic_modeling_BERTopic.html#travaux-pratiques",
-    "href": "6_topic_modeling_BERTopic.html#travaux-pratiques",
-    "title": "BERTopic",
-    "section": "4 Travaux pratiques",
-    "text": "4 Travaux pratiques",
-    "crumbs": [
-      "Topic Modeling - BERT"
-    ]
-  },
-  {
-    "objectID": "1_intro.html",
-    "href": "1_intro.html",
-    "title": "Introduction au NLP",
-    "section": "",
-    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
-    "crumbs": [
-      "Introduction au NLP"
-    ]
-  },
-  {
-    "objectID": "1_intro.html#quest-ce-que-le-traitement-du-langage-naturel",
-    "href": "1_intro.html#quest-ce-que-le-traitement-du-langage-naturel",
-    "title": "Introduction au NLP",
-    "section": "",
-    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
-    "crumbs": [
-      "Introduction au NLP"
-    ]
-  },
-  {
-    "objectID": "4_embedding.html",
-    "href": "4_embedding.html",
-    "title": "Du mot au vecteur",
-    "section": "",
-    "text": "Un embedding est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.\n\n\n\nAvec un vocabulaire de tokens de taille ( n ), on peut créer un espace vectoriel de dimension ( n ), où chaque token est représenté par un vecteur unitaire canonique (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :\n1. L’espace vectoriel devient très grand lorsque ( n ) est important.\n2. Les représentations sont orthogonales, ce qui signifie qu’elles ne capturent aucune relation sémantique entre les mots.\n\n\n\nEn s’appuyant sur l’hypothèse distributionnelle et les réseaux de neurones, les modèles neuronaux Bag of Words (CBOW et Skip-Gram) permettent d’apprendre des représentations vectorielles compressées tout en conservant les proximités et distances sémantiques entre les tokens.",
-    "crumbs": [
-      "Word Embedding"
-    ]
-  },
-  {
-    "objectID": "4_embedding.html#embedding-passer-du-token-au-vecteur-numérique",
-    "href": "4_embedding.html#embedding-passer-du-token-au-vecteur-numérique",
-    "title": "Du mot au vecteur",
-    "section": "",
-    "text": "Un embedding est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.\n\n\n\nAvec un vocabulaire de tokens de taille ( n ), on peut créer un espace vectoriel de dimension ( n ), où chaque token est représenté par un vecteur unitaire canonique (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :\n1. L’espace vectoriel devient très grand lorsque ( n ) est important.\n2. Les représentations sont orthogonales, ce qui signifie qu’elles ne capturent aucune relation sémantique entre les mots.\n\n\n\nEn s’appuyant sur l’hypothèse distributionnelle et les réseaux de neurones, les modèles neuronaux Bag of Words (CBOW et Skip-Gram) permettent d’apprendre des représentations vectorielles compressées tout en conservant les proximités et distances sémantiques entre les tokens.",
-    "crumbs": [
-      "Word Embedding"
-    ]
-  },
-  {
-    "objectID": "4_embedding.html#les-premiers-algorithmes-sémantiques",
-    "href": "4_embedding.html#les-premiers-algorithmes-sémantiques",
-    "title": "Du mot au vecteur",
-    "section": "2 Les premiers algorithmes sémantiques",
-    "text": "2 Les premiers algorithmes sémantiques\n\n2.1 L’algorithme CBOW\nL’algorithme Continuous Bag of Words (CBOW) repose sur un réseau de neurones composé de deux étapes :\n1. Encodage : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.\n2. Décodage : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.\nL’idée est d’entraîner le réseau à prédire un mot à partir de son contexte (les mots qui l’entourent).\nExemple avec un contexte de 4 mots (les deux mots avant et après) :\n- Phrase : “Le chat dort sur le canapé.”\n- Contexte : [\"Le\", \"dort\", \"sur\", \"le\"]\n- Mot à prédire : \"chat\"\n- Base d’entraînement : ((“Le”, “dort”, “sur”, “le”), “chat”)\nEn parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on récupère la représentation vectorielle intermédiaire pour associer chaque mot à son embedding.\n\n\n2.2 L’algorithme Skip-Gram\nL’architecture du réseau est similaire à CBOW, mais avec une approche inversée :\n- Plutôt que de prédire un mot à partir de son contexte, Skip-Gram prédit les mots du contexte à partir d’un mot donné.\n- On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.\nExemple :\n- Phrase : “Le chat dort sur le canapé.”\n- Mot donné : \"chat\"\n- Contexte à prédire : [\"Le\", \"dort\", \"sur\", \"le\"]\n- Base d’entraînement : (“Le”,“chat”) ; (“dort”,“chat”) ; (“sur”,“chat”) ; (“le”,“chat”)\nUne fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.\n\n\n2.3 L’algorithme GloVe\nL’algorithme GloVe (Global Vectors for Word Representation) adopte une approche différente :\n- Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe apprend des cooccurrences de mots à partir d’un large corpus.\n- Il construit une matrice de cooccurrence indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.\n- Ensuite, un facteur de décomposition est utilisé pour générer des représentations vectorielles capturant les relations sémantiques.\nGloVe est particulièrement efficace pour représenter des mots ayant des relations sémantiques globales, comme :\n- Roi – Reine,\n- France – Paris,\n- Banque – Argent.\n\n\n2.4 L’algorithme FastText\nFastText est une amélioration de CBOW et Skip-Gram :\n- Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).\n- Cela permet de mieux gérer les mots rares ou inconnus en générant des embeddings dynamiques.\nExemple :\n- Le mot “apprentissage” peut être décomposé en [\"app\", \"pren\", \"tiss\", \"age\"].\n- Si un mot jamais vu auparavant est rencontré, son embedding peut être inféré à partir de ses sous-mots.\nFastText est particulièrement utile pour les langues morphologiquement riches (comme l’allemand ou le turc) et pour gérer les fautes d’orthographe ou les variantes linguistiques.",
-    "crumbs": [
-      "Word Embedding"
-    ]
-  },
-  {
-    "objectID": "4_embedding.html#les-embeddings-contextuels",
-    "href": "4_embedding.html#les-embeddings-contextuels",
-    "title": "Du mot au vecteur",
-    "section": "3 Les embeddings contextuels",
-    "text": "3 Les embeddings contextuels\nLe principal problème des embeddings classiques est que leur représentation est fixe : un même token possède toujours le même vecteur numérique, quel que soit le contexte. Or, dans de nombreuses langues, notamment en français, un même mot peut avoir plusieurs significations selon son usage. De plus, des notions différentes peuvent s’écrire de la même façon (homonymes).\nPour désambiguïser ces cas, il est essentiel de prendre en compte le contexte dans lequel un mot apparaît afin de déterminer son sens précis.\nLes embeddings contextuels permettent d’adapter la représentation numérique d’un mot en fonction de son contexte. Contrairement aux approches statiques, ils tiennent compte de la position et de l’interaction entre les mots dans une phrase.\nExemple :\n- “La baleine nage dans l’océan.” 🐋 → baleine (animal)\n- “J’ai un mal de baleine après ce repas.” 🤕 → baleine (expression signifiant une douleur intense)\nLes modèles basés sur les transformers (ex. BERT, GPT, T5) sont capables d’encoder ces différences en générant un vecteur unique pour chaque occurrence d’un mot selon son contexte. Ainsi, un mot aura un embedding spécifique qui varie en fonction des mots qui l’entourent, tout en conservant les relations sémantiques apprises (synonymie, antonymie, etc.).",
-    "crumbs": [
-      "Word Embedding"
-    ]
-  },
-  {
-    "objectID": "4_embedding.html#travaux-pratiques",
-    "href": "4_embedding.html#travaux-pratiques",
-    "title": "Du mot au vecteur",
-    "section": "4 Travaux pratiques",
-    "text": "4 Travaux pratiques",
-    "crumbs": [
-      "Word Embedding"
-    ]
-  },
-  {
-    "objectID": "5_ressources.html",
-    "href": "5_ressources.html",
-    "title": "Pour aller plus loin",
-    "section": "",
-    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
-    "crumbs": [
-      "Ressources"
-    ]
-  },
-  {
-    "objectID": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
-    "href": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
-    "title": "Pour aller plus loin",
-    "section": "",
-    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
-    "crumbs": [
-      "Ressources"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html",
-    "href": "5_topic_modeling.html",
-    "title": "Modélisation de sujets",
-    "section": "",
-    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
-    "crumbs": [
-      "Topic Modeling - LDA"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html#topic-modeling",
-    "href": "5_topic_modeling.html#topic-modeling",
-    "title": "Modélisation de sujets",
-    "section": "",
-    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
-    "crumbs": [
-      "Topic Modeling - LDA"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
-    "href": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
-    "title": "Modélisation de sujets",
-    "section": "2 LDA (Latent Dirichlet Allocation)",
-    "text": "2 LDA (Latent Dirichlet Allocation)\n\n2.1 Définition du LDA\nLe Latent Dirichlet Allocation (LDA) est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.\n\n\n2.2 Lien vers article\nPour plus de détails, vous pouvez consulter l’article original de Blei, Ng et Jordan (2003) : Latent Dirichlet Allocation\n\n\n2.3 LDA - Génération de documents\nL’algorithme de génération de documents sous LDA suit les étapes suivantes :\n\nChoisir le nombre de mots à générer pour le document (N)\nChoisir la distribution des sujets pour un document selon une distribution de Dirichlet. (\\(\\theta\\))\nPour chaque mot du document :\n\nSélectionner un sujet selon la distribution de sujets du document.\nSélectionner un mot selon la distribution de mots associée à ce sujet.\n\n\nCela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.\nSachant une distribution de topics, comment construire un document ?\n\n2.3.1 Exemple à deux sujets\n\nsujet_1 = CET; sujet_2 = télétravail Soit la distribution suivante:\n\n\nsujet_1_distribution = {“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}\nsujet_2_distribution = {“télétravail”:0.7,“droit”:0.15,“déconnexion”:0.15}\n\n\nGénération de 4 mots (N=4)\n\nGénération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4) Pour le premier mot :\n\nselection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1\nparmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “CET”\n\n\nphrase générée = CET\n\nPour le deuxième mot : * selection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1 * parmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “compte”\n\nphrase générée = CET compte\n\netc.\n\n\n\n2.4 LDA - Génération de topics\nL’algorithme de génération de topics sous LDA repose sur une approche de type inférence bayésienne :\n\nInitialiser aléatoirement une attribution de sujets aux mots du corpus.\nMettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.\nRépéter l’opération jusqu’à convergence.\n\nDeux techniques principales sont utilisées pour l’inférence :\n\nGibbs Sampling, une méthode de Monte Carlo par chaînes de Markov (MCMC).\nVariationnal Bayes, une approximation de l’inférence exacte.\n\nCe processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.\nSachant des documents observés, comment retrouver/construire les topics ?\n\n2.4.1 Exemple à deux sujets avec trois documents\n\n2.4.1.1 Initialisation\nCorpus de trois documents :\n\nDocument_1 = “Le télétravail est un droit”\nDocument_2 = “Le droit à la deconnexion est un droit”\nDocument_3 = “Le plafond annuel du CET est de 40 jours”\n\npour l’exemple, travaillons en concept :\n\nDocument_1 = “télétravail être droit”\nDocument_2 = “droit deconnexion être droit”\nDocument_3 = “plafond annuel CET être 40 jours”\n\n\n\n2.4.1.2 Calcul de probabilités\nk=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet\n\nDocument_1 = “télétravail(2) être(1) droit(1)”\nDocument_2 = “droit(2) deconnexion(1) être(2) droit(2)”\nDocument_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”\n\nCeci donne la répartition suivante (ces contours vont bouger à chaque étape!) :\n\n\\(sujet_1=\\{être,droit,deconnexion,plafond,annuel,être,40\\}\\) ; \\(sujet_2=\\{télétravail, droit, être, droit, CET, jours\\}\\)\n\non remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [Représentativité du mot dans un sujet ou poids] * \\(P(mot='droit'| 'droit' appartient au sujet_1)=1/7\\) et \\(P(mot='droit'| 'droit' appartient au sujet_2)=2/6\\)\nOn peut aussi calcul des probabilités conditionnelles empiriques sachant les documents * \\(P(mot='droit'| document=document_1)=1/3\\) et \\(P(mot='droit'| document=document_2)=2/4\\)\nEt même comment les sujets sont représentés dans les documents [Répresentativité des sujets dans un document]: * \\(P(sujet=sujet_1 | document=document_1)=2/3\\) et \\(P(sujet=sujet_1 | document=document_2)=1/4\\)\n\n\n2.4.1.3 Réévaluation et bis repetita\nPour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i\n\n\\(P(\"droit\" appartient au sujet_1 | mot=\"droit\" ) \\alpha P(mot=\"droit\"| \"droit\" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\\)\non calcule pour les autres sujets et on affecte au plus probable\non arrête l’algorithme quand il converge",
-    "crumbs": [
-      "Topic Modeling - LDA"
-    ]
-  },
-  {
-    "objectID": "5_topic_modeling.html#travaux-pratiques",
-    "href": "5_topic_modeling.html#travaux-pratiques",
-    "title": "Modélisation de sujets",
-    "section": "3 Travaux pratiques",
-    "text": "3 Travaux pratiques",
-    "crumbs": [
-      "Topic Modeling - LDA"
+      "Qu'est ce que la tokenization ?"
     ]
   },
   {
@@ -270,23 +140,213 @@
     ]
   },
   {
-    "objectID": "2_tokenization.html",
-    "href": "2_tokenization.html",
-    "title": "Tokenization : première étape du NLP",
+    "objectID": "5_topic_modeling.html",
+    "href": "5_topic_modeling.html",
+    "title": "Modélisation de sujets",
     "section": "",
-    "text": "La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.\nLa tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.\nExemples de tokenisation :\n\nDécoupage en tokens mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"tokenisation\", \"en\", \"NLP\", \"est\", \"primordiale\"\n\nDécoupage en tokens sous-mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"token\", \"isation\", \"en\", \"NLP\", \"est\", \"prim\", \"ordiale\"\n\n\n\n\n\n\nUne fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :\n- Les mots les plus fréquents (top mots).\n- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.\n- Les mots qui reviennent dans des contextes similaires.\nEn NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.\n\n\n\nLa machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille n (suffisamment grand, mais pas excessif).\nUne première approche, appelée one-hot encoding, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :\n- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.\n- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les word embeddings (ex. Word2Vec, GloVe, BERT).\n\n\n\n\nPlusieurs librairies, en général en python, permettent de tokenizer un texte :\n\nNLTK\nSpacy\nHuggingFace",
+    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
     "crumbs": [
-      "Qu'est ce que la tokenization ?"
+      "Topic Modeling - LDA"
     ]
   },
   {
-    "objectID": "2_tokenization.html#quest-ce-que-la-tokenization",
-    "href": "2_tokenization.html#quest-ce-que-la-tokenization",
-    "title": "Tokenization : première étape du NLP",
+    "objectID": "5_topic_modeling.html#topic-modeling",
+    "href": "5_topic_modeling.html#topic-modeling",
+    "title": "Modélisation de sujets",
     "section": "",
-    "text": "La tokenisation est le processus de découpage d’un long élément en plusieurs petits éléments. Elle est essentielle en NLP (traitement du langage naturel) afin de fournir progressivement des fragments d’information à la machine. Quel que soit sa longueur, un texte doit être segmenté en petits morceaux pour être traité séquentiellement par l’algorithme.\nLa tokenisation constitue la base du NLP et influence fortement les résultats en fonction des choix effectués. Traditionnellement, elle s’effectue au niveau des mots ou des sous-mots : une phrase entière est trop volumineuse pour être comprise par la machine, tandis que les caractères pris individuellement sont trop atomiques pour les langues latines et cyrilliques.\nExemples de tokenisation :\n\nDécoupage en tokens mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"tokenisation\", \"en\", \"NLP\", \"est\", \"primordiale\"\n\nDécoupage en tokens sous-mots :\n“La tokenisation en NLP est primordiale.” → \"La\", \"token\", \"isation\", \"en\", \"NLP\", \"est\", \"prim\", \"ordiale\"\n\n\n\n\n\n\nUne fois la tokenisation réalisée, on peut analyser les occurrences des tokens et observer des régularités statistiques, telles que :\n- Les mots les plus fréquents (top mots).\n- Les mots qui apparaissent souvent ensemble, formant des expressions courantes.\n- Les mots qui reviennent dans des contextes similaires.\nEn NLP, on formule l’hypothèse distributionnelle suivante : les mots qui apparaissent souvent dans des contextes similaires sont proches et a priori ont de fortes chances d’avoir le même sens.\n\n\n\nLa machine ne comprend que des suites de 0 et 1. Il est donc nécessaire de convertir chaque token en une représentation numérique. Pour ce faire, on lui attribue un vecteur numérique de taille n (suffisamment grand, mais pas excessif).\nUne première approche, appelée one-hot encoding, consiste à associer à chaque token un vecteur canonique ( e_n ). Cependant, cette représentation est orthogonale et ne reflète pas bien la structure du langage :\n- Les tokens correspondant à des synonymes sont tout aussi distants que des antonymes, alors qu’on souhaiterait au contraire modéliser leur proximité sémantique.\n- Une meilleure approche consisterait à intégrer ces relations sémantiques en utilisant des représentations vectorielles plus avancées, comme les word embeddings (ex. Word2Vec, GloVe, BERT).\n\n\n\n\nPlusieurs librairies, en général en python, permettent de tokenizer un texte :\n\nNLTK\nSpacy\nHuggingFace",
+    "text": "Le Topic Modeling est une technique de traitement du langage naturel (NLP) permettant d’extraire automatiquement des sujets latents à partir d’un corpus de documents. Il repose sur des modèles probabilistes qui tentent de découvrir des structures sous-jacentes dans un ensemble de textes sans supervision.\n\n\n\nLe concept de modélisation de sujets a émergé dans les années 1990 avec l’avènement des modèles probabilistes de classification de texte. Parmi les premières approches, on retrouve Latent Semantic Analysis (LSA) introduite en 1988 et le Latent Dirichlet Allocation (LDA) proposé par Blei, Ng et Jordan en 2003.\n\n\n\nEn français, le terme topic peut être traduit par sujet ou thème. Ces termes sont souvent utilisés de manière interchangeable dans le contexte de la modélisation de sujets.",
     "crumbs": [
-      "Qu'est ce que la tokenization ?"
+      "Topic Modeling - LDA"
+    ]
+  },
+  {
+    "objectID": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
+    "href": "5_topic_modeling.html#lda-latent-dirichlet-allocation",
+    "title": "Modélisation de sujets",
+    "section": "2 LDA (Latent Dirichlet Allocation)",
+    "text": "2 LDA (Latent Dirichlet Allocation)\n\n2.1 Définition du LDA\nLe Latent Dirichlet Allocation (LDA) est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.\n\n\n2.2 Lien vers article\nPour plus de détails, vous pouvez consulter l’article original de Blei, Ng et Jordan (2003) : Latent Dirichlet Allocation\n\n\n2.3 LDA - Génération de documents\nL’algorithme de génération de documents sous LDA suit les étapes suivantes :\n\nChoisir le nombre de mots à générer pour le document (N)\nChoisir la distribution des sujets pour un document selon une distribution de Dirichlet. (\\(\\theta\\))\nPour chaque mot du document :\n\nSélectionner un sujet selon la distribution de sujets du document.\nSélectionner un mot selon la distribution de mots associée à ce sujet.\n\n\nCela permet de générer un document synthétique basé sur un modèle probabiliste des sujets et des mots.\nSachant une distribution de topics, comment construire un document ?\n\n2.3.1 Exemple à deux sujets\n\nsujet_1 = CET; sujet_2 = télétravail Soit la distribution suivante:\n\n\nsujet_1_distribution = {“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}\nsujet_2_distribution = {“télétravail”:0.7,“droit”:0.15,“déconnexion”:0.15}\n\n\nGénération de 4 mots (N=4)\n\nGénération de la distribution en sujet du document (admettons sujet_1=3/4, sujet_2=1/4) Pour le premier mot :\n\nselection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1\nparmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “CET”\n\n\nphrase générée = CET\n\nPour le deuxième mot : * selection d’un sujet selon la distribution 3/4 ; 1/4 =&gt; sujet_1 * parmi la distribution du sujet_1 ={“compte”:0.16,“CET”:0.5,“épargne”:0.16,“temps”:0.16}, on tire un mot =&gt; “compte”\n\nphrase générée = CET compte\n\netc.\n\n\n\n2.4 LDA - Génération de topics\nL’algorithme de génération de topics sous LDA repose sur une approche de type inférence bayésienne :\n\nInitialiser aléatoirement une attribution de sujets aux mots du corpus.\nMettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.\nRépéter l’opération jusqu’à convergence.\n\nDeux techniques principales sont utilisées pour l’inférence :\n\nGibbs Sampling, une méthode de Monte Carlo par chaînes de Markov (MCMC).\nVariationnal Bayes, une approximation de l’inférence exacte.\n\nCe processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.\nSachant des documents observés, comment retrouver/construire les topics ?\n\n2.4.1 Exemple à deux sujets avec trois documents\n\n2.4.1.1 Initialisation\nCorpus de trois documents :\n\nDocument_1 = “Le télétravail est un droit”\nDocument_2 = “Le droit à la deconnexion est un droit”\nDocument_3 = “Le plafond annuel du CET est de 40 jours”\n\npour l’exemple, travaillons en concept :\n\nDocument_1 = “télétravail être droit”\nDocument_2 = “droit deconnexion être droit”\nDocument_3 = “plafond annuel CET être 40 jours”\n\n\n\n2.4.1.2 Calcul de probabilités\nk=2 sujets, affectons aléatoirement chacun des concepts de chaque document à un sujet\n\nDocument_1 = “télétravail(2) être(1) droit(1)”\nDocument_2 = “droit(2) deconnexion(1) être(2) droit(2)”\nDocument_3 = “plafond(1) annuel(1) CET(2) être(1) 40(1) jours(2)”\n\nCeci donne la répartition suivante (ces contours vont bouger à chaque étape!) :\n\n\\(sujet_1=\\{être,droit,deconnexion,plafond,annuel,être,40\\}\\) ; \\(sujet_2=\\{télétravail, droit, être, droit, CET, jours\\}\\)\n\non remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [Représentativité du mot dans un sujet ou poids] * \\(P(mot='droit'| 'droit' appartient au sujet_1)=1/7\\) et \\(P(mot='droit'| 'droit' appartient au sujet_2)=2/6\\)\nOn peut aussi calcul des probabilités conditionnelles empiriques sachant les documents * \\(P(mot='droit'| document=document_1)=1/3\\) et \\(P(mot='droit'| document=document_2)=2/4\\)\nEt même comment les sujets sont représentés dans les documents [Répresentativité des sujets dans un document]: * \\(P(sujet=sujet_1 | document=document_1)=2/3\\) et \\(P(sujet=sujet_1 | document=document_2)=1/4\\)\n\n\n2.4.1.3 Réévaluation et bis repetita\nPour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i\n\n\\(P(\"droit\" appartient au sujet_1 | mot=\"droit\" ) \\alpha P(mot=\"droit\"| \"droit\" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\\)\non calcule pour les autres sujets et on affecte au plus probable\non arrête l’algorithme quand il converge",
+    "crumbs": [
+      "Topic Modeling - LDA"
+    ]
+  },
+  {
+    "objectID": "5_topic_modeling.html#travaux-pratiques",
+    "href": "5_topic_modeling.html#travaux-pratiques",
+    "title": "Modélisation de sujets",
+    "section": "3 Travaux pratiques",
+    "text": "3 Travaux pratiques",
+    "crumbs": [
+      "Topic Modeling - LDA"
+    ]
+  },
+  {
+    "objectID": "5_ressources.html",
+    "href": "5_ressources.html",
+    "title": "Pour aller plus loin",
+    "section": "",
+    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
+    "crumbs": [
+      "Ressources"
+    ]
+  },
+  {
+    "objectID": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
+    "href": "5_ressources.html#dautres-ressources-pour-aller-plus-loin",
+    "title": "Pour aller plus loin",
+    "section": "",
+    "text": "Quelques ressources pour aller plus loin :\n\nCours de Lino Galiana\nCours de Julien Romero\nCours de Georges-André Silber",
+    "crumbs": [
+      "Ressources"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html",
+    "href": "4_embedding.html",
+    "title": "Du mot au vecteur",
+    "section": "",
+    "text": "Un embedding est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.\n\n\n\nAvec un vocabulaire de tokens de taille ( n ), on peut créer un espace vectoriel de dimension ( n ), où chaque token est représenté par un vecteur unitaire canonique (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :\n1. L’espace vectoriel devient très grand lorsque ( n ) est important.\n2. Les représentations sont orthogonales, ce qui signifie qu’elles ne capturent aucune relation sémantique entre les mots.\n\n\n\nEn s’appuyant sur l’hypothèse distributionnelle et les réseaux de neurones, les modèles neuronaux Bag of Words (CBOW et Skip-Gram) permettent d’apprendre des représentations vectorielles compressées tout en conservant les proximités et distances sémantiques entre les tokens.",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#embedding-passer-du-token-au-vecteur-numérique",
+    "href": "4_embedding.html#embedding-passer-du-token-au-vecteur-numérique",
+    "title": "Du mot au vecteur",
+    "section": "",
+    "text": "Un embedding est un espace vectoriel permettant d’attribuer une représentation numérique à un token. Grâce à ces représentations, la machine peut effectuer des opérations arithmétiques pour manipuler le langage et déterminer si des mots sont proches ou non sur le plan sémantique.\n\n\n\nAvec un vocabulaire de tokens de taille ( n ), on peut créer un espace vectoriel de dimension ( n ), où chaque token est représenté par un vecteur unitaire canonique (one-hot encoding). Cependant, cette approche présente plusieurs inconvénients :\n1. L’espace vectoriel devient très grand lorsque ( n ) est important.\n2. Les représentations sont orthogonales, ce qui signifie qu’elles ne capturent aucune relation sémantique entre les mots.\n\n\n\nEn s’appuyant sur l’hypothèse distributionnelle et les réseaux de neurones, les modèles neuronaux Bag of Words (CBOW et Skip-Gram) permettent d’apprendre des représentations vectorielles compressées tout en conservant les proximités et distances sémantiques entre les tokens.",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#les-premiers-algorithmes-sémantiques",
+    "href": "4_embedding.html#les-premiers-algorithmes-sémantiques",
+    "title": "Du mot au vecteur",
+    "section": "2 Les premiers algorithmes sémantiques",
+    "text": "2 Les premiers algorithmes sémantiques\n\n2.1 L’algorithme CBOW\nL’algorithme Continuous Bag of Words (CBOW) repose sur un réseau de neurones composé de deux étapes :\n1. Encodage : une couche d’entrée qui compresse les mots du contexte dans un vecteur de taille réduite.\n2. Décodage : une couche de sortie qui prend ce vecteur réduit et prédit le mot cible.\nL’idée est d’entraîner le réseau à prédire un mot à partir de son contexte (les mots qui l’entourent).\nExemple avec un contexte de 4 mots (les deux mots avant et après) :\n- Phrase : “Le chat dort sur le canapé.”\n- Contexte : [\"Le\", \"dort\", \"sur\", \"le\"]\n- Mot à prédire : \"chat\"\n- Base d’entraînement : ((“Le”, “dort”, “sur”, “le”), “chat”)\nEn parcourant un corpus, l’algorithme apprend ces associations de manière probabiliste. Une fois l’entraînement terminé, on récupère la représentation vectorielle intermédiaire pour associer chaque mot à son embedding.\n\n\n2.2 L’algorithme Skip-Gram\nL’architecture du réseau est similaire à CBOW, mais avec une approche inversée :\n- Plutôt que de prédire un mot à partir de son contexte, Skip-Gram prédit les mots du contexte à partir d’un mot donné.\n- On génère des paires (mot, mot_contexte) en fonction de la fenêtre de contexte choisie.\nExemple :\n- Phrase : “Le chat dort sur le canapé.”\n- Mot donné : \"chat\"\n- Contexte à prédire : [\"Le\", \"dort\", \"sur\", \"le\"]\n- Base d’entraînement : (“Le”,“chat”) ; (“dort”,“chat”) ; (“sur”,“chat”) ; (“le”,“chat”)\nUne fois la distribution apprise, on débranche la deuxième couche et on utilise la réprésentation vectorielle de la couche cachée.\n\n\n2.3 L’algorithme GloVe\nL’algorithme GloVe (Global Vectors for Word Representation) adopte une approche différente :\n- Plutôt que d’analyser des contextes locaux (comme CBOW et Skip-Gram), GloVe apprend des cooccurrences de mots à partir d’un large corpus.\n- Il construit une matrice de cooccurrence indiquant à quelle fréquence deux mots apparaissent ensemble dans les mêmes phrases.\n- Ensuite, un facteur de décomposition est utilisé pour générer des représentations vectorielles capturant les relations sémantiques.\nGloVe est particulièrement efficace pour représenter des mots ayant des relations sémantiques globales, comme :\n- Roi – Reine,\n- France – Paris,\n- Banque – Argent.\n\n\n2.4 L’algorithme FastText\nFastText est une amélioration de CBOW et Skip-Gram :\n- Au lieu de représenter un mot en entier, il le décompose en sous-mots (n-grams).\n- Cela permet de mieux gérer les mots rares ou inconnus en générant des embeddings dynamiques.\nExemple :\n- Le mot “apprentissage” peut être décomposé en [\"app\", \"pren\", \"tiss\", \"age\"].\n- Si un mot jamais vu auparavant est rencontré, son embedding peut être inféré à partir de ses sous-mots.\nFastText est particulièrement utile pour les langues morphologiquement riches (comme l’allemand ou le turc) et pour gérer les fautes d’orthographe ou les variantes linguistiques.",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#les-embeddings-contextuels",
+    "href": "4_embedding.html#les-embeddings-contextuels",
+    "title": "Du mot au vecteur",
+    "section": "3 Les embeddings contextuels",
+    "text": "3 Les embeddings contextuels\nLe principal problème des embeddings classiques est que leur représentation est fixe : un même token possède toujours le même vecteur numérique, quel que soit le contexte. Or, dans de nombreuses langues, notamment en français, un même mot peut avoir plusieurs significations selon son usage. De plus, des notions différentes peuvent s’écrire de la même façon (homonymes).\nPour désambiguïser ces cas, il est essentiel de prendre en compte le contexte dans lequel un mot apparaît afin de déterminer son sens précis.\nLes embeddings contextuels permettent d’adapter la représentation numérique d’un mot en fonction de son contexte. Contrairement aux approches statiques, ils tiennent compte de la position et de l’interaction entre les mots dans une phrase.\nExemple :\n- “La baleine nage dans l’océan.” 🐋 → baleine (animal)\n- “J’ai un mal de baleine après ce repas.” 🤕 → baleine (expression signifiant une douleur intense)\nLes modèles basés sur les transformers (ex. BERT, GPT, T5) sont capables d’encoder ces différences en générant un vecteur unique pour chaque occurrence d’un mot selon son contexte. Ainsi, un mot aura un embedding spécifique qui varie en fonction des mots qui l’entourent, tout en conservant les relations sémantiques apprises (synonymie, antonymie, etc.).",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "4_embedding.html#travaux-pratiques",
+    "href": "4_embedding.html#travaux-pratiques",
+    "title": "Du mot au vecteur",
+    "section": "4 Travaux pratiques",
+    "text": "4 Travaux pratiques",
+    "crumbs": [
+      "Word Embedding"
+    ]
+  },
+  {
+    "objectID": "1_intro.html",
+    "href": "1_intro.html",
+    "title": "Introduction au NLP",
+    "section": "",
+    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
+    "crumbs": [
+      "Introduction au NLP"
+    ]
+  },
+  {
+    "objectID": "1_intro.html#quest-ce-que-le-traitement-du-langage-naturel",
+    "href": "1_intro.html#quest-ce-que-le-traitement-du-langage-naturel",
+    "title": "Introduction au NLP",
+    "section": "",
+    "text": "Il existe plusieurs définitions pour définir le concept de langage naturel Lien Dictonnary .\n\nUn ensemble de mots et les systèmes de leur utilisation communs à un peuple appartenant à la même communauté ou nation, à la même zone géographique ou à la même tradition culturelle.\nLa communication par la voix de manière spécifiquement humaine, en utilisant des sons arbitraires de façon conventionnelle avec des significations conventionnelles.\nLe système de signes ou de symboles linguistiques considéré dans l’abstrait (opposé à la parole).\nTout ensemble ou système de tels symboles utilisés de manière plus ou moins uniforme par un certain nombre de personnes, leur permettant ainsi de communiquer intelligiblement entre elles.\nTout système de symboles formalisés, signes, sons, gestes, ou autres, utilisé ou conçu comme un moyen de communiquer la pensée, l’émotion, etc. : le langage des mathématiques ; la langue des signes. Les moyens de communication utilisés par les animaux.\n\nAinsi, on peut voir le traitement du langage naturel comme un ensemble de recherche et de développement visant à modéliser et à reproduire, à l’aide de machines, la capacité humaine à produire et à comprendre des énoncés linguistiques à des fins de communication. Le langage est ainsi un concept complexe et ambigu. Son interprétation s’accompagne de nombreuses connaissances implicites (expressions, métaphores, métonymies…) et de bon sens, ce qui est très compliqué à retranscrire à un ordinateur.\nExemples : J’ai lu un article sur le droit des femmes dans le journal. J’ai lu un article sur le droit des femmes dans le métro.",
+    "crumbs": [
+      "Introduction au NLP"
+    ]
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html",
+    "href": "6_topic_modeling_BERTopic.html",
+    "title": "BERTopic",
+    "section": "",
+    "text": "BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic.",
+    "crumbs": [
+      "Topic Modeling - BERT"
+    ]
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#bertopic",
+    "href": "6_topic_modeling_BERTopic.html#bertopic",
+    "title": "BERTopic",
+    "section": "",
+    "text": "BERTopic est une bibliothèque de Topic Modeling qui permet d’utiliser des connaissances externes pour construire les topics. Elle repose sur une méthodologie en deux étapes. Dans un premier temps, BERTopic détermine le nombre de topics en projetant les documents dans un espace vectoriel (embeddings), en réduisant la dimension de cet espace, puis en appliquant un algorithme de clustering. Une fois cette étape terminée, les clusters (topics) sont formés et les documents leur sont attribués. Dans un second temps, BERTopic caractérise les topics en analysant les documents associés, afin d’identifier les mots les plus fréquents spécifiquement présents dans chaque topic.",
+    "crumbs": [
+      "Topic Modeling - BERT"
+    ]
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#méthodologie-bertopic",
+    "href": "6_topic_modeling_BERTopic.html#méthodologie-bertopic",
+    "title": "BERTopic",
+    "section": "2 Méthodologie BERTopic",
+    "text": "2 Méthodologie BERTopic\n\n2.1 1 - Plongements lexicaux : du document aux vecteurs\nL’objectif est de projeter un document texte dans un espace vectoriel. Cette projection peut être réalisée soit sur l’ensemble du document, soit en le découpant préalablement en plusieurs sous-documents, qui sont ensuite projetés individuellement. Dans ce cas, l’analyse est menée au niveau des sous-documents. Cette approche est généralement privilégiée lorsque les documents sont particulièrement longs.\n\n\n2.2 2 - Réduction de dimension : d’un vecteur long à un vecteur court\nLe but est de réduire la dimension des vecteurs issus du plongement lexical, qui produisent généralement des représentations de grande taille, souvent supérieures à 500 dimensions. Pour que le clustering soit efficace, il est préférable de travailler dans des espaces de dimensions réduites, typiquement entre 30 et 100. Plusieurs techniques peuvent être employées à cet effet, comme l’Analyse en Composantes Principales (ACP) ou l’UMAP. Ces méthodes permettent de conserver les dimensions les plus pertinentes tout en éliminant le bruit.\n\n\n2.3 3 - Clustering : création des topics\nAprès la réduction de dimension, où seules les dimensions les plus significatives sont conservées, BERTopic procède à un regroupement des documents en appliquant un algorithme de clustering. Les documents similaires sont ainsi organisés en clusters, chacun correspondant à un topic, c’est-à-dire une thématique cohérente déduite des proximités observées dans l’espace vectoriel réduit. L’algorithme de clustering utilisé, le plus souvent HDBSCAN, présente l’avantage de s’adapter à des structures de données complexes, en identifiant automatiquement le nombre approprié de clusters sans paramétrage préalable. À l’issue de ce processus, chaque document est rattaché à un topic en fonction de sa proximité avec les autres éléments du cluster, ouvrant la voie à l’étape suivante qui consiste à caractériser le contenu sémantique de chaque topic.\n\n\n2.4 4 - Analyse des tokens : caractérisation des topics\nPour chaque topic, un document agrégé est constitué à partir de l’ensemble des documents qui lui sont associés. Une analyse fréquentielle des tokens est ensuite réalisée. BERTopic applique une pondération spécifique aux tokens en utilisant la méthode c-TF-IDF (class-based TF-IDF), qui évalue l’importance d’un token en fonction de sa fréquence dans le topic par rapport à l’ensemble du corpus. Cette approche permet de mieux identifier les termes caractéristiques de chaque topic, en mettant en avant les tokens qui sont particulièrement représentatifs d’un groupe donné, même s’ils sont peu fréquents dans l’ensemble des documents.",
+    "crumbs": [
+      "Topic Modeling - BERT"
+    ]
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#composition",
+    "href": "6_topic_modeling_BERTopic.html#composition",
+    "title": "BERTopic",
+    "section": "3 Composition",
+    "text": "3 Composition\nBERTopic offre une grande flexibilité, ce qui lui permet de répondre de manière souple à n’importe quelle problématique. La librairie autorise le choix de chaque algorithme à chaque étape du processus. Pour la génération des plongements lexicaux, il est possible d’utiliser Sentence-BERT, différents modèles de Transformers ou encore d’autres méthodes d’encodage adaptées aux spécificités du corpus. Pour la réduction de dimension, BERTopic utilise par défaut l’algorithme UMAP, mais il est également possible d’opter pour d’autres techniques telles que l’Analyse en Composantes Principales (ACP) ou t-SNE selon les besoins analytiques.\nEn ce qui concerne l’étape de clustering, BERTopic s’appuie initialement sur HDBSCAN, un algorithme de clustering hiérarchique basé sur la densité, mais l’utilisateur peut choisir d’appliquer d’autres méthodes comme K-Means ou DBSCAN en fonction de ses objectifs. De plus, BERTopic propose des fonctionnalités avancées pour guider la découverte des topics à partir de mots-clés métier, facilitant ainsi une approche semi-supervisée, ou pour organiser les topics de manière hiérarchique, en créant des structures imbriquées qui reflètent plus finement la complexité thématique du corpus.\nCette modularité rend BERTopic particulièrement adapté à des contextes variés, qu’il s’agisse d’exploration de données, d’analyse thématique dirigée ou de projets nécessitant une forte personnalisation des résultats.\n\n\n\nMéthodologie de BERTopic",
+    "crumbs": [
+      "Topic Modeling - BERT"
+    ]
+  },
+  {
+    "objectID": "6_topic_modeling_BERTopic.html#travaux-pratiques",
+    "href": "6_topic_modeling_BERTopic.html#travaux-pratiques",
+    "title": "BERTopic",
+    "section": "4 Travaux pratiques",
+    "text": "4 Travaux pratiques",
+    "crumbs": [
+      "Topic Modeling - BERT"
+    ]
+  },
+  {
+    "objectID": "3_preprocessing.html",
+    "href": "3_preprocessing.html",
+    "title": "Les étapes du pre-processing",
+    "section": "",
+    "text": "Le préprocessing consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).\n\n\n\nLa tokenisation fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.\n\n\n\nLa normalisation consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :\n- La conversion en majuscules ou minuscules pour éviter de traiter “Paris” et “paris” comme deux mots distincts.\n- La suppression des accents (ex. é → e) pour uniformiser les termes.\n\n\n\nLes stopwords sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des articles (le, la, un, des), des prépositions (à, de, pour), ou encore des conjonctions (et, mais, donc). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.\n\n\n\n\nLa lemmatisation consiste à réduire un mot à sa forme canonique (ou lemme), c’est-à-dire sa version trouvée dans le dictionnaire.\n\nEx. “mangé”, “mangeons”, “mangeaient” → “manger”\n\n\nLa stemmatisation, plus rudimentaire, tronque les mots à leur racine commune sans tenir compte des règles linguistiques.\n\nEx. “manger”, “mangé”, “mangeons” → “mang”\n\n\nCes techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.\n\n\n\nToutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.",
+    "crumbs": [
+      "Prétraitement des données"
+    ]
+  },
+  {
+    "objectID": "3_preprocessing.html#les-étapes-du-pre-processing",
+    "href": "3_preprocessing.html#les-étapes-du-pre-processing",
+    "title": "Les étapes du pre-processing",
+    "section": "",
+    "text": "Le préprocessing consiste à nettoyer et préparer un texte avant son traitement par des algorithmes de machine learning. Il permet d’améliorer la qualité des données et d’optimiser les performances des modèles de NLP (traitement du langage naturel).\n\n\n\nLa tokenisation fait partie du préprocessing. Elle permet de segmenter un texte en unités plus petites (mots, sous-mots ou caractères) afin de faciliter l’analyse. Cette étape est essentielle pour réaliser des analyses statistiques exploratoires, comme identifier le thème d’un texte ou analyser les sentiments.\n\n\n\nLa normalisation consiste à uniformiser l’écriture d’un texte afin de regrouper des tokens similaires. Cela inclut :\n- La conversion en majuscules ou minuscules pour éviter de traiter “Paris” et “paris” comme deux mots distincts.\n- La suppression des accents (ex. é → e) pour uniformiser les termes.\n\n\n\nLes stopwords sont des mots qui n’apportent pas d’information significative sur le sens du texte, mais servent uniquement à la structure syntaxique. Il s’agit notamment des articles (le, la, un, des), des prépositions (à, de, pour), ou encore des conjonctions (et, mais, donc). Leur suppression permet de réduire le bruit et d’améliorer l’efficacité du modèle.\n\n\n\n\nLa lemmatisation consiste à réduire un mot à sa forme canonique (ou lemme), c’est-à-dire sa version trouvée dans le dictionnaire.\n\nEx. “mangé”, “mangeons”, “mangeaient” → “manger”\n\n\nLa stemmatisation, plus rudimentaire, tronque les mots à leur racine commune sans tenir compte des règles linguistiques.\n\nEx. “manger”, “mangé”, “mangeons” → “mang”\n\n\nCes techniques permettent de regrouper les variantes d’un même mot et d’améliorer l’analyse du texte.\n\n\n\nToutes ces étapes sont adaptées en fonction de la problématique. Il n’existe pas de méthode unique, mais plutôt des approches variées selon les besoins du projet. Il est donc essentiel de tester plusieurs stratégies afin d’identifier la plus efficace.",
+    "crumbs": [
+      "Prétraitement des données"
+    ]
+  },
+  {
+    "objectID": "3_preprocessing.html#travaux-pratiques",
+    "href": "3_preprocessing.html#travaux-pratiques",
+    "title": "Les étapes du pre-processing",
+    "section": "2 Travaux pratiques",
+    "text": "2 Travaux pratiques",
+    "crumbs": [
+      "Prétraitement des données"
     ]
   }
 ]
