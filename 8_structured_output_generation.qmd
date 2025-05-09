@@ -1,0 +1,57 @@
+---
+title: "Structured output generation"
+author: "raniafhm"
+date: "2025-05-09"
+format: html
+---
+
+## Limites des LLM
+
+Les **LLMs** (Large Language Models), en raison de leur nature de "perroquet stochastique", sont susceptibles de générer des **hallucinations**. Ce terme désigne le phénomène où un modèle génère des informations qui, bien que plausibles, sont factuellement incorrectes. Cela survient car les modèles de langage prédisent des tokens en fonction des probabilités, sans forcément vérifier leur exactitude par rapport à la réalité.
+
+Parfois, il est également nécessaire de générer des réponses suivant un certain standard ou de restreindre les choix parmi un ensemble limité de réponses possibles. Dans ces cas, il est crucial de contraindre la génération des tokens pour orienter le modèle vers des sorties plus pertinentes et cohérentes avec les attentes.
+
+Un exemple de contrainte de génération est l'utilisation de formats spécifiques, comme un fichier **JSON** où les réponses doivent être structurées dans un format précis, par exemple :
+
+```json
+{
+  "status": "success",
+  "message": "Operation completed successfully",
+  "data": {
+    "user_id": 12345,
+    "username": "example_user"
+  }
+}
+```
+
+Dans ce cas, le modèle doit être contraint pour générer une réponse conforme à ce format, respectant ainsi la structure des clés et des valeurs.
+
+De manière similaire, un autre exemple de contrainte pourrait être la simulation du lancer d'un **dé à six faces**. Ici, le modèle devrait générer une réponse dans un espace limité, par exemple en choisissant un nombre entre 1 et 6. Il est essentiel que la génération respecte ces contraintes, sinon le modèle pourrait produire des résultats non valides, comme un nombre supérieur à 6 ou un texte au lieu d'un chiffre.
+
+Ces exemples illustrent comment il est possible de guider la génération des LLMs pour obtenir des réponses qui respectent des contraintes spécifiques, tout en minimisant les risques d'hallucinations ou de résultats incohérents.
+
+
+## Structured Output Generation
+
+La **Structured Output Generation** est une méthode qui consiste à ajuster les distributions de probabilités lors de l'étape de génération ou d'inférence d'un modèle. L'objectif est de restreindre l'espace des sorties possibles pour répondre à des contraintes spécifiques.
+
+Par exemple, si l'on souhaite générer une valeur correspondant à un **dé à 6 faces** (c'est-à-dire un nombre entre 1 et 6), on peut ajuster les probabilités associées aux tokens pour n'inclure que ces six valeurs. Concrètement, cela signifie que l'on va conserver les probabilités associées aux tokens représentant les nombres 1, 2, 3, 4, 5 et 6, tout en mettant à zéro les probabilités des autres tokens. Ensuite, on normalise la distribution résultante (c'est-à-dire, on réajuste les probabilités pour que leur somme soit égale à 1) et on génère la sortie en tirant au hasard dans cette nouvelle distribution.
+
+Cette approche permet de garantir que la génération respecte les contraintes spécifiques, en l'occurrence de n'opter que pour l'une des six valeurs valides. Elle est particulièrement utile lorsqu'on veut que le modèle respecte des formats structurés ou des ensembles de sorties finies et prédéfinies. Cela réduit ainsi le risque d'hallucinations ou de résultats non pertinents, tout en offrant un contrôle plus précis sur le type de réponse générée.
+
+De manière générale, la **Structured Output Generation** est souvent utilisée dans des applications où la sortie doit suivre une certaine structure ou un ensemble de règles définies à l’avance, comme la génération de code, de réponses en format JSON, ou encore la génération de nombres dans des plages spécifiques (comme le lancer de dés, ou la génération de réponses à choix multiples).
+
+## SOG en pratique
+
+* Pydantic
+Pydantic est une bibliothèque Python largement utilisée pour la validation des données et la gestion des types de manière stricte. Dans le cadre de Structured Output Generation (SOG), Pydantic s'avère très utile pour garantir que les sorties générées respectent une structure bien définie et des types spécifiques.
+
+Avec Pydantic, vous pouvez créer des modèles de données qui définissent des schémas attendus pour les sorties. Par exemple, si vous voulez que la sortie d'un modèle de langage soit un dictionnaire JSON avec des clés comme status, message, et data, vous pouvez définir un modèle Pydantic qui impose la structure exacte de ces champs, ainsi que leurs types. Cela permet de valider que les données générées par le modèle sont bien conformes à ce format et aux exigences de votre application. Si les données ne respectent pas ces règles, Pydantic lèvera une erreur, facilitant ainsi la gestion des anomalies et des incohérences dans la sortie du modèle.
+
+Pydantic est particulièrement utile lorsqu'il s'agit de garantir la conformité des réponses dans des systèmes nécessitant des formats bien définis, comme les API, les bases de données ou les formulaires web.
+
+
+* librarie outlines (https://dottxt-ai.github.io/outlines/latest/welcome/)
+
+
+## Travaux pratiques
