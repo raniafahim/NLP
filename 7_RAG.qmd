@@ -1,0 +1,45 @@
+---
+title: "LLM et RAG"
+author: "raniafhm"
+date: "2025-05-09"
+format: html
+---
+
+## LLM
+
+Les Large Language Models (LLM) sont des réseaux de neurones de très grande taille, comptant souvent plusieurs milliards de paramètres, également appelés poids (correspondant à ceux des neurones). Ces modèles sont entraînés sur d'immenses volumes de données, incluant une grande partie du contenu disponible sur Internet. Ils s’appuient principalement sur l’architecture des Transformers, une structure spécifique de réseau de neurones composée de plusieurs modules empilés.
+
+L'objectif des Transformers est d’apprendre à prédire les tokens (unités de texte) de manière conditionnelle, c’est-à-dire en fonction des tokens précédents. Cette architecture surpasse les modèles bidirectionnels traditionnels, notamment grâce à l’introduction des têtes d’attention. Ces mécanismes permettent au modèle de concentrer plus ou moins d’attention sur certains tokens en fonction du contexte. Par exemple, une tête d’attention peut se spécialiser dans la structure grammaticale d’une phrase, en mettant l’accent sur la relation entre le sujet, le verbe et le complément (les tokens correspondant auront alors un poids plus important que les stopwords par exemple).
+
+e.g : GPT, Gemini, Claude, Llama, Mistral
+
+## RAG
+
+Les LLM (Large Language Models) disposent d'une capacité limitée — bien que conséquente — à traiter des données en entrée, appelée taille d’input (input_size). Cette contrainte signifie que certains documents, trop volumineux, ne peuvent pas être analysés en une seule fois. Par ailleurs, même lorsqu’un document entre entièrement dans cette capacité, il est souvent inutile d’en exploiter l’ensemble pour accomplir une tâche spécifique, comme répondre à une question. Limiter la quantité de texte traité permet également de réduire le coût computationnel, puisque plus le nombre de tokens est élevé, plus les calculs sont complexes et onéreux.
+
+L’architecture Retrieval-Augmented Generation (RAG) apporte une solution efficace à ce problème. Elle consiste à découper un document en segments plus petits, appelés chunks, et à ne transmettre au modèle que les parties les plus pertinentes pour la tâche demandée.
+
+Le processus se déroule généralement en quatre étapes :
+
+0. Découpage et vectorisation (Embedding) : Le document est segmenté selon différentes stratégies (par paragraphe, tous les X caractères, ou via un séparateur spécifique). Chaque segment est ensuite transformé en vecteur dans un espace vectoriel à l’aide d’un embedder.
+
+1. Recherche des segments pertinents (Retrieval) : Lorsqu’une question est posée, elle est également convertie en vecteur, puis comparée aux vecteurs des segments. On sélectionne généralement les 5 à 10 chunks les plus proches.
+
+2. Construction de la question augmentée (Augmentation) : La question est enrichie avec les chunks les plus pertinents afin de fournir au modèle le contexte utile.
+
+3. Génération de la réponse (Generation) : Le LLM produit une réponse en s’appuyant sur la question augmentée et les éléments de contexte fournis.
+
+
+## le RAG en pratique
+
+La mise en place d'une architecture Retrieval-Augmented Generation (RAG) nécessite de choisir les bons outils et de définir un pipeline clair.
+
+Tout d'abord, pour implémenter le chaînage des différentes étapes, deux frameworks populaires s'offrent à vous : Langchain et LlamaIndex. Langchain est très flexible et permet de créer des chaînes complexes, parfait pour les projets nécessitant une personnalisation fine. En revanche, LlamaIndex est plus simple, conçu pour gérer des données structurées et non structurées, idéal pour des tâches de récupération de documents.
+
+Ensuite, il faut choisir une base de données vectorielle pour stocker et récupérer les vecteurs d'embarquement. Parmi les options disponibles, FAISS est rapide et léger, parfait pour des déploiements locaux ou des projets open-source. Qdrant est plus robuste, adapté à une utilisation à grande échelle, avec une API facile à intégrer. Enfin, ChromaDB est intégré à Langchain et convient bien pour des prototypes ou des projets de taille moyenne.
+
+Une fois les outils choisis, il convient de définir l’architecture. Le processus commence par le découpage du document en chunks, qui sont ensuite convertis en vecteurs via un embedder. Ces vecteurs sont stockés dans la base vectorielle. Lorsque l'utilisateur pose une question, elle est transformée en vecteur et comparée aux vecteurs stockés pour retrouver les chunks les plus pertinents. Ces derniers sont combinés avec la question pour créer une question augmentée. Enfin, cette question enrichie est envoyée à un LLM (comme GPT-4 ou Claude) pour générer une réponse.
+
+Cette architecture optimise l'efficacité du modèle en ne fournissant que les informations pertinentes, ce qui réduit le coût computationnel et améliore la qualité des réponses. Elle est également flexible, permettant de personnaliser chaque étape du processus en fonction des besoins spécifiques du projet.
+
+## Travaux pratiques
