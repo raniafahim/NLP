@@ -5,6 +5,7 @@ date: "2025-04-07"
 format: html
 ---
 
+
 ## Topic Modeling
 
 ### Définition du Topic Modeling
@@ -21,12 +22,35 @@ En français, le terme *topic* peut être traduit par *sujet* ou *thème*. Ces t
 ### Définition du LDA
 Le **Latent Dirichlet Allocation (LDA)** est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.
 
+::: {.callout-note}
+* un document = un mélange de sujets
+* un sujet = un mélange de mots (distribution des mots en probabilité)
+:::
+
+L'algorithme principal permet de **générer de nouveaux documents** à partir d'un distribution de sujets et des sujets complètement définis, relevant d'une stratégie de tirage d'échantillon simple.
+Des algorithmes complémentaires permettent de **découvrir et constituer des sujets** à partir de l'observation de documents en se donnant un nombre de classes et une distribution *a priori* de sujets, tirant parti des approches bayésiennes.
+
+::: {.callout-note}
+Le **Latent Dirichlet Allocation (LDA)** permet de 
+* ex-ante, **générer de nouveaux documents**
+* ex-post, **découvrir et constituer des sujets**
+:::
 ### Lien vers article
 Pour plus de détails, vous pouvez consulter l'article original de **Blei, Ng et Jordan (2003)** : [Latent Dirichlet Allocation](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)
 
 
 
-### LDA - Génération de documents
+### LDA - Ex-ante - Génération de documents
+
+
+::: {.callout-important}
+Hypothèses - paramètres connus :
+
+* Les sujets sont complètement connus (nombre et composition)
+* La distribution des sujets dans les documents est connue
+
+:::
+
 
 L'algorithme de **génération de documents** sous LDA suit les étapes suivantes :
 
@@ -66,22 +90,35 @@ Pour le deuxième mot :
 
 etc.
 
-### LDA - Génération de topics
+### LDA - Ex-post - Découverte de topics
 
-L'algorithme de **génération de topics** sous LDA repose sur une approche de type **inférence bayésienne** :
+Ces algorithmes permettent d'extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.
 
-1. Initialiser aléatoirement une attribution de sujets aux mots du corpus.
-2. Mettre à jour ces attributions en fonction de la probabilité conditionnelle d'un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.
-3. Répéter l’opération jusqu’à convergence.
+***Sachant des documents observés, comment retrouver/construire les topics ?***
+
+
+::: {.callout-important}
+Hypothèses - paramètres connus :
+
+* *a posteriori*, les documents *a priori* supposés générés par la méthode précédente
+* un nombre de sujets à définir (hyperparamètre), car on ne peut pas savoir *a priori* combien de sujets composent les documents
+:::
 
 Deux techniques principales sont utilisées pour l’inférence :
 
 * **Gibbs Sampling**, une méthode de Monte Carlo par chaînes de Markov (MCMC).
 * **Variationnal Bayes**, une approximation de l’inférence exacte.
 
-Ce processus permet d'extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.
 
-***Sachant des documents observés, comment retrouver/construire les topics ?***
+L'algorithme de **découverte de topics avec Gibbs Sampling** repose sur une approche de type **inférence bayésienne** :
+
+1. Initialiser aléatoirement une attribution de sujets aux mots du corpus.
+2. Mettre à jour ces attributions en fonction de la probabilité conditionnelle d'un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.
+3. Répéter l’opération jusqu’à convergence.
+
+
+
+
 
 #### Exemple à deux sujets avec trois documents
 
@@ -113,14 +150,14 @@ Ceci donne la répartition suivante (***ces contours vont bouger à chaque étap
 * $sujet_1=\{être,droit,deconnexion,plafond,annuel,être,40\}$ ; $sujet_2=\{télétravail, droit, être, droit, CET, jours\}$
 
 on remarque le mot "droit" est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [***Représentativité du mot dans un sujet ou poids***]
-* $P(mot='droit'| 'droit' appartient au sujet_1)=1/7$  et $P(mot='droit'| 'droit' appartient au sujet_2)=2/6$
+> $P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_1) = \frac{1}{7} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_2) = \frac{2}{6}$
 
 
-On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents
-* $P(mot='droit'| document=document_1)=1/3$ et $P(mot='droit'| document=document_2)=2/4$
+On peut aussi calculer des probabilités conditionnelles empiriques sachant les documents
+>  $P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_1) = \frac{1}{3} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_2) = \frac{2}{4}$
 
 Et même comment les sujets sont représentés dans les documents [***Répresentativité des sujets dans un document***]:
-* $P(sujet=sujet_1 | document=document_1)=2/3$ et $P(sujet=sujet_1 | document=document_2)=1/4$
+ >  $P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_1) = \frac{2}{3} \quad \text{et} \quad P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_2) = \frac{1}{4}$
 
 ##### Réévaluation et bis repetita
 
@@ -128,7 +165,7 @@ Et même comment les sujets sont représentés dans les documents [***Répresent
 Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i
 
 
-* $P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)$
+>$P(\text{'droit'} \in \text{sujet}_1 \mid \text{mot} = \text{'droit'})  \propto  P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_1)  \times  P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_1)$
 * on calcule pour les autres sujets et on affecte au plus probable
 * on arrête l'algorithme quand il converge
 

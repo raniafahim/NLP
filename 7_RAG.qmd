@@ -71,8 +71,8 @@ embedder = HuggingFaceEmbeddings(model_name="BAAI/bge-m3", model_kwargs=model_kw
 df=pd.read_parquet(FILE)
 
 vector_store = Chroma(embedding_function=embedder, persist_directory="./chroma_db")
-for index, row in tqdm(df_cet.iterrows(), total=len(df_cet)):
-    text=df_cet.loc[index].texte
+for index, row in tqdm(df.iterrows(), total=len(df)):
+    text=df.loc[index].texte
     texts = text_splitter.create_documents([text])
     i=0
     for t in texts:
