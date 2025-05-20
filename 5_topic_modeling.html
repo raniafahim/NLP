@@ -298,7 +298,11 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Le <strong>Latent Dirichlet Allocation (LDA)</strong> permet de * ex-ante, <strong>générer de nouveaux documents</strong> * ex-post, <strong>découvrir et constituer des sujets</strong></p>
+<p>Le <strong>Latent Dirichlet Allocation (LDA)</strong> permet de :</p>
+<ul>
+<li>ex-ante, <strong>générer de nouveaux documents</strong></li>
+<li>ex-post, <strong>découvrir et constituer des sujets</strong></li>
+</ul>
 </div>
 </div>
 </section>
@@ -393,9 +397,10 @@ Important
 <p>L’algorithme de <strong>découverte de topics avec Gibbs Sampling</strong> repose sur une approche de type <strong>inférence bayésienne</strong> :</p>
 <ol type="1">
 <li>Initialiser aléatoirement une attribution de sujets aux mots du corpus.</li>
-<li>Mettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.</li>
+<li>Mettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus. (*)</li>
 <li>Répéter l’opération jusqu’à convergence.</li>
 </ol>
+<p>(*) la proba empirique est proportionnelle à la représentativité du sujet dans le document (sujet le plus fréquent intradocument) pondéré par la représentativité du mot dans le sujet de manière globale (sujet qui contient le plus souvent le mot de manière global interdocument). La mise à jour se fait dans le sujet argmax(P) parmi tous les sujets probables</p>
 <section id="exemple-à-deux-sujets-avec-trois-documents" class="level4" data-number="2.4.1">
 <h4 data-number="2.4.1" class="anchored" data-anchor-id="exemple-à-deux-sujets-avec-trois-documents"><span class="header-section-number">2.4.1</span> Exemple à deux sujets avec trois documents</h4>
 <section id="initialisation" class="level5" data-number="2.4.1.1">
@@ -425,9 +430,18 @@ Important
 <ul>
 <li><span class="math inline">\(sujet_1=\{être,droit,deconnexion,plafond,annuel,être,40\}\)</span> ; <span class="math inline">\(sujet_2=\{télétravail, droit, être, droit, CET, jours\}\)</span></li>
 </ul>
-<p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>] &gt; <span class="math inline">\(P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_1) = \frac{1}{7} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_2) = \frac{2}{6}\)</span></p>
-<p>On peut aussi calculer des probabilités conditionnelles empiriques sachant les documents &gt; <span class="math inline">\(P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_1) = \frac{1}{3} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_2) = \frac{2}{4}\)</span></p>
-<p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]: &gt; <span class="math inline">\(P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_1) = \frac{2}{3} \quad \text{et} \quad P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_2) = \frac{1}{4}\)</span></p>
+<p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>]</p>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_1) = \frac{1}{7} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_2) = \frac{2}{6}\)</span></p>
+</blockquote>
+<p>On peut aussi calculer des probabilités conditionnelles empiriques sachant les documents</p>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_1) = \frac{1}{3} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_2) = \frac{2}{4}\)</span></p>
+</blockquote>
+<p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]:</p>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_1) = \frac{2}{3} \quad \text{et} \quad P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_2) = \frac{1}{4}\)</span></p>
+</blockquote>
 </section>
 <section id="réévaluation-et-bis-repetita" class="level5" data-number="2.4.1.3">
 <h5 data-number="2.4.1.3" class="anchored" data-anchor-id="réévaluation-et-bis-repetita"><span class="header-section-number">2.4.1.3</span> Réévaluation et bis repetita</h5>
