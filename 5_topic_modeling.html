@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6be61a3439fc0d259cfd7558efe8e758.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-558fc24d850e83838a05c02b076fcd27.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -210,8 +210,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#définition-du-lda" id="toc-définition-du-lda" class="nav-link" data-scroll-target="#définition-du-lda"><span class="header-section-number">2.1</span> Définition du LDA</a></li>
   <li><a href="#lien-vers-article" id="toc-lien-vers-article" class="nav-link" data-scroll-target="#lien-vers-article"><span class="header-section-number">2.2</span> Lien vers article</a></li>
-  <li><a href="#lda---génération-de-documents" id="toc-lda---génération-de-documents" class="nav-link" data-scroll-target="#lda---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Génération de documents</a></li>
-  <li><a href="#lda---génération-de-topics" id="toc-lda---génération-de-topics" class="nav-link" data-scroll-target="#lda---génération-de-topics"><span class="header-section-number">2.4</span> LDA - Génération de topics</a></li>
+  <li><a href="#lda---ex-ante---génération-de-documents" id="toc-lda---ex-ante---génération-de-documents" class="nav-link" data-scroll-target="#lda---ex-ante---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Ex-ante - Génération de documents</a></li>
+  <li><a href="#lda---ex-post---découverte-de-topics" id="toc-lda---ex-post---découverte-de-topics" class="nav-link" data-scroll-target="#lda---ex-post---découverte-de-topics"><span class="header-section-number">2.4</span> LDA - Ex-post - Découverte de topics</a></li>
   </ul></li>
   <li><a href="#travaux-pratiques" id="toc-travaux-pratiques" class="nav-link" data-scroll-target="#travaux-pratiques"><span class="header-section-number">3</span> Travaux pratiques</a></li>
   </ul>
@@ -271,13 +271,60 @@ window.Quarto = {
 <section id="définition-du-lda" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="définition-du-lda"><span class="header-section-number">2.1</span> Définition du LDA</h3>
 <p>Le <strong>Latent Dirichlet Allocation (LDA)</strong> est un modèle génératif probabiliste qui représente chaque document comme une distribution de sujets et chaque sujet comme une distribution de mots. Il suppose que chaque document est généré par un mélange de plusieurs sujets, chacun contribuant avec une certaine probabilité.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>un document = un mélange de sujets</li>
+<li>un sujet = un mélange de mots (distribution des mots en probabilité)</li>
+</ul>
+</div>
+</div>
+<p>L’algorithme principal permet de <strong>générer de nouveaux documents</strong> à partir d’un distribution de sujets et des sujets complètement définis, relevant d’une stratégie de tirage d’échantillon simple. Des algorithmes complémentaires permettent de <strong>découvrir et constituer des sujets</strong> à partir de l’observation de documents en se donnant un nombre de classes et une distribution <em>a priori</em> de sujets, tirant parti des approches bayésiennes.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le <strong>Latent Dirichlet Allocation (LDA)</strong> permet de * ex-ante, <strong>générer de nouveaux documents</strong> * ex-post, <strong>découvrir et constituer des sujets</strong></p>
+</div>
+</div>
 </section>
 <section id="lien-vers-article" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="lien-vers-article"><span class="header-section-number">2.2</span> Lien vers article</h3>
 <p>Pour plus de détails, vous pouvez consulter l’article original de <strong>Blei, Ng et Jordan (2003)</strong> : <a href="https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf">Latent Dirichlet Allocation</a></p>
 </section>
-<section id="lda---génération-de-documents" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="lda---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Génération de documents</h3>
+<section id="lda---ex-ante---génération-de-documents" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="lda---ex-ante---génération-de-documents"><span class="header-section-number">2.3</span> LDA - Ex-ante - Génération de documents</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hypothèses - paramètres connus :</p>
+<ul>
+<li>Les sujets sont complètement connus (nombre et composition)</li>
+<li>La distribution des sujets dans les documents est connue</li>
+</ul>
+</div>
+</div>
 <p>L’algorithme de <strong>génération de documents</strong> sous LDA suit les étapes suivantes :</p>
 <ol type="1">
 <li>Choisir le nombre de mots à générer pour le document (N)</li>
@@ -317,21 +364,38 @@ window.Quarto = {
 <p>etc.</p>
 </section>
 </section>
-<section id="lda---génération-de-topics" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="lda---génération-de-topics"><span class="header-section-number">2.4</span> LDA - Génération de topics</h3>
-<p>L’algorithme de <strong>génération de topics</strong> sous LDA repose sur une approche de type <strong>inférence bayésienne</strong> :</p>
-<ol type="1">
-<li>Initialiser aléatoirement une attribution de sujets aux mots du corpus.</li>
-<li>Mettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.</li>
-<li>Répéter l’opération jusqu’à convergence.</li>
-</ol>
+<section id="lda---ex-post---découverte-de-topics" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="lda---ex-post---découverte-de-topics"><span class="header-section-number">2.4</span> LDA - Ex-post - Découverte de topics</h3>
+<p>Ces algorithmes permettent d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.</p>
+<p><strong><em>Sachant des documents observés, comment retrouver/construire les topics ?</em></strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hypothèses - paramètres connus :</p>
+<ul>
+<li><em>a posteriori</em>, les documents <em>a priori</em> supposés générés par la méthode précédente</li>
+<li>un nombre de sujets à définir (hyperparamètre), car on ne peut pas savoir <em>a priori</em> combien de sujets composent les documents</li>
+</ul>
+</div>
+</div>
 <p>Deux techniques principales sont utilisées pour l’inférence :</p>
 <ul>
 <li><strong>Gibbs Sampling</strong>, une méthode de Monte Carlo par chaînes de Markov (MCMC).</li>
 <li><strong>Variationnal Bayes</strong>, une approximation de l’inférence exacte.</li>
 </ul>
-<p>Ce processus permet d’extraire des distributions de sujets et de mots qui définissent les thématiques sous-jacentes du corpus étudié.</p>
-<p><strong><em>Sachant des documents observés, comment retrouver/construire les topics ?</em></strong></p>
+<p>L’algorithme de <strong>découverte de topics avec Gibbs Sampling</strong> repose sur une approche de type <strong>inférence bayésienne</strong> :</p>
+<ol type="1">
+<li>Initialiser aléatoirement une attribution de sujets aux mots du corpus.</li>
+<li>Mettre à jour ces attributions en fonction de la probabilité conditionnelle d’un mot appartenant à un sujet donné, basée sur les occurrences dans le corpus.</li>
+<li>Répéter l’opération jusqu’à convergence.</li>
+</ol>
 <section id="exemple-à-deux-sujets-avec-trois-documents" class="level4" data-number="2.4.1">
 <h4 data-number="2.4.1" class="anchored" data-anchor-id="exemple-à-deux-sujets-avec-trois-documents"><span class="header-section-number">2.4.1</span> Exemple à deux sujets avec trois documents</h4>
 <section id="initialisation" class="level5" data-number="2.4.1.1">
@@ -361,18 +425,16 @@ window.Quarto = {
 <ul>
 <li><span class="math inline">\(sujet_1=\{être,droit,deconnexion,plafond,annuel,être,40\}\)</span> ; <span class="math inline">\(sujet_2=\{télétravail, droit, être, droit, CET, jours\}\)</span></li>
 </ul>
-<p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>] * <span class="math inline">\(P(mot='droit'| 'droit' appartient au sujet_1)=1/7\)</span> et <span class="math inline">\(P(mot='droit'| 'droit' appartient au sujet_2)=2/6\)</span></p>
-<p>On peut aussi calcul des probabilités conditionnelles empiriques sachant les documents * <span class="math inline">\(P(mot='droit'| document=document_1)=1/3\)</span> et <span class="math inline">\(P(mot='droit'| document=document_2)=2/4\)</span></p>
-<p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]: * <span class="math inline">\(P(sujet=sujet_1 | document=document_1)=2/3\)</span> et <span class="math inline">\(P(sujet=sujet_1 | document=document_2)=1/4\)</span></p>
+<p>on remarque le mot “droit” est dans les deux sujets, on peut calculer des probabilités empiriques conditionnelles différentes [<strong><em>Représentativité du mot dans un sujet ou poids</em></strong>] &gt; <span class="math inline">\(P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_1) = \frac{1}{7} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_2) = \frac{2}{6}\)</span></p>
+<p>On peut aussi calculer des probabilités conditionnelles empiriques sachant les documents &gt; <span class="math inline">\(P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_1) = \frac{1}{3} \quad \text{et} \quad P(\text{mot} = \text{'droit'} \mid \text{document} = \text{document}_2) = \frac{2}{4}\)</span></p>
+<p>Et même comment les sujets sont représentés dans les documents [<strong><em>Répresentativité des sujets dans un document</em></strong>]: &gt; <span class="math inline">\(P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_1) = \frac{2}{3} \quad \text{et} \quad P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_2) = \frac{1}{4}\)</span></p>
 </section>
 <section id="réévaluation-et-bis-repetita" class="level5" data-number="2.4.1.3">
 <h5 data-number="2.4.1.3" class="anchored" data-anchor-id="réévaluation-et-bis-repetita"><span class="header-section-number">2.4.1.3</span> Réévaluation et bis repetita</h5>
 <p>Pour chaque mot, nous réévaluons sont appartenance à un sujet. Il faut alors calculer les nouvelles probabilités conditionnelles que le mot appartiennent au sujet i</p>
-<ul>
-<li><span class="math inline">\(P("droit" appartient au sujet_1 | mot="droit" ) \alpha P(mot="droit"| "droit" appartient au sujet_1) * P(sujet=sujet_1 | document=document_1)\)</span></li>
-<li>on calcule pour les autres sujets et on affecte au plus probable</li>
-<li>on arrête l’algorithme quand il converge</li>
-</ul>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(\text{'droit'} \in \text{sujet}_1 \mid \text{mot} = \text{'droit'})  \propto  P(\text{mot} = \text{'droit'} \mid \text{'droit'} \in \text{sujet}_1)  \times  P(\text{sujet} = \text{sujet}_1 \mid \text{document} = \text{document}_1)\)</span> * on calcule pour les autres sujets et on affecte au plus probable * on arrête l’algorithme quand il converge</p>
+</blockquote>
 </section>
 </section>
 </section>

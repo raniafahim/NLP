@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://raniafahim.github.io/NLP/8_structured_output_generation.html</loc>
-    <lastmod>2025-05-12T08:23:29.070Z</lastmod>
-  </url>
-  <url>
-    <loc>https://raniafahim.github.io/NLP/2_tokenization.html</loc>
-    <lastmod>2025-05-12T08:23:29.069Z</lastmod>
+    <loc>https://raniafahim.github.io/NLP/5_topic_modeling.html</loc>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
   </url>
   <url>
     <loc>https://raniafahim.github.io/NLP/7_RAG.html</loc>
-    <lastmod>2025-05-12T08:23:29.070Z</lastmod>
-  </url>
-  <url>
-    <loc>https://raniafahim.github.io/NLP/5_topic_modeling.html</loc>
-    <lastmod>2025-05-12T08:23:29.070Z</lastmod>
-  </url>
-  <url>
-    <loc>https://raniafahim.github.io/NLP/5_ressources.html</loc>
-    <lastmod>2025-05-12T08:23:29.070Z</lastmod>
-  </url>
-  <url>
-    <loc>https://raniafahim.github.io/NLP/4_embedding.html</loc>
-    <lastmod>2025-05-12T08:23:29.069Z</lastmod>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
   </url>
   <url>
     <loc>https://raniafahim.github.io/NLP/1_intro.html</loc>
-    <lastmod>2025-05-12T08:23:29.069Z</lastmod>
+    <lastmod>2025-05-20T08:56:40.695Z</lastmod>
   </url>
   <url>
-    <loc>https://raniafahim.github.io/NLP/6_topic_modeling_BERTopic.html</loc>
-    <lastmod>2025-05-12T08:23:29.070Z</lastmod>
+    <loc>https://raniafahim.github.io/NLP/5_ressources.html</loc>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
   </url>
   <url>
     <loc>https://raniafahim.github.io/NLP/3_preprocessing.html</loc>
-    <lastmod>2025-05-12T08:23:29.069Z</lastmod>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://raniafahim.github.io/NLP/8_structured_output_generation.html</loc>
+    <lastmod>2025-05-20T08:56:40.697Z</lastmod>
+  </url>
+  <url>
+    <loc>https://raniafahim.github.io/NLP/2_tokenization.html</loc>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://raniafahim.github.io/NLP/4_embedding.html</loc>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://raniafahim.github.io/NLP/6_topic_modeling_BERTopic.html</loc>
+    <lastmod>2025-05-20T08:56:40.696Z</lastmod>
   </url>
 </urlset>
